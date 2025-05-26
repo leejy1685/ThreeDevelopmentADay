@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
@@ -7,13 +7,13 @@ using System.Linq;
 public class SoundManager : Singleton<SoundManager>
 {
    
-    [Header("¾Àº° »ç¿îµå ¶óÀÌºê·¯¸®")]
+    [Header("ì”¬ë³„ ì‚¬ìš´ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬")]
     public List<SoundLibrary> libraries;
 
     [Header("Audio Mixer")]
     public AudioMixer audioMixer;
 
-    // ·±Å¸ÀÓ¿¡ »ç¿ë ÁßÀÎ »ç¿îµå
+    // ëŸ°íƒ€ì„ì— ì‚¬ìš© ì¤‘ì¸ ì‚¬ìš´ë“œ
     private Sound[] currentSounds = new Sound[0];
 
     protected override void Awake()
@@ -27,16 +27,16 @@ public class SoundManager : Singleton<SoundManager>
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // ¾ÀÀÌ ·ÎµåµÉ ¶§¸¶´Ù È£Ãâ
+    // ì”¬ì´ ë¡œë“œë  ë•Œë§ˆë‹¤ í˜¸ì¶œ
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadLibraryForScene(scene.name);
     }
 
-    // ÇØ´ç ¾À ÀÌ¸§¿¡ ¸Â´Â ¶óÀÌºê·¯¸®¸¦ Ã£¾Æ Àû¿ë
+    // í•´ë‹¹ ì”¬ ì´ë¦„ì— ë§ëŠ” ë¼ì´ë¸ŒëŸ¬ë¦¬ë¥¼ ì°¾ì•„ ì ìš©
     private void LoadLibraryForScene(string sceneName)
     {
-        // ÀÌÀü »ç¿îµå ÇØÁ¦
+        // ì´ì „ ì‚¬ìš´ë“œ í•´ì œ
         foreach (var s in currentSounds)
         {
             if (s.source != null)
@@ -46,14 +46,14 @@ public class SoundManager : Singleton<SoundManager>
         var lib = libraries.FirstOrDefault(x => x.sceneName == sceneName);
         if (lib == null)
         {
-            Debug.LogWarning($"SoundManager: Scene '{sceneName}'¿ë SoundLibrary°¡ ¾ø½À´Ï´Ù.");
+            Debug.LogWarning($"SoundManager: Scene '{sceneName}'ìš© SoundLibraryê°€ ì—†ìŠµë‹ˆë‹¤.");
             currentSounds = new Sound[0];
             return;
         }
 
         currentSounds = lib.sounds;
 
-        // AudioSource ¼¼ÆÃ
+        // AudioSource ì„¸íŒ…
         foreach (var s in currentSounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -63,11 +63,11 @@ public class SoundManager : Singleton<SoundManager>
             s.source.outputAudioMixerGroup = s.mixerGroup;
         }
 
-        // ¿¹½Ã: ÇÃ·¹ÀÌ ½ÃÀÛ ½Ã ÀÚµ¿À¸·Î BGMÀÌ¸§ÀÌ "BGM"ÀÎ »ç¿îµå¸¦ Àç»ı
+        // ì˜ˆì‹œ: í”Œë ˆì´ ì‹œì‘ ì‹œ ìë™ìœ¼ë¡œ BGMì´ë¦„ì´ "BGM"ì¸ ì‚¬ìš´ë“œë¥¼ ì¬ìƒ
         //Play("BGM");
     }
 
-    // »ç¿îµå Àç»ı
+    // ì‚¬ìš´ë“œ ì¬ìƒ
     public void Play(string name)
     {
         var s = currentSounds.FirstOrDefault(x => x.name == name);
@@ -75,7 +75,7 @@ public class SoundManager : Singleton<SoundManager>
             s.source.Play();
     }
 
-    // »ç¿îµå Á¤Áö
+    // ì‚¬ìš´ë“œ ì •ì§€
     public void Stop(string name)
     {
         var s = currentSounds.FirstOrDefault(x => x.name == name);
@@ -83,8 +83,8 @@ public class SoundManager : Singleton<SoundManager>
             s.source.Stop();
     }
 
-    // º¼·ı Á¶Àı ¸Ş¼­µå (Master/BGM/SFX)
-    // UI ½½¶óÀÌ´õ¿¡ ¿¬°áÇÏ´Â ¹æÇâÀ¸·Î ±¸ÇöÇÏ¿´½À´Ï´Ù.
+    // ë³¼ë¥¨ ì¡°ì ˆ ë©”ì„œë“œ (Master/BGM/SFX)
+    // UI ìŠ¬ë¼ì´ë”ì— ì—°ê²°í•˜ëŠ” ë°©í–¥ìœ¼ë¡œ êµ¬í˜„í•˜ì˜€ìŠµë‹ˆë‹¤.
     public void SetMasterVolume(float sliderValue)
         => audioMixer.SetFloat("MasterVolume", Mathf.Log10(Mathf.Clamp(sliderValue, 0.0001f, 1f)) * 20f);
     public void SetBGMVolume(float sliderValue)

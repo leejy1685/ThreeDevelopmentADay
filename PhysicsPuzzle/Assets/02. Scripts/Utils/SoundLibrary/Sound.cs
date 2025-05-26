@@ -1,16 +1,16 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.Audio;
 
 [System.Serializable]
 public class Sound
 {
-    public string name;           // »ç¿îµå ½Äº°¿ë ÀÌ¸§
-    public AudioClip clip;           // Àç»ıÇÒ ¿Àµğ¿À Å¬¸³
+    public string name;           // ì‚¬ìš´ë“œ ì‹ë³„ìš© ì´ë¦„
+    public AudioClip clip;           // ì¬ìƒí•  ì˜¤ë””ì˜¤ í´ë¦½
     [Range(0f, 1f)]
-    public float volume = 1f;    // ±âº» º¼·ı(0~1)
-    public bool loop = false;   // ·çÇÁ ¿©ºÎ
-    public AudioMixerGroup mixerGroup;     // ÇÒ´çÇÒ AudioMixerGroup
+    public float volume = 1f;    // ê¸°ë³¸ ë³¼ë¥¨(0~1)
+    public bool loop = false;   // ë£¨í”„ ì—¬ë¶€
+    public AudioMixerGroup mixerGroup;     // í• ë‹¹í•  AudioMixerGroup, í–¥í›„ í•„ìš”í•  ê²ƒ ê°™ì•„ì„œ ì¶”ê°€í•˜ì˜€ìŠµë‹ˆë‹¤.
 
     [HideInInspector]
-    public AudioSource source;         // ·±Å¸ÀÓ¿¡ »ı¼ºÇÒ AudioSource
+    public AudioSource source;         // ëŸ°íƒ€ì„ì— ìƒì„±í•  AudioSource
 }
