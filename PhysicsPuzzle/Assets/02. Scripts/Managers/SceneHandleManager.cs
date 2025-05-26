@@ -16,6 +16,7 @@ public enum SCENE_TYPE
     DayAndNight,
     Time,
     Magnetic,
+    Count
 }
 public class SceneHandleManager : Singleton<SceneHandleManager>
 {
