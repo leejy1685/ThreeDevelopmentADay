@@ -11,7 +11,8 @@ public class RaserMachine : MonoBehaviour
     public float maxDistance = 100f;
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space)) // Space 누르면 발사
+        // 컨트롤 누르면 발사
+        if (Input.GetKey(KeyCode.LeftControl))
         {
             Ray ray = new Ray(_pillarAngle.position, transform.up);
             RaycastHit hit;
@@ -31,5 +32,10 @@ public class RaserMachine : MonoBehaviour
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, transform.position);
         }
+    }
+
+    public void ChangeBottleColor()
+    {
+
     }
 }
