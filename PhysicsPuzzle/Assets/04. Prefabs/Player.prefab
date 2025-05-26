@@ -551,6 +551,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 26a53848-4e86-4900-be5d-c5d878217fff
     m_ActionName: Player/Crouch[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6850557317937054288}
+        m_TargetAssemblyTypeName: _02._Scripts.Character.Player.PlayerInput, Assembly-CSharp
+        m_MethodName: OnChangeGravity
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b4f68770-de01-4929-97d8-f628791399fd
+    m_ActionName: Player/ChangeGravity[/Keyboard/g]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

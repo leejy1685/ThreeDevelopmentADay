@@ -41,6 +41,11 @@ namespace _02._Scripts.Character.Player
         {
             if(context.started) playerController.OnCrouch();
         }
+
+        public void OnChangeGravity(InputAction.CallbackContext context)
+        {
+            if(context.started) playerController.OnChangeGravity();
+        }
         
         #endregion
     }

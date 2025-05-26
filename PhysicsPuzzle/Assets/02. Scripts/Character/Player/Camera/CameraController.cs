@@ -1,20 +1,31 @@
-﻿using UnityEngine;
+﻿using System;
+using _02._Scripts.Utils;
+using UnityEngine;
 
 namespace _02._Scripts.Character.Player.Camera
 {
     public class CameraController : MonoBehaviour
     {
+        // Components
+        [Header("Components")] 
+        [SerializeField] private PlayerController playerController;
+        
         // Camera Attributes
-        [Header("Camera Settings")] [SerializeField]
-        private Transform cameraPivot;
-
+        [Header("Camera Settings")] 
+        [SerializeField] private Transform cameraPivot;
         [SerializeField] private float cameraSensitivity;
         [SerializeField] private float minX;
         [SerializeField] private float maxX;
         [SerializeField] private float cameraVerticalMovement;
         [SerializeField] private Vector2 mouseDelta;
 
+        // Properties
         public Transform CameraPivot => cameraPivot;
+
+        private void Awake()
+        {
+            if (!playerController) playerController = Helper.GetComponent_Helper<PlayerController>(gameObject);
+        }
 
         private void LateUpdate()
         {
@@ -26,7 +37,7 @@ namespace _02._Scripts.Character.Player.Camera
             cameraVerticalMovement += mouseDelta.y * cameraSensitivity;
             cameraVerticalMovement = Mathf.Clamp(cameraVerticalMovement, minX, maxX);
             cameraPivot.localEulerAngles = new Vector3(-cameraVerticalMovement, 0, 0);
-            transform.eulerAngles += new Vector3(0, mouseDelta.x * cameraSensitivity, 0);
+            transform.eulerAngles += new Vector3(0, playerController.IsPlayerUpsideDown ? -mouseDelta.x * cameraSensitivity : mouseDelta.x * cameraSensitivity, 0);
         }
 
         #region Player Input Methods

@@ -39,6 +39,10 @@ namespace _02._Scripts.Character.Player
         // Player Input Checking Fields
         private bool _isJumpPressed;
         private bool _isCrouchPressed;
+        private bool _isPlayerUpsideDown;
+        
+        // Properties
+        public bool IsPlayerUpsideDown => _isPlayerUpsideDown;
 
         private void Awake()
         {
@@ -65,23 +69,39 @@ namespace _02._Scripts.Character.Player
             SetPositionOfCameraPivot();
         }
 
+        /// <summary>
+        /// Calculate Player Movement
+        /// </summary>
         private void CalculateMovement()
         {
+            _isGrounded = IsPlayerGrounded(); 
+            playerAnimator.SetPlayerIsGrounded(_isGrounded);
+            
             var move = CalculateMovement_FlatSurface();
             
-            _isGrounded = IsPlayerGrounded();
-            playerAnimator.SetPlayerIsGrounded(_isGrounded);
-            if (!_isGrounded) move /= 2f;
+            if (_isGrounded)
+            {
+                if(gravityDirection == Vector3.down)
+                    rigidBody.velocity = new Vector3(rigidBody.velocity.x, -1f, rigidBody.velocity.z);
+                else if(gravityDirection == Vector3.up)
+                    rigidBody.velocity = new Vector3(rigidBody.velocity.x, 1f, rigidBody.velocity.z);
+            }else { rigidBody.velocity += gravityDirection * (gravityValue * rigidBody.mass * Time.fixedDeltaTime); }
+            
             if (_isGrounded && _isJumpPressed)
             {
                 playerAnimator.SetPlayerJump();
                 rigidBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+                
                 _isJumpPressed = false;
-            } else { rigidBody.velocity += gravityDirection * (gravityValue * rigidBody.mass * Time.fixedDeltaTime); }
+            } 
             
             rigidBody.MovePosition(transform.position + move);
         }
 
+        /// <summary>
+        /// Calculate Player Movement in flat surface.
+        /// </summary>
+        /// <returns></returns>
         private Vector3 CalculateMovement_FlatSurface()
         {
             var targetSpeed = 0f;
@@ -90,10 +110,13 @@ namespace _02._Scripts.Character.Player
             else currentSpeed = !Mathf.Approximately(currentSpeed, targetSpeed) ? Mathf.Lerp(currentSpeed, targetSpeed, currentSpeed / targetSpeed * speedDeltaMultiplier * Time.fixedDeltaTime) : targetSpeed;
             
             var velocityXZ = (transform.forward * movementDirection.y + transform.right * movementDirection.x).normalized * currentSpeed;
-            playerAnimator.SetPlayerSpeed(velocityXZ.magnitude/ maxSpeed);
+            playerAnimator.SetPlayerSpeed(velocityXZ.magnitude / maxSpeed);
             return velocityXZ * Time.fixedDeltaTime;
         }
 
+        /// <summary>
+        /// Set Position of CameraPivot
+        /// </summary>
         private void SetPositionOfCameraPivot()
         {
             if (!_isCrouch) return;
@@ -132,6 +155,15 @@ namespace _02._Scripts.Character.Player
             }
         }
 
+        private void SetRotationOfPlayerTransform()
+        {
+            
+        }
+
+        /// <summary>
+        /// Check if the player is on the Ground.
+        /// </summary>
+        /// <returns></returns>
         private bool IsPlayerGrounded()
         {
             return Physics.CheckSphere(transform.position + (transform.up * 0.25f), 0.35f, groundLayer);
@@ -167,6 +199,26 @@ namespace _02._Scripts.Character.Player
             playerAnimator.SetPlayerIsCrouch(_isCrouchPressed);
             capsuleCollider.center = _isCrouchPressed ? capsuleCollider.center / 2 : capsuleCollider.center * 2;
             capsuleCollider.height = _isCrouchPressed ? 1 : 2;
+        }
+
+        /// <summary>
+        /// Change Gravity Direction
+        /// </summary>
+        public void OnChangeGravity()
+        {
+            if (gravityDirection == Vector3.down)
+            {
+                gravityDirection = Vector3.up;
+                transform.position += transform.up * capsuleCollider.height; 
+                transform.rotation = Quaternion.Euler(180, 0, 0);
+            }
+            else
+            {
+                gravityDirection = Vector3.down;
+                transform.position += transform.up * capsuleCollider.height; 
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            _isPlayerUpsideDown = !_isPlayerUpsideDown;
         }
         
         #endregion
