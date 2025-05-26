@@ -5,23 +5,18 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    private int _objectStagePuzzle;
-    private int _gravityStagePuzzle;
-    private int _pipeStagePuzzle;
-    private int _dayAndNightStagePuzzle;
-    private int _timeStagePuzzle;
-    private int _magneticStagePuzzle;
+    private int[] _stagePuzzleClearCount;
+    private string[] sceneName;
     
     private void Awake()
     {
         base.Awake();
-        
-        _objectStagePuzzle = PlayerPrefs.GetInt(SCENE_TYPE.Object.ToString(), 0);
-        _gravityStagePuzzle = PlayerPrefs.GetInt(SCENE_TYPE.Gravity.ToString(), 0);
-        _pipeStagePuzzle = PlayerPrefs.GetInt(SCENE_TYPE.Pipe.ToString(), 0);
-        _dayAndNightStagePuzzle = PlayerPrefs.GetInt(SCENE_TYPE.DayAndNight.ToString(), 0);
-        _timeStagePuzzle = PlayerPrefs.GetInt(SCENE_TYPE.Time.ToString(), 0);
-        _magneticStagePuzzle = PlayerPrefs.GetInt(SCENE_TYPE.Magnetic.ToString(), 0);
+
+        _stagePuzzleClearCount = new int[(int)SCENE_TYPE.Count];
+        for (int i = 0; i < 6; i++)
+        {
+            _stagePuzzleClearCount[(int)SCENE_TYPE.Object + i] = PlayerPrefs.GetInt((SCENE_TYPE.Object + i).ToString(), 0);
+        }
     }
 
     public void GameStart()
@@ -32,6 +27,12 @@ public class GameManager : Singleton<GameManager>
     public void GameOver()
     {
         //GameOverUI 띄우고 시간 정지 등등
+    }
+
+    public void ClearPuzzle(SCENE_TYPE sceneType)
+    {
+        _stagePuzzleClearCount[(int)sceneType]++;
+        PlayerPrefs.SetInt(sceneType.ToString(),_stagePuzzleClearCount[(int)sceneType]);
     }
     
     
