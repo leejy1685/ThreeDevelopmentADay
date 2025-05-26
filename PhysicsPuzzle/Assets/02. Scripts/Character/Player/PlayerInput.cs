@@ -1,5 +1,6 @@
 ﻿using System;
 using _02._Scripts.Character.Player.Camera;
+using _02._Scripts.Managers;
 using _02._Scripts.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,12 +13,18 @@ namespace _02._Scripts.Character.Player
         [SerializeField] private PlayerController playerController;
         [SerializeField] private CameraController cameraController;
 
-        private void Start()
+        private void Awake()
         {
             if (!playerController) playerController = Helper.GetComponent_Helper<PlayerController>(gameObject);
             if (!cameraController) cameraController = Helper.GetComponent_Helper<CameraController>(gameObject);
         }
-        
+
+        private void Start()
+        {
+            playerController = CharacterManager.Instance.Player.PlayerController;
+            cameraController = CharacterManager.Instance.Player.CameraController;
+        }
+
         #region Input Actions
 
         public void OnMove(InputAction.CallbackContext context)

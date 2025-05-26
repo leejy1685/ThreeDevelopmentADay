@@ -1,4 +1,5 @@
 ﻿using System;
+using _02._Scripts.Managers;
 using _02._Scripts.Utils;
 using UnityEngine;
 
@@ -22,9 +23,9 @@ namespace _02._Scripts.Character.Player.Camera
         // Properties
         public Transform CameraPivot => cameraPivot;
 
-        private void Awake()
+        private void Start()
         {
-            if (!playerController) playerController = Helper.GetComponent_Helper<PlayerController>(gameObject);
+            playerController = CharacterManager.Instance.Player.PlayerController;
         }
 
         private void LateUpdate()

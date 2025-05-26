@@ -1,5 +1,6 @@
 ﻿using System;
 using _02._Scripts.Character.Player.Camera;
+using _02._Scripts.Managers;
 using _02._Scripts.Utils;
 using UnityEngine;
 
@@ -48,8 +49,6 @@ namespace _02._Scripts.Character.Player
         {
             if (!rigidBody) rigidBody = Helper.GetComponent_Helper<Rigidbody>(gameObject);
             if (!capsuleCollider) capsuleCollider = Helper.GetComponent_Helper<CapsuleCollider>(gameObject);
-            if (!playerAnimator) playerAnimator = Helper.GetComponent_Helper<PlayerAnimation>(gameObject);
-            if (!cameraController) cameraController = Helper.GetComponent_Helper<CameraController>(gameObject);
             if (!cameraPivot) { Debug.LogError("Missing Component : CameraPivot is Missing!"); throw new MissingComponentException(); }
         }
 
@@ -57,6 +56,8 @@ namespace _02._Scripts.Character.Player
         {
             _cameraPivot = cameraController.CameraPivot;
             originalCameraPositionY = _cameraPivot.localPosition.y;
+            playerAnimator = CharacterManager.Instance.Player.PlayerAnimation;
+            cameraController = CharacterManager.Instance.Player.CameraController;
         }
 
         private void FixedUpdate()
