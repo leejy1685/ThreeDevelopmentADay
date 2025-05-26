@@ -1,11 +1,11 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Sound/SoundLibrary")]
 public class SoundLibrary : ScriptableObject
 {
-    [Tooltip("ÀÌ ¶óÀÌºê·¯¸®¸¦ Àû¿ëÇÒ ¾À ÀÌ¸§")]
+    [Tooltip("ì´ ë¼ì´ë¸ŒëŸ¬ë¦¬ë¥¼ ì ìš©í•  ì”¬ ì´ë¦„")]
     public string sceneName;
 
-    [Tooltip("ÀÌ ¾À¿¡¼­ »ç¿ëÇÒ »ç¿îµå ¸®½ºÆ®")]
+    [Tooltip("ì´ ì”¬ì—ì„œ ì‚¬ìš©í•  ì‚¬ìš´ë“œ ë¦¬ìŠ¤íŠ¸")]
     public Sound[] sounds;
 }
