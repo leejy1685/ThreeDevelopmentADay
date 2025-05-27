@@ -60,8 +60,8 @@ public class SoundManager : Singleton<SoundManager>
             s.source.clip = s.clip;
             s.source.loop = s.loop;
             s.source.volume = s.volume;
-            s.source.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master/BGM")[0];
-            s.source.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master/SFX")[0];
+            //s.source.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master/BGM")[0];
+            //s.source.outputAudioMixerGroup = audioMixer.FindMatchingGroups("Master/SFX")[0];
         }
 
         // 예시: 플레이 시작 시 자동으로 BGM이름이 "BGM"인 사운드를 재생
