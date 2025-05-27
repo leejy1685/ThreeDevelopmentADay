@@ -18,6 +18,7 @@ public class RaserMachine : MonoBehaviour
     [SerializeField] private Transform _pitchPivot;         // Z축 회전만 담당
     [SerializeField] private LineRenderer _lineRenderer;      // 라인
     [SerializeField] public Transform barrel;   // <= 배럴 오브젝트 담당할듯...?
+
     [SerializeField] public LAZER_COLOR testColor;  //배럴 오브젝트에서 칼라정보 뽑아올것
     private GoalMachine _currentTarget = null;
 
@@ -40,15 +41,11 @@ public class RaserMachine : MonoBehaviour
 
     void Update()
     {
-        // 발사 토글(일단은 좌 컨트롤)
+        // 발사 토글(일단은 좌 컨트롤) => LazerToggle 호출시에 지워도 됨
         if (Input.GetKeyDown(KeyCode.LeftControl))
             _isFiring = !_isFiring;
 
-        // 상하 회전 입력(위, 아래 방향키)
-        if (Input.GetKey(KeyCode.UpArrow))
-            _currPitch += _pitchSpeed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.DownArrow))
-            _currPitch -= _pitchSpeed * Time.deltaTime;
+        ControlRazerVertical();
 
         // 회전 제한(현재는 수직 ~ 수평)
         _currPitch = Mathf.Clamp(_currPitch, _minRotate, _maxRotate);
@@ -101,7 +98,19 @@ public class RaserMachine : MonoBehaviour
         _currentTarget = hitTarget;
     }
 
-
+    public void ControlRazerVertical()
+    {     
+        // 이 부분은 inputaction으로 추후 바꿔서...actionMap에 Lazer라고 명명해서
+        // 플레이어가 lazer 조작시에는 player의 inputaction을 끄도록 하면 될거 같습니다
+        if (Input.GetKey(KeyCode.UpArrow))
+            _currPitch += _pitchSpeed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.DownArrow))
+            _currPitch -= _pitchSpeed * Time.deltaTime;
+    }
+    public void LazerToggle()
+    {
+        _isFiring = !_isFiring;
+    }
     /// <summary>
     /// 배럴 != null 이라면, 배럴의 칼라값을 이용하여 SetLineColor(itemData.Color); <br/>
     /// Update에서 처리할 필요 없이 배럴을 끼고 빼고 할때 변경시키면 될듯<br/>
@@ -110,6 +119,7 @@ public class RaserMachine : MonoBehaviour
     /// </summary>
     public void SetLineColor(LAZER_COLOR color)
     {
+        // 여기서 
         Color lazerColor = new Color();
         if(color == LAZER_COLOR.Blue)
         {
