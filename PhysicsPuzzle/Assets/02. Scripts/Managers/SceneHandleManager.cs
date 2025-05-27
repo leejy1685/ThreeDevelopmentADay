@@ -10,12 +10,8 @@ public enum SCENE_TYPE
     TestMain,
     LoadingScene,
     TestGoalScene,
-    Object,
-    Gravity,
-    Pipe,
-    DayAndNight,
-    Time,
-    Magnetic,
+    ObjectAndPipe,
+    DayAndNightGravity,
     Count
 }
 public class SceneHandleManager : Singleton<SceneHandleManager>
