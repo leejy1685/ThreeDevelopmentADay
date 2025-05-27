@@ -8,17 +8,26 @@ public class GameManager : Singleton<GameManager>
 {
     private int[] _stagePuzzleClearCount;
     [SerializeField] private int stageCount;
+    
+    private LobbyCamera _lobbyCamera;
     private void Awake()
     {
         base.Awake();
 
         _stagePuzzleClearCount = new int[(int)SCENE_TYPE.Count];
+        _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
     }
 
     public void GameStart()
     {
-        //게임 정보 초기화 등등
+        //카메라 변경
+        _lobbyCamera.DisableCamera();
+        //마우스 커서 고정
+        Cursor.lockState = CursorLockMode.Locked;
+        //게임 정보 초기화
+        
         //게임UI로 변경
+        UIManager.Instance.ChangeState(UIState.Game);
     }
 
     // 저장 데이터 불러오기

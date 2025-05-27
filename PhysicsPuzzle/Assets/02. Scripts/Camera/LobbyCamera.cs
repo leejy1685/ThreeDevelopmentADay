@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class RobbyCamera : MonoBehaviour
+public class LobbyCamera : MonoBehaviour
 {
-    [SerializeField] private CinemachineSmoothPath path;
+    [SerializeField] private LayerMask _playerLayer;
+    private CinemachineSmoothPath path;
     private Rigidbody _rigidbody;
+    
 
     private void Awake()
     {
@@ -15,6 +17,12 @@ public class RobbyCamera : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
 
         StartCoroutine(CameraMove_Coroutine());
+    }
+
+    public void DisableCamera()
+    {
+        Camera.main.cullingMask -= _playerLayer;
+        gameObject.SetActive(false);
     }
 
     private IEnumerator CameraMove_Coroutine()
