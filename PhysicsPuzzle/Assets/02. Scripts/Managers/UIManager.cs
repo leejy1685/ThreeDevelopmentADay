@@ -7,6 +7,7 @@ public enum UIState
     Lobby,
     Game,
     Clear,
+    Obtion
 }
 
 public class UIManager : Singleton<UIManager>

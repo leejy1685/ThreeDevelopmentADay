@@ -1,18 +1,36 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class ObtionUI : MonoBehaviour
+public class ObtionUI : BaseUI
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("[Option UI]")]
+    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private Slider sfxSlider;
+    [SerializeField] private Button backButton;
+
+    public override void Init(UIManager uiManager)
     {
+        base.Init(uiManager);
         
+        backButton.onClick.AddListener(OnClickBackButton);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        bgmSlider.onValueChanged.AddListener((value) => SoundManager.Instance.SetBGMVolume(value));;
+        sfxSlider.onValueChanged.AddListener((value) => SoundManager.Instance.SetSFXVolume(value));;
+    }
+
+    protected override UIState GetUIState()
+    {
+        return UIState.Obtion;
+    }
+
+    public void OnClickBackButton()
+    {
+        uiManager.ChangeState(UIState.Lobby);
     }
 }

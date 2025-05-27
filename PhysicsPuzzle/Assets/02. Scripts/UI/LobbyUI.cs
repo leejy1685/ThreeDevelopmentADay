@@ -13,10 +13,6 @@ public class LobbyUI : BaseUI
     [SerializeField] private Button optionButton;
     [SerializeField] private Button exitButton;
     
-    [Header("[Option UI]")]
-    [SerializeField] private Slider bgmSlider;
-    [SerializeField] private Slider sfxSlider;
-    
     protected override UIState GetUIState()
     {
         return UIState.Lobby;
@@ -30,9 +26,6 @@ public class LobbyUI : BaseUI
         loadButton.onClick.AddListener(OnClickLoadButton);
         optionButton.onClick.AddListener(OnClickOptionButton);
         exitButton.onClick.AddListener(OnClickExitButton);
-        
-        bgmSlider.onValueChanged.AddListener((value) => SoundManager.Instance.SetBGMVolume(value));;
-        sfxSlider.onValueChanged.AddListener((value) => SoundManager.Instance.SetSFXVolume(value));;
     }
     
     // 인스펙터에서 직접 연결. 씬에 슬라이더 추가했다고 가정, 슬라이더 설정은 되어 있을거고. 
