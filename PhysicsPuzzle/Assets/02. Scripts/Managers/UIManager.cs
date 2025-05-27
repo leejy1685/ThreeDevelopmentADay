@@ -18,6 +18,7 @@ public class UIManager : Singleton<UIManager>
     
     [SerializeField] private Canvas lobbyCanvas;
     [SerializeField] private Canvas optioinCanvas;
+    [SerializeField] private Canvas clearCanvas;
 
     private void Awake()
     {
