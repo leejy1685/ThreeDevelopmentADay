@@ -46,7 +46,8 @@ public class LobbyUI : BaseUI
 
     private void OnClickStartButton()
     {
-        UIManager.Instance.OnClickStart();
+        GameManager.Instance.GameStart();
+        //UIManager.Instance.OnClickStart();
     }
     
     private void OnClickLoadButton()
