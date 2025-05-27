@@ -3,6 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//낮과 밤
+public enum TIME_TYPE
+{
+    Day,
+    Night,
+}
+
 public class DayAndNight : MonoBehaviour
 {
     // 하루 시간을 0 ~ 1로 치환
@@ -32,14 +39,18 @@ public class DayAndNight : MonoBehaviour
     
     [Header("[Blocks]")]
     public TIME_TYPE isDay;
-    public TimeBlock[] timeBlocks;
+    public VisibleBlock[] VisibleBlocks;
+    public CollisionBlock[] CollisionBlocks;
 
     private void Start()
     {
         timeRate = 1.0f / fullDayLength;
         time = startTime;
         isDay = TIME_TYPE.Day;
-        timeBlocks = FindObjectsByType<TimeBlock>(FindObjectsSortMode.None);
+        VisibleBlocks = FindObjectsByType<VisibleBlock>(FindObjectsSortMode.None);
+        CollisionBlocks = FindObjectsByType<CollisionBlock>(FindObjectsSortMode.None);
+        
+        ChangeBlocks();
     }
     
     private void Update()
@@ -75,12 +86,7 @@ public class DayAndNight : MonoBehaviour
             if (Mathf.Abs(time) < 0.01f)
             {
                 isDay = TIME_TYPE.Night;
-                
-                for (int i = 0; i < timeBlocks.Length; i++)
-                {
-                    timeBlocks[i].ChangeTimeBlock(isDay);
-                }
-                
+                ChangeBlocks();
                 break;
             }
 
@@ -98,12 +104,8 @@ public class DayAndNight : MonoBehaviour
             //낮이 되면 탈출
             if (Mathf.Abs(time - 0.5f) < 0.01f)
             {
-                for (int i = 0; i < timeBlocks.Length; i++)
-                {
-                    timeBlocks[i].ChangeTimeBlock(isDay);
-                }
-                
                 isDay = TIME_TYPE.Day;
+                ChangeBlocks();
                 break;
             }
             
@@ -130,5 +132,17 @@ public class DayAndNight : MonoBehaviour
 
         RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
         RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
+    }
+
+    private void ChangeBlocks()
+    {
+        for(int i =0;i<VisibleBlocks.Length;i++)
+        {
+            VisibleBlocks[i].ChangeVisibleBlock(isDay);
+        }
+        for(int i=0;i<CollisionBlocks.Length;i++)
+        {
+            CollisionBlocks[i].ChangeSetActive(isDay);
+        }
     }
 }

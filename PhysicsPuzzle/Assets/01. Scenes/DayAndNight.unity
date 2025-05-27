@@ -3926,7 +3926,7 @@ GameObject:
   - component: {fileID: 813981693}
   - component: {fileID: 813981692}
   - component: {fileID: 813981691}
-  - component: {fileID: 813981690}
+  - component: {fileID: 813981695}
   m_Layer: 3
   m_Name: CollisionNight
   m_TagString: Untagged
@@ -3934,20 +3934,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &813981690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 813981689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26ccb6a0f7c553346ad454802343684a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeBlockType: 1
-  visibleAndCollisionType: 0
 --- !u!65 &813981691
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4034,6 +4020,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &813981695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813981689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81deb4dbf5547d149b50f1bb0eb642a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBlockType: 1
 --- !u!1 &818534941
 GameObject:
   m_ObjectHideFlags: 0
@@ -4948,7 +4947,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBlockType: 1
-  visibleAndCollisionType: 0
 --- !u!65 &1043121485
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6110,7 +6108,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   isDay: 0
-  timeBlocks: []
+  VisibleBlocks: []
+  CollisionBlocks: []
 --- !u!1 &1347016490
 GameObject:
   m_ObjectHideFlags: 0
@@ -7342,7 +7341,7 @@ GameObject:
   - component: {fileID: 1585467447}
   - component: {fileID: 1585467446}
   - component: {fileID: 1585467445}
-  - component: {fileID: 1585467444}
+  - component: {fileID: 1585467449}
   m_Layer: 3
   m_Name: CollisionDay
   m_TagString: Untagged
@@ -7350,20 +7349,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1585467444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1585467443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26ccb6a0f7c553346ad454802343684a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeBlockType: 0
-  visibleAndCollisionType: 0
 --- !u!65 &1585467445
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7450,6 +7435,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1585467449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585467443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81deb4dbf5547d149b50f1bb0eb642a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeBlockType: 0
 --- !u!1 &1630638592
 GameObject:
   m_ObjectHideFlags: 0
@@ -8872,7 +8870,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBlockType: 0
-  visibleAndCollisionType: 0
 --- !u!65 &2073463541
 BoxCollider:
   m_ObjectHideFlags: 0
