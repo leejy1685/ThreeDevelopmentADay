@@ -29,11 +29,17 @@ public class DayAndNight : MonoBehaviour
     [Header("Other Lighting")]
     [SerializeField] private AnimationCurve lightingIntensityMultiplier;
     [SerializeField] private AnimationCurve reflectionIntensityMultiplier;
+    
+    [Header("[Blocks]")]
+    public TIME_TYPE isDay;
+    public TimeBlock[] timeBlocks;
 
     private void Start()
     {
         timeRate = 1.0f / fullDayLength;
         time = startTime;
+        isDay = TIME_TYPE.Day;
+        timeBlocks = FindObjectsByType<TimeBlock>(FindObjectsSortMode.None);
     }
     
     private void Update()
@@ -45,9 +51,9 @@ public class DayAndNight : MonoBehaviour
         }
     }
 
-    private void ChangeDayAndNight()
+    public void ChangeDayAndNight()
     {
-        if (Mathf.Abs(time-0.5f) > 0.01f)
+        if (TIME_TYPE.Night == isDay)
         {
             ChangeDayCoroutine = StartCoroutine(ChangeDay_Coroutine());
         }
@@ -55,6 +61,7 @@ public class DayAndNight : MonoBehaviour
         {
             ChangeNightCoroutine = StartCoroutine(ChangeNight_Coroutine());
         }
+        
     }
     
 
@@ -62,28 +69,21 @@ public class DayAndNight : MonoBehaviour
     {
         while (true)
         {
-            //시간 계산
-            time = (time + timeRate * Time.deltaTime) % 1.0f;
-            
-            //태양 위치 변경
-            sun.transform.eulerAngles =  (time - 0.25f) * 4.0f * noon;
-            sun.color = sunColor.Evaluate(time);
-            sun.intensity = sunIntensity.Evaluate(time);
-            
-            //달 밝기 변경
-            moon1.color = moonColor.Evaluate(time);
-            moon1.intensity = moonIntensity.Evaluate(time);
-            
-            moon2.color = moonColor.Evaluate(time);
-            moon2.intensity = moonIntensity.Evaluate(time);
-            
-            RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
-            RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
+            EvaluateDayAndNight();
 
             //밤이 되면 탈출
             if (Mathf.Abs(time) < 0.01f)
+            {
+                isDay = TIME_TYPE.Night;
+                
+                for (int i = 0; i < timeBlocks.Length; i++)
+                {
+                    timeBlocks[i].ChangeTimeBlock(isDay);
+                }
+                
                 break;
-            
+            }
+
 
             yield return null;
         }
@@ -93,29 +93,42 @@ public class DayAndNight : MonoBehaviour
     {
         while (true)
         {
-            //시간 계산
-            time = (time + timeRate * Time.deltaTime) % 1.0f;
-            
-            //태양 위치 변경
-            sun.transform.eulerAngles =  (time - 0.25f) * 4.0f * noon;
-            sun.color = sunColor.Evaluate(time);
-            sun.intensity = sunIntensity.Evaluate(time);
-            
-            //달 밝기 변경
-            moon1.color = moonColor.Evaluate(time);
-            moon1.intensity = moonIntensity.Evaluate(time);
-            
-            moon2.color = moonColor.Evaluate(time);
-            moon2.intensity = moonIntensity.Evaluate(time);
-            
-            RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
-            RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
+            EvaluateDayAndNight();
 
             //낮이 되면 탈출
-            if (Mathf.Abs(time-0.5f) < 0.01f)
+            if (Mathf.Abs(time - 0.5f) < 0.01f)
+            {
+                for (int i = 0; i < timeBlocks.Length; i++)
+                {
+                    timeBlocks[i].ChangeTimeBlock(isDay);
+                }
+                
+                isDay = TIME_TYPE.Day;
                 break;
+            }
             
             yield return null;
         }
+    }
+
+    private void EvaluateDayAndNight()
+    {
+        //시간 계산
+        time = (time + timeRate * Time.deltaTime) % 1.0f;
+
+        //태양 위치 변경
+        sun.transform.eulerAngles = (time - 0.25f) * 4.0f * noon;
+        sun.color = sunColor.Evaluate(time);
+        sun.intensity = sunIntensity.Evaluate(time);
+
+        //달 밝기 변경
+        moon1.color = moonColor.Evaluate(time);
+        moon1.intensity = moonIntensity.Evaluate(time);
+
+        moon2.color = moonColor.Evaluate(time);
+        moon2.intensity = moonIntensity.Evaluate(time);
+
+        RenderSettings.ambientIntensity = lightingIntensityMultiplier.Evaluate(time);
+        RenderSettings.reflectionIntensity = reflectionIntensityMultiplier.Evaluate(time);
     }
 }
