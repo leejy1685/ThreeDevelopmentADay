@@ -9,7 +9,10 @@ public enum SCENE_TYPE
     // 여기에 하드코딩 방지용 SceneName
     TestMain,
     LoadingScene,
-    TestGoalScene
+    TestGoalScene,
+    ObjectAndPipe,
+    DayAndNightGravity,
+    Count
 }
 public class SceneHandleManager : Singleton<SceneHandleManager>
 {

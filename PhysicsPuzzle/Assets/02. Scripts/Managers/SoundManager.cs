@@ -25,8 +25,10 @@ public class SoundManager : Singleton<SoundManager>
         
         audioSource = GetComponent<AudioSource>();
 
+
         audioSource.loop = true;
         ChangeBGM(BGM);
+
     }
 
     public void ChangeBGM(AudioClip clip)
