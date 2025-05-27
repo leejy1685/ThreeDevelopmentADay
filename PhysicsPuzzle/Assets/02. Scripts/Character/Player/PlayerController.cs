@@ -159,11 +159,6 @@ namespace _02._Scripts.Character.Player
             }
         }
 
-        private void SetRotationOfPlayerTransform()
-        {
-            
-        }
-
         /// <summary>
         /// Check if the player is on the Ground.
         /// </summary>

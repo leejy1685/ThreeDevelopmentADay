@@ -18,6 +18,7 @@ namespace _02._Scripts.Character.Player.Camera
         [SerializeField] private float minX;
         [SerializeField] private float maxX;
         [SerializeField] private float cameraVerticalMovement;
+        [SerializeField] private float originalCameraPivotAngleX;
         [SerializeField] private Vector2 mouseDelta;
 
         // Fields
@@ -30,6 +31,7 @@ namespace _02._Scripts.Character.Player.Camera
         {
             _characterManager = CharacterManager.Instance;
             
+            originalCameraPivotAngleX = cameraPivot.localEulerAngles.x;
             playerController = _characterManager.Player.PlayerController;
         }
 
@@ -42,7 +44,7 @@ namespace _02._Scripts.Character.Player.Camera
         {
             cameraVerticalMovement += mouseDelta.y * cameraSensitivity;
             cameraVerticalMovement = Mathf.Clamp(cameraVerticalMovement, minX, maxX);
-            cameraPivot.localEulerAngles = new Vector3(-cameraVerticalMovement, 0, 0);
+            cameraPivot.localEulerAngles = new Vector3(-cameraVerticalMovement + originalCameraPivotAngleX, 0, 0);
             transform.eulerAngles += new Vector3(0, playerController.IsPlayerUpsideDown ? -mouseDelta.x * cameraSensitivity : mouseDelta.x * cameraSensitivity, 0);
         }
 

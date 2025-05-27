@@ -12,6 +12,7 @@ namespace _02._Scripts.Character.Player
         [Header("Components")]
         [SerializeField] private PlayerController playerController;
         [SerializeField] private CameraController cameraController;
+        [SerializeField] private PlayerInteraction playerInteraction;
 
         private CharacterManager _characterManager;
 
@@ -21,6 +22,7 @@ namespace _02._Scripts.Character.Player
             
             playerController = _characterManager.Player.PlayerController;
             cameraController = _characterManager.Player.CameraController;
+            playerInteraction = _characterManager.Player.PlayerInteraction;
         }
 
         #region Input Actions
@@ -50,6 +52,21 @@ namespace _02._Scripts.Character.Player
         public void OnChangeGravity(InputAction.CallbackContext context)
         {
             if(context.started) playerController.OnChangeGravity();
+        }
+
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            if(context.started) playerInteraction.OnInteract();
+        }
+
+        public void OnUse(InputAction.CallbackContext context)
+        {
+            if(context.started) InventoryManager.Instance.UseItem();    
+        }
+        
+        public void OnDrop(InputAction.CallbackContext context)
+        {
+            if(context.started) InventoryManager.Instance.DropItem();
         }
         
         #endregion

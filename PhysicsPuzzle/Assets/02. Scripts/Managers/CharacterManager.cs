@@ -4,19 +4,25 @@ using UnityEngine;
 
 namespace _02._Scripts.Managers
 {
-    public class CharacterManager : Singleton<CharacterManager>
+    public class CharacterManager : MonoBehaviour
     {
-        // Manages player in every scene
-        [Header("Player")] 
+        // Fields
         [SerializeField] private Player player;
         
         // Properties
         public Player Player => player;
         
-        protected override void Awake()
+        // Singleton
+        public static CharacterManager Instance { get; private set; }
+
+        private void Awake()
         {
-            base.Awake();
-            player = Helper.GetComponent_Helper<Player>(GameObject.FindWithTag("Player"));
+            if (!Instance)
+            {
+                Instance = this;
+                if (!player) player = Helper.GetComponent_Helper<Player>(GameObject.FindWithTag("Player"));
+            }
+            else { if (Instance != this) Destroy(gameObject); }
         }
     }
 }
