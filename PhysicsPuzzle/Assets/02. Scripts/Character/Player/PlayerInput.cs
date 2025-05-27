@@ -1,5 +1,6 @@
 ﻿using System;
 using _02._Scripts.Character.Player.Camera;
+using _02._Scripts.Managers;
 using _02._Scripts.Utils;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,12 +13,16 @@ namespace _02._Scripts.Character.Player
         [SerializeField] private PlayerController playerController;
         [SerializeField] private CameraController cameraController;
 
+        private CharacterManager _characterManager;
+
         private void Start()
         {
-            if (!playerController) playerController = Helper.GetComponent_Helper<PlayerController>(gameObject);
-            if (!cameraController) cameraController = Helper.GetComponent_Helper<CameraController>(gameObject);
+            _characterManager = CharacterManager.Instance;
+            
+            playerController = _characterManager.Player.PlayerController;
+            cameraController = _characterManager.Player.CameraController;
         }
-        
+
         #region Input Actions
 
         public void OnMove(InputAction.CallbackContext context)
@@ -40,6 +45,11 @@ namespace _02._Scripts.Character.Player
         public void OnCrouch(InputAction.CallbackContext context)
         {
             if(context.started) playerController.OnCrouch();
+        }
+
+        public void OnChangeGravity(InputAction.CallbackContext context)
+        {
+            if(context.started) playerController.OnChangeGravity();
         }
         
         #endregion
