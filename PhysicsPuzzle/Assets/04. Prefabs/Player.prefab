@@ -308,14 +308,16 @@ GameObject:
   - component: {fileID: 1394431625068058889}
   - component: {fileID: 347741198787532272}
   - component: {fileID: 6937741176745237255}
+  - component: {fileID: -573593011789325943}
+  - component: {fileID: 9204080799817005099}
+  - component: {fileID: 8901723863115515097}
   - component: {fileID: 3506878476624293076}
   - component: {fileID: 3731292494306958236}
-  - component: {fileID: 8901723863115515097}
   - component: {fileID: 6850557317937054288}
   - component: {fileID: 619859596558535234}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -387,6 +389,48 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &-573593011789325943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141663084719360671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20ed427aed194cef9901b8b77189ff10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 3731292494306958236}
+  playerAnimation: {fileID: 8901723863115515097}
+  playerInput: {fileID: 6850557317937054288}
+  playerCondition: {fileID: 9204080799817005099}
+  cameraController: {fileID: 3506878476624293076}
+--- !u!114 &9204080799817005099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141663084719360671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31e2a2b40b1249728d836c0271d9663e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8901723863115515097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141663084719360671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cba9f71029a4a48998355d5ce2a492c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 317645045011739044}
 --- !u!114 &3506878476624293076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5177bdffd33e4620b31a2203ccc959b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 3731292494306958236}
   cameraPivot: {fileID: 7400930726095756771}
   cameraSensitivity: 0.2
   minX: -70
@@ -419,8 +464,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 347741198787532272}
   capsuleCollider: {fileID: 6937741176745237255}
-  playerAnimator: {fileID: 0}
-  cameraController: {fileID: 0}
+  playerAnimator: {fileID: 8901723863115515097}
+  cameraController: {fileID: 3506878476624293076}
   movementDirection: {x: 0, y: 0}
   maxSpeed: 8
   currentSpeed: 0
@@ -435,19 +480,6 @@ MonoBehaviour:
   cameraPivot: {fileID: 7400930726095756771}
   crouchCameraPositionY: 1
   originalCameraPositionY: 0
---- !u!114 &8901723863115515097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141663084719360671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cba9f71029a4a48998355d5ce2a492c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 317645045011739044}
 --- !u!114 &6850557317937054288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,8 +492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f55a1816fbe94ad1b4d7d9d9c3847730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  cameraController: {fileID: 0}
+  playerController: {fileID: 3731292494306958236}
+  cameraController: {fileID: 3506878476624293076}
 --- !u!114 &619859596558535234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,6 +583,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 26a53848-4e86-4900-be5d-c5d878217fff
     m_ActionName: Player/Crouch[/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6850557317937054288}
+        m_TargetAssemblyTypeName: _02._Scripts.Character.Player.PlayerInput, Assembly-CSharp
+        m_MethodName: OnChangeGravity
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b4f68770-de01-4929-97d8-f628791399fd
+    m_ActionName: Player/ChangeGravity[/Keyboard/g]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
