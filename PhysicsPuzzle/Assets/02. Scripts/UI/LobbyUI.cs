@@ -50,7 +50,7 @@ public class LobbyUI : BaseUI
     
     private void OnClickOptionButton()
     {
-        UIManager.Instance.OnClickOption();
+        uiManager.ChangeState(UIState.Obtion);
     }
     
     private void OnClickExitButton()
