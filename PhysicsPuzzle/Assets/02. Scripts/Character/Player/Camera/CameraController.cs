@@ -1,6 +1,7 @@
 ﻿using System;
 using _02._Scripts.Managers;
 using _02._Scripts.Utils;
+using Cinemachine;
 using UnityEngine;
 
 namespace _02._Scripts.Character.Player.Camera
@@ -10,6 +11,7 @@ namespace _02._Scripts.Character.Player.Camera
         // Components
         [Header("Components")] 
         [SerializeField] private PlayerController playerController;
+        [SerializeField] private PlayerCondition playerCondition;
         
         // Camera Attributes
         [Header("Camera Settings")] 
@@ -33,11 +35,12 @@ namespace _02._Scripts.Character.Player.Camera
             
             originalCameraPivotAngleX = cameraPivot.localEulerAngles.x;
             playerController = _characterManager.Player.PlayerController;
+            playerCondition = _characterManager.Player.PlayerCondition;
         }
 
         private void LateUpdate()
         {
-            RotateCamera();
+            if (playerCondition.IsPlayerCharacterHasControl) RotateCamera();
         }
 
         private void RotateCamera()

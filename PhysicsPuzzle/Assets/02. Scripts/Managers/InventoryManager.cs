@@ -3,6 +3,7 @@ using System.Linq;
 using _02._Scripts.Character.Player;
 using _02._Scripts.Item;
 using _02._Scripts.Item.DataAndTable;
+using _02._Scripts.Objects.LaserMachine;
 using _02._Scripts.Utils;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -26,6 +27,8 @@ namespace _02._Scripts.Managers
         // Fields
         private CharacterManager _characterManager;
         private PlayerEquipment _playerEquipment;
+        private PlayerInteraction _playerInteraction;
+        private PlayerCondition _playerCondition;
         private Player _player;
         
         // Properties
@@ -44,6 +47,8 @@ namespace _02._Scripts.Managers
         {
             _characterManager = CharacterManager.Instance;
             _playerEquipment = _characterManager.Player.PlayerEquipment;
+            _playerInteraction = _characterManager.Player.PlayerInteraction;
+            _playerCondition = _characterManager.Player.PlayerCondition;
             _player = _characterManager.Player;
             itemThrowPivot = _player.ItemThrowPivot;
             
@@ -89,13 +94,15 @@ namespace _02._Scripts.Managers
 
         public void UseItem()
         {
-            if (!selectedItem) return;
+            if (!selectedItem || !_playerCondition.IsPlayerCharacterHasControl) return;
+            if (_playerInteraction.Interactable is not LaserMachine laserMachine) return;
+            laserMachine.SetLineColor(selectedItem.color);
             RemoveSelectedItem();
         }
 
         public void DropItem()
         {
-            if (!selectedItem) return;
+            if (!selectedItem || !_playerCondition.IsPlayerCharacterHasControl) return;
             ThrowItem(selectedItem);
             RemoveSelectedItem();
         }
