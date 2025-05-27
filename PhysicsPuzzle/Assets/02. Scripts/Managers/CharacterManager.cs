@@ -1,4 +1,5 @@
 ﻿using _02._Scripts.Character.Player;
+using _02._Scripts.Utils;
 using UnityEngine;
 
 namespace _02._Scripts.Managers
@@ -15,7 +16,7 @@ namespace _02._Scripts.Managers
         protected override void Awake()
         {
             base.Awake();
-            player = FindFirstObjectByType<Player>();
+            player = Helper.GetComponent_Helper<Player>(GameObject.FindWithTag("Player"));
         }
     }
 }

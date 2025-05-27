@@ -309,15 +309,15 @@ GameObject:
   - component: {fileID: 347741198787532272}
   - component: {fileID: 6937741176745237255}
   - component: {fileID: -573593011789325943}
-  - component: {fileID: 3731292494306958236}
   - component: {fileID: 9204080799817005099}
   - component: {fileID: 8901723863115515097}
   - component: {fileID: 3506878476624293076}
+  - component: {fileID: 3731292494306958236}
   - component: {fileID: 6850557317937054288}
   - component: {fileID: 619859596558535234}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -401,41 +401,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20ed427aed194cef9901b8b77189ff10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  playerAnimation: {fileID: 0}
-  playerInput: {fileID: 0}
-  playerCondition: {fileID: 0}
-  cameraController: {fileID: 0}
---- !u!114 &3731292494306958236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141663084719360671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc15a38b381b43d0813ba99a9a95c06d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidBody: {fileID: 347741198787532272}
-  capsuleCollider: {fileID: 6937741176745237255}
-  playerAnimator: {fileID: 0}
-  cameraController: {fileID: 0}
-  movementDirection: {x: 0, y: 0}
-  maxSpeed: 8
-  currentSpeed: 0
-  crouchSpeed: 2
-  speedDeltaMultiplier: 5
-  jumpForce: 30
-  gravityValue: 9.81
-  gravityDirection: {x: 0, y: -1, z: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  cameraPivot: {fileID: 7400930726095756771}
-  crouchCameraPositionY: 1
-  originalCameraPositionY: 0
+  playerController: {fileID: 3731292494306958236}
+  playerAnimation: {fileID: 8901723863115515097}
+  playerInput: {fileID: 6850557317937054288}
+  playerCondition: {fileID: 9204080799817005099}
+  cameraController: {fileID: 3506878476624293076}
 --- !u!114 &9204080799817005099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,13 +443,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5177bdffd33e4620b31a2203ccc959b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
+  playerController: {fileID: 3731292494306958236}
   cameraPivot: {fileID: 7400930726095756771}
   cameraSensitivity: 0.2
   minX: -70
   maxX: 70
   cameraVerticalMovement: 0
   mouseDelta: {x: 0, y: 0}
+--- !u!114 &3731292494306958236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141663084719360671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc15a38b381b43d0813ba99a9a95c06d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidBody: {fileID: 347741198787532272}
+  capsuleCollider: {fileID: 6937741176745237255}
+  playerAnimator: {fileID: 8901723863115515097}
+  cameraController: {fileID: 3506878476624293076}
+  movementDirection: {x: 0, y: 0}
+  maxSpeed: 8
+  currentSpeed: 0
+  crouchSpeed: 2
+  speedDeltaMultiplier: 5
+  jumpForce: 30
+  gravityValue: 9.81
+  gravityDirection: {x: 0, y: -1, z: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  cameraPivot: {fileID: 7400930726095756771}
+  crouchCameraPositionY: 1
+  originalCameraPositionY: 0
 --- !u!114 &6850557317937054288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,8 +492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f55a1816fbe94ad1b4d7d9d9c3847730, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
-  cameraController: {fileID: 0}
+  playerController: {fileID: 3731292494306958236}
+  cameraController: {fileID: 3506878476624293076}
 --- !u!114 &619859596558535234
 MonoBehaviour:
   m_ObjectHideFlags: 0

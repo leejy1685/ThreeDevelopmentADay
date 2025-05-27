@@ -1,5 +1,4 @@
-﻿using System;
-using _02._Scripts.Character.Player.Camera;
+﻿using _02._Scripts.Character.Player.Camera;
 using _02._Scripts.Utils;
 using UnityEngine;
 
