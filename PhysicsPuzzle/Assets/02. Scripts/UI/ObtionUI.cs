@@ -20,8 +20,8 @@ public class ObtionUI : BaseUI
 
     private void Update()
     {
-        bgmSlider.onValueChanged.AddListener((value) => SoundManager.Instance.SetBGMVolume(value));;
-        sfxSlider.onValueChanged.AddListener((value) => SoundManager.Instance.SetSFXVolume(value));;
+        bgmSlider.onValueChanged.AddListener((value) => SoundManager.Instance.SetBGMVolume = value);;
+        sfxSlider.onValueChanged.AddListener((value) => SoundManager.Instance.SetSFXVolume = value);;
     }
 
     protected override UIState GetUIState()

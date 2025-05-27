@@ -12,11 +12,23 @@ public class SoundManager : Singleton<SoundManager>
     [Header( "[BGM]" )]
     private AudioSource audioSource;
     [SerializeField] private AudioClip BGM;
-    [Range(0f,1f)]public float BGMVolume = 0.5f;
-    
+    [Range(0f, 1f)] public float BGMVolume;
+    public float SetBGMVolume
+    {
+        set
+        {
+            BGMVolume = Mathf.Clamp(value, 0f, 1f); 
+            audioSource.volume = BGMVolume;
+        }
+    }
+
     [Header( "[SFX]" )]
     [SerializeField] private SoundSource soundPrefab;
     [Range(0f,1f)]public float SFXVolume = 0.5f;
+    public float SetSFXVolume
+    {
+        set { SFXVolume = Mathf.Clamp(value, 0f, 1f); }
+    }
 
 
     protected override void Awake()
@@ -24,8 +36,7 @@ public class SoundManager : Singleton<SoundManager>
         base.Awake();
         
         audioSource = GetComponent<AudioSource>();
-
-
+        
         audioSource.loop = true;
         ChangeBGM(BGM);
 
@@ -33,7 +44,6 @@ public class SoundManager : Singleton<SoundManager>
 
     public void ChangeBGM(AudioClip clip)
     {
-        audioSource.volume = BGMVolume;
         audioSource.clip = clip;
         audioSource.Play();
     }
