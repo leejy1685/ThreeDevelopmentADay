@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,6 +8,7 @@ public enum UIState
     Game,
     Clear,
 }
+
 
 public class UIManager : Singleton<UIManager>
 {
@@ -81,6 +82,7 @@ public class UIManager : Singleton<UIManager>
         // 초기 상태를 로비 화면으로 설정
         ChangeState(UIState.Lobby);
     }
+
 
 
     public void ChangeState(UIState state)
