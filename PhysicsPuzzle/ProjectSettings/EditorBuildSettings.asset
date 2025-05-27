@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01. Scenes/TestGoalScene.unity
     guid: 09680bc83b32d93489c5051131165e57
+  - enabled: 1
+    path: Assets/01. Scenes/LobbyCamera.unity
+    guid: 25d311749627d9f43b829ec601393363
   m_configObjects: {}

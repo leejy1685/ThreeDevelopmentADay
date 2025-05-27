@@ -37760,6 +37760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   libraries:
+  - {fileID: 11400000, guid: 6ebc8c83c76259844bea619296f68782, type: 2}
   - {fileID: 11400000, guid: 59f0741a7b89b9d48b9a3a472dd7b229, type: 2}
   audioMixer: {fileID: 24100000, guid: dc67e0c96539fad4aa6b6f4bf380c667, type: 2}
 --- !u!1 &1416732392
