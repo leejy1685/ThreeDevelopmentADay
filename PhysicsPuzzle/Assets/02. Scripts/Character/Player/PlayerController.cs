@@ -32,6 +32,7 @@ namespace _02._Scripts.Character.Player
         
         // Components
         private Transform _cameraPivot;
+        private CharacterManager _characterManager;
         
         // Player State Fields
         private bool _isGrounded = true;
@@ -55,9 +56,11 @@ namespace _02._Scripts.Character.Player
         private void Start()
         {
             _cameraPivot = cameraController.CameraPivot;
+            _characterManager = CharacterManager.Instance;
             originalCameraPositionY = _cameraPivot.localPosition.y;
-            playerAnimator = CharacterManager.Instance.Player.PlayerAnimation;
-            cameraController = CharacterManager.Instance.Player.CameraController;
+            
+            playerAnimator = _characterManager.Player.PlayerAnimation;
+            cameraController = _characterManager.Player.CameraController;
         }
 
         private void FixedUpdate()

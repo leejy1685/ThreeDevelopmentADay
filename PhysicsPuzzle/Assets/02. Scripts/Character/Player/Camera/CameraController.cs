@@ -20,12 +20,17 @@ namespace _02._Scripts.Character.Player.Camera
         [SerializeField] private float cameraVerticalMovement;
         [SerializeField] private Vector2 mouseDelta;
 
+        // Fields
+        private CharacterManager _characterManager;
+        
         // Properties
         public Transform CameraPivot => cameraPivot;
 
         private void Start()
         {
-            playerController = CharacterManager.Instance.Player.PlayerController;
+            _characterManager = CharacterManager.Instance;
+            
+            playerController = _characterManager.Player.PlayerController;
         }
 
         private void LateUpdate()

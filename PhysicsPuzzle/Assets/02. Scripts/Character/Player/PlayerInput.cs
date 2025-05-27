@@ -13,16 +13,14 @@ namespace _02._Scripts.Character.Player
         [SerializeField] private PlayerController playerController;
         [SerializeField] private CameraController cameraController;
 
-        private void Awake()
-        {
-            if (!playerController) playerController = Helper.GetComponent_Helper<PlayerController>(gameObject);
-            if (!cameraController) cameraController = Helper.GetComponent_Helper<CameraController>(gameObject);
-        }
+        private CharacterManager _characterManager;
 
         private void Start()
         {
-            playerController = CharacterManager.Instance.Player.PlayerController;
-            cameraController = CharacterManager.Instance.Player.CameraController;
+            _characterManager = CharacterManager.Instance;
+            
+            playerController = _characterManager.Player.PlayerController;
+            cameraController = _characterManager.Player.CameraController;
         }
 
         #region Input Actions
