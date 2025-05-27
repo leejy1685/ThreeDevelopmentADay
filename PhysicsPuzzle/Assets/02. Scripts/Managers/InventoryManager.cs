@@ -21,11 +21,12 @@ namespace _02._Scripts.Managers
         [SerializeField] private int selectedItemIndex;
         
         [Header("Item Throw Position")]
-        [SerializeField] private Transform itemThrowTransform;
+        [SerializeField] private Transform itemThrowPivot;
         
         // Fields
         private CharacterManager _characterManager;
         private PlayerEquipment _playerEquipment;
+        private Player _player;
         
         // Properties
         public ItemData SelectedItem => selectedItem;
@@ -43,6 +44,8 @@ namespace _02._Scripts.Managers
         {
             _characterManager = CharacterManager.Instance;
             _playerEquipment = _characterManager.Player.PlayerEquipment;
+            _player = _characterManager.Player;
+            itemThrowPivot = _player.ItemThrowPivot;
             
             itemSlots = new List<ItemSlot> { Capacity = maxDataCount };
 
@@ -141,7 +144,7 @@ namespace _02._Scripts.Managers
         
         private void ThrowItem(ItemData item)
         {
-            Instantiate(item.itemPrefab, itemThrowTransform.position, itemThrowTransform.rotation);
+            Instantiate(item.itemPrefab, itemThrowPivot.position, itemThrowPivot.rotation);
         }
     }
 }

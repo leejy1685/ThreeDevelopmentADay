@@ -18,6 +18,8 @@ namespace _02._Scripts.Character.Player
         [SerializeField] private CameraController cameraController;
         [SerializeField] private PlayerEquipment playerEquipment;
         [SerializeField] private PlayerInteraction playerInteraction;
+        [SerializeField] private Transform itemThrowPivot;
+        [SerializeField] private Transform equipmentPivot;
         
         // Properties
         public PlayerController PlayerController => playerController;
@@ -27,6 +29,8 @@ namespace _02._Scripts.Character.Player
         public PlayerInteraction PlayerInteraction => playerInteraction;
         public PlayerEquipment PlayerEquipment => playerEquipment;
         public CameraController CameraController => cameraController;
+        public Transform ItemThrowPivot => itemThrowPivot;
+        public Transform EquipmentPivot => equipmentPivot;
         
         private void Awake()
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using _02._Scripts.Utils.Interface;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace _02._Scripts.Character.Player
@@ -48,7 +49,9 @@ namespace _02._Scripts.Character.Player
 
         public void OnInteract()
         {
-            Interactable.OnInteract();
+            if (Interactable == null) return;
+            
+            Interactable?.OnInteract();
             interactableObject = null;
             Interactable = null;
         }

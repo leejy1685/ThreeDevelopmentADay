@@ -56,7 +56,7 @@
                     "id": "c2ad731c-cddc-4c8a-9c7e-73610b0c993e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
@@ -65,7 +65,7 @@
                     "id": "97f92654-86d4-423d-a86d-56cec3aa86e8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Hold(duration=1.5)",
                     "initialStateCheck": false
                 },
                 {
@@ -74,7 +74,7 @@
                     "id": "e94b65d1-a55a-4456-9139-9ecdb72a1ca0",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -248,7 +248,7 @@
                     "name": "",
                     "id": "43e91b7e-f946-4c82-b8ba-fd3a23ec01d4",
                     "path": "<Keyboard>/e",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Drop",
@@ -259,7 +259,7 @@
                     "name": "",
                     "id": "e49a1832-c417-4e6c-b859-2c1435dc23c6",
                     "path": "<Keyboard>/e",
-                    "interactions": "Press",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Use",

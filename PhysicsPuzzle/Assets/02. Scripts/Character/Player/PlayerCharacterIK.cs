@@ -8,6 +8,7 @@ namespace _02._Scripts.Character.Player
     public class PlayerCharacterIK : MonoBehaviour
     {
         [Header("Necessary Components")]
+        [SerializeField] private Player player;
         [SerializeField] private PlayerEquipment playerEquipment;
         [SerializeField] private Animator animator;
         
@@ -18,20 +19,21 @@ namespace _02._Scripts.Character.Player
 
         private void Start()
         {
-            playerEquipment = CharacterManager.Instance.Player.PlayerEquipment;
+            player = CharacterManager.Instance.Player;
+            playerEquipment = player.PlayerEquipment;
         }
 
         private void OnAnimatorIK(int layerIndex)
         {
-            if ( playerEquipment.EquipmentPivot)
+            if (playerEquipment.IsEquipped && player.EquipmentPivot)
             {
                 // IK 활성화
                 animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
                 animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1f);
 
                 // IK 목표 설정
-                animator.SetIKPosition(AvatarIKGoal.RightHand, playerEquipment.EquipmentPivot.position);
-                animator.SetIKRotation(AvatarIKGoal.RightHand, playerEquipment.EquipmentPivot.rotation);
+                animator.SetIKPosition(AvatarIKGoal.RightHand, player.EquipmentPivot.position);
+                animator.SetIKRotation(AvatarIKGoal.RightHand, player.EquipmentPivot.rotation);
             }
             else
             {

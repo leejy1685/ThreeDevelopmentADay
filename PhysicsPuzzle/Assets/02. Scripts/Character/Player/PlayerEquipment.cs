@@ -1,5 +1,7 @@
-﻿using _02._Scripts.Item;
+﻿using System;
+using _02._Scripts.Item;
 using _02._Scripts.Item.DataAndTable;
+using _02._Scripts.Managers;
 using _02._Scripts.Utils;
 using UnityEngine;
 
@@ -15,11 +17,17 @@ namespace _02._Scripts.Character.Player
 
         // Fields
         private bool _isEquipped;
+        private Player _player;
         
         // Properties
         public KeyItem CurrentKeyItem{ get => currentKeyItem; set=> currentKeyItem = value; }
-        public Transform EquipmentPivot => equipmentPivot;
         public bool IsEquipped => _isEquipped;
+
+        private void Start()
+        {
+            _player = CharacterManager.Instance.Player;
+            equipmentPivot = _player.EquipmentPivot;
+        }
 
         public void EquipItem(ItemData data)
         {
