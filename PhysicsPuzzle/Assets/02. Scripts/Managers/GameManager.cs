@@ -6,7 +6,6 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     private int[] _stagePuzzleClearCount;
-    private string[] sceneName;
     
     private void Awake()
     {
