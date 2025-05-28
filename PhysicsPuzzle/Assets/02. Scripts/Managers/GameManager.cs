@@ -10,6 +10,9 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private int stageCount;
     
     private LobbyCamera _lobbyCamera;
+    
+    
+    public Door[] doors;
     private void Awake()
     {
         base.Awake();
@@ -17,7 +20,7 @@ public class GameManager : Singleton<GameManager>
         _stagePuzzleClearCount = new int[(int)SCENE_TYPE.Count];
         _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
     }
-
+    
     public void GameStart()
     {
         //카메라 변경
@@ -28,6 +31,12 @@ public class GameManager : Singleton<GameManager>
         
         //게임UI로 변경
         UIManager.Instance.ChangeState(UIState.Game);
+    }
+
+    public void OnEnable()
+    {
+        
+        doors = FindObjectsOfType<Door>();
     }
 
     // 저장 데이터 불러오기
@@ -48,6 +57,8 @@ public class GameManager : Singleton<GameManager>
     {
         _stagePuzzleClearCount[(int)sceneType]++;
         PlayerPrefs.SetInt(sceneType.ToString(),_stagePuzzleClearCount[(int)sceneType]);
+
+        doors[_stagePuzzleClearCount[(int)sceneType]].DestroyDoor();
     }
     
     
