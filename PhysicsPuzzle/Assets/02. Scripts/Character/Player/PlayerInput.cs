@@ -1,7 +1,6 @@
-﻿using System;
-using _02._Scripts.Character.Player.Camera;
+﻿using _02._Scripts.Character.Player.Camera;
 using _02._Scripts.Managers;
-using _02._Scripts.Utils;
+using _02._Scripts.Objects.LaserMachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +12,7 @@ namespace _02._Scripts.Character.Player
         [SerializeField] private PlayerController playerController;
         [SerializeField] private CameraController cameraController;
         [SerializeField] private PlayerInteraction playerInteraction;
+        [SerializeField] private PlayerCondition playerCondition;
 
         private CharacterManager _characterManager;
 
@@ -23,6 +23,7 @@ namespace _02._Scripts.Character.Player
             playerController = _characterManager.Player.PlayerController;
             cameraController = _characterManager.Player.CameraController;
             playerInteraction = _characterManager.Player.PlayerInteraction;
+            playerCondition = _characterManager.Player.PlayerCondition;
         }
 
         #region Input Actions
@@ -54,6 +55,11 @@ namespace _02._Scripts.Character.Player
             if(context.started) playerController.OnChangeGravity();
         }
 
+        public void OnChangeTime(InputAction.CallbackContext context)
+        {
+            if(context.started) playerController.OnChangeTime();
+        }
+
         public void OnInteract(InputAction.CallbackContext context)
         {
             if(context.started) playerInteraction.OnInteract();
@@ -61,12 +67,22 @@ namespace _02._Scripts.Character.Player
 
         public void OnUse(InputAction.CallbackContext context)
         {
-            if(context.started) InventoryManager.Instance.UseItem();    
+            if(context.started) InventoryManager.Instance.UseItem();
         }
         
         public void OnDrop(InputAction.CallbackContext context)
         {
-            if(context.started) InventoryManager.Instance.DropItem();
+            if(context.performed) InventoryManager.Instance.DropItem();
+        }
+        
+        public void OnFire(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                if (playerCondition.IsPlayerCharacterHasControl) return;
+                if(playerInteraction.Interactable is LaserMachine laserMachine)
+                    laserMachine.ToggleLaser();
+            }
         }
         
         #endregion

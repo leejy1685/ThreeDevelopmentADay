@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ChangeTime",
+                    "type": "Button",
+                    "id": "49df188c-ad27-4ad7-bacf-a41017dd8f18",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "c2ad731c-cddc-4c8a-9c7e-73610b0c993e",
@@ -65,7 +74,7 @@
                     "id": "97f92654-86d4-423d-a86d-56cec3aa86e8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=1.5)",
+                    "interactions": "Hold(duration=3)",
                     "initialStateCheck": false
                 },
                 {
@@ -75,6 +84,15 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Fire",
+                    "type": "Button",
+                    "id": "3aa71559-e187-43e5-ade6-deb563db0bdb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -263,6 +281,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e75166d5-de95-4d49-a1ba-4827ecc5234a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "19012ca2-b124-48b5-8f2b-0cad743e2cec",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeTime",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

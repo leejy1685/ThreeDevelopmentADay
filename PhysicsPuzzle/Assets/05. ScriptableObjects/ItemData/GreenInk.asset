@@ -19,4 +19,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: da84f20f8bcee2e43956fcd33ce9674a, type: 3}
   color: 2
   itemPrefab: {fileID: 8054321425370514664, guid: e7a5708ca0f154b4c88b47a50f0dd267, type: 3}
+  equipPrefab: {fileID: 8054321425370514664, guid: 6e6c68e8627cb7a419fc2baea5a21d5a, type: 3}
   maxStackCount: 3

@@ -1,4 +1,6 @@
 ﻿using System;
+using _02._Scripts.Managers;
+using _02._Scripts.Objects.LaserMachine;
 using _02._Scripts.Utils.Interface;
 using JetBrains.Annotations;
 using UnityEngine;
@@ -17,6 +19,7 @@ namespace _02._Scripts.Character.Player
         private float _timeSinceLastCheck;
         private UnityEngine.Camera _camera;
         private bool _isPlayerHoldingProp;
+        private PlayerCondition _playerCondition;
         
         // Properties
         public IInteractable Interactable { get; private set; }
@@ -24,10 +27,12 @@ namespace _02._Scripts.Character.Player
         private void Start()
         {
             _camera = UnityEngine.Camera.main;
+            _playerCondition = CharacterManager.Instance.Player.PlayerCondition;
         }
 
         private void Update()
         {
+            if (!_playerCondition.IsPlayerCharacterHasControl) return; 
             if (_timeSinceLastCheck < checkRate) { _timeSinceLastCheck += Time.deltaTime; return; }
             
             _timeSinceLastCheck = 0f;
@@ -52,6 +57,8 @@ namespace _02._Scripts.Character.Player
             if (Interactable == null) return;
             
             Interactable?.OnInteract();
+            
+            if (Interactable is LaserMachine) return;
             interactableObject = null;
             Interactable = null;
         }
