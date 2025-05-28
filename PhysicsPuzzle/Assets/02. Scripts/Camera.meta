@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:PhysicsPuzzle/Assets/02. Scripts/Camera.meta
 guid: 3059c17cc268d3545bc4640ea56e12e6
+========
+guid: 13eeb4115d40b954db7c217ae3ad860c
+>>>>>>>> origin/develop/GameUI:PhysicsPuzzle/Assets/05. ScriptableObjects/ItemData.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

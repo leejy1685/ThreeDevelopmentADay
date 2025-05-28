@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 549281c9b0834751865563bf6bcb4fac, type: 3}
+  m_Name: InkTable
+  m_EditorClassIdentifier: 
+  data:
+  - {fileID: 11400000, guid: 70388d39d7620224bb27797d97d3543b, type: 2}
+  - {fileID: 11400000, guid: 84f158caefe9227499b94b5b11b9ec98, type: 2}
+  - {fileID: 11400000, guid: 5039402beaf65514cbed791aa3790ebd, type: 2}
+  - {fileID: 11400000, guid: 1ecbae4295d95a84e8eceac2ae84499e, type: 2}
+  - {fileID: 11400000, guid: dbb268b7a8ef7b742aa5ecb01b2d7fc2, type: 2}
+  dictionary:
+    _serializedList: []
