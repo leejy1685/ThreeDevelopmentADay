@@ -71,10 +71,8 @@ public class GameUI : BaseUI
     {
         timeCooldownImage.fillAmount = amount;
     }
-    public void UpdatePlayTime()
+    public void UpdatePlayTime(float playTime)
     {
-        playTime += Time.deltaTime;
-
         int minutes = Mathf.FloorToInt(playTime / 60f);
         int seconds = Mathf.FloorToInt(playTime % 60f);
 

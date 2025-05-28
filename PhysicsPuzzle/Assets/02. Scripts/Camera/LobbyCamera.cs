@@ -15,7 +15,11 @@ public class LobbyCamera : MonoBehaviour
     {
         path = FindAnyObjectByType<CinemachineSmoothPath>();
         _rigidbody = GetComponent<Rigidbody>();
+    }
 
+    private void OnEnable()
+    {
+        //Camera.main.cullingMask += _playerLayer;
         StartCoroutine(CameraMove_Coroutine());
     }
 
@@ -25,6 +29,8 @@ public class LobbyCamera : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    
+    
     private IEnumerator CameraMove_Coroutine()
     {
         int waypointCount = path.m_Waypoints.Length;

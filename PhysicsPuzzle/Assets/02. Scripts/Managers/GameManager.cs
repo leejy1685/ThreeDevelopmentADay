@@ -18,15 +18,22 @@ public class GameManager : Singleton<GameManager>
     private Transform player;
     public Door[] doors;
     public bool isLoad = false;
+
+    private float playTime;
+    private bool isClear;
+    
     private void Awake()
     {
         base.Awake();
 
-        _stagePuzzleClearCount = new int[(int)SCENE_TYPE.Count];
         _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
+
+        _stagePuzzleClearCount = new int[(int)SCENE_TYPE.Count];
         
         //testCode
         PlayerPrefs.SetInt(SCENE_TYPE.ObjectAndPipe.ToString(),3);
+        
+        
     }
 
     //씬이 넘어갈 때 사용
@@ -39,6 +46,9 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         _uiManager = UIManager.Instance;
+        
+        //시작 카메라 연출
+        _lobbyCamera.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -47,15 +57,19 @@ public class GameManager : Singleton<GameManager>
         {
             ClearPuzzle(SceneHandleManager.Instance.currentScene);
         }
-        
-        if(SceneHandleManager.Instance.currentScene == SCENE_TYPE.ObjectAndPipe)
-            _uiManager.GameUI.UpdatePlayTime();
+
+        if (SceneHandleManager.Instance.currentScene != SCENE_TYPE.Lobby && !isClear)
+        {
+            playTime += Time.deltaTime;
+            _uiManager.GameUI.UpdatePlayTime(playTime);
+        }
     }
     
     // 체인을 걸어서 이 함수는 매 씬마다 호출된다.
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         _uiManager.GameUI.ChangeSceneName();
+        
         doors = FindObjectsOfType<Door>();
         Array.Sort(doors);
 
@@ -63,6 +77,7 @@ public class GameManager : Singleton<GameManager>
         player = FindAnyObjectByType<Player>()?.transform;
         if (player != null)
         {
+            //플레이어 배치
             player.position = new Vector3(20, 0, 0);
             if (isLoad)
             {
@@ -72,14 +87,20 @@ public class GameManager : Singleton<GameManager>
                     .PuzzleClearPosition();
             }
         }
+
+        //로비로 돌아오면
+        if (SceneHandleManager.Instance.currentScene == SCENE_TYPE.Lobby)
+        {
+            _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
+            GameStart();
+        }
     }
     public void GameStart()
     {
         //카메라 변경
-        _lobbyCamera.DisableCamera();
+        _lobbyCamera?.DisableCamera();
         //마우스 커서 고정
         Cursor.lockState = CursorLockMode.Locked;
-        //게임 정보 초기화
         
         //게임UI로 변경
         _uiManager.ChangeState(UIState.Game);
@@ -106,6 +127,8 @@ public class GameManager : Singleton<GameManager>
     {
         Cursor.lockState = CursorLockMode.None;
         _uiManager.ChangeState(UIState.Clear);
+
+        isClear = true;
     }
 
     public void ClearPuzzle(SCENE_TYPE sceneType)
