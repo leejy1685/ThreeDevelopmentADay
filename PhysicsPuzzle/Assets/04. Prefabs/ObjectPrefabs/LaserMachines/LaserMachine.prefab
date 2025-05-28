@@ -273,11 +273,11 @@ MonoBehaviour:
   body: {fileID: 6027392697670808317}
   _lineRenderer: {fileID: 6407259176535981763}
   barrel: {fileID: 5307725396892921113}
-  testColor: 0
   _maxDistance: 100
   _pitchSpeed: 60
   _maxRotate: 0
   _minRotate: -90
+  laserColor: 1
 --- !u!65 &8379918533837984468
 BoxCollider:
   m_ObjectHideFlags: 0
