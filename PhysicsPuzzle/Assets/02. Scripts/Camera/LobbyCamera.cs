@@ -19,7 +19,7 @@ public class LobbyCamera : MonoBehaviour
 
     private void OnEnable()
     {
-        //Camera.main.cullingMask += _playerLayer;
+        Camera.main.cullingMask += _playerLayer;
         StartCoroutine(CameraMove_Coroutine());
     }
 

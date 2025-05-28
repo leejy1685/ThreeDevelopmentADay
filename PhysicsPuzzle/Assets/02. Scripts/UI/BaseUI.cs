@@ -17,6 +17,6 @@ public abstract class BaseUI : MonoBehaviour
     // 전달된 상태와 현재 UI의 상태가 일치하면 활성화, 아니면 비활성화
     public void SetActive(UIState state)
     {
-        gameObject.SetActive(GetUIState() == state);
+        gameObject?.SetActive(GetUIState() == state);
     }
 }

@@ -27,7 +27,7 @@ public class ClearUI : BaseUI
 
     private void OnClickLobbyButton()
     {
-        UIManager.Instance.OnClickStart();
+        GameManager.Instance.LoadLobbyScene();
     }
     
     // float 값 분:초로 변환

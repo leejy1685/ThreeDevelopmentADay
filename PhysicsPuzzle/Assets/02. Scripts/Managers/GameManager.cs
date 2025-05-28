@@ -1,4 +1,5 @@
 using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.Character.Player;
@@ -25,7 +26,7 @@ public class GameManager : Singleton<GameManager>
     public float playTime;
     private int currentClearPuzzle;   //스테이지 별 클리어 퍼즐 수
     
-    private LobbyCamera _lobbyCamera;   //로비 연출용 카메라
+    [SerializeField] public LobbyCamera _lobbyCamera;   //로비 연출용 카메라
     
     public Door[] doors;    //퍼즐 클리어 시 열리는 문
     private Transform player;   //플레이어 좌표
@@ -34,8 +35,6 @@ public class GameManager : Singleton<GameManager>
     private void Awake()
     {
         base.Awake();
-
-        _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
         
         //testCode
         isLoad = false;
@@ -47,15 +46,14 @@ public class GameManager : Singleton<GameManager>
     //씬이 넘어갈 때 사용
     void OnEnable()
     {
+        _uiManager = UIManager.Instance;
+        _sceneHandle = SceneHandleManager.Instance;
         // 씬 매니저의 sceneLoaded에 체인을 건다.
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Start()
     {
-        _uiManager = UIManager.Instance;
-        _sceneHandle = SceneHandleManager.Instance;
-        
         //시작 카메라 연출
         _lobbyCamera.gameObject.SetActive(true);
     }
@@ -77,6 +75,8 @@ public class GameManager : Singleton<GameManager>
     // 체인을 걸어서 이 함수는 매 씬마다 호출된다.
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log(scene.name);
+
         _uiManager.GameUI.ChangeSceneName();
         
         //문 찾기
@@ -90,18 +90,6 @@ public class GameManager : Singleton<GameManager>
             //플레이어 배치
             player.position = new Vector3(20, 0, 0); //일단은 하드코딩
             LoadPlayerPosition();
-        }
-
-        //로비로 돌아오면
-        if (_sceneHandle.currentScene == SCENE_TYPE.Lobby)
-        {
-            _uiManager.ChangeState(UIState.Lobby);
-            StartGameLobby();
-        }
-        else//로비가 아니면 타이머 UI 생성
-        {
-            _uiManager.GameUI.SetTimer(true);
-            //StartCoroutine(itemManager.Instnace.)
         }
     }
     
@@ -117,19 +105,18 @@ public class GameManager : Singleton<GameManager>
     public void StartGameLobby()
     {
         //데이터 초기화
-        playTime = 0;
         isClear = false;
+        playTime = 0;
         currentClearPuzzle = 0;
         
         //카메라 변경
         _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
-        _lobbyCamera.DisableCamera();
-        
-        GameStart();
+        _lobbyCamera?.DisableCamera();
         
         //로비에선 타이머 없음
         _uiManager.GameUI.SetTimer(false);
-        
+
+        GameStart();
     }
 
     // 저장 데이터 불러오기
@@ -140,8 +127,6 @@ public class GameManager : Singleton<GameManager>
         //마지막 정보 불러오기
         playTime = PlayerPrefs.GetFloat(LASTTIME);
         lastClearPuzzle = PlayerPrefs.GetInt(LASTCLEARPUZZLE);
-        
-        GameStart();
 
         //마지막 씬 불러오기
         string sceneName = PlayerPrefs.GetString(LASTSTAGE);
@@ -155,6 +140,8 @@ public class GameManager : Singleton<GameManager>
         }
 
         _sceneHandle.LoadScene(loadScene);
+        
+        GameStart();
     }
 
     private void LoadPlayerPosition()
@@ -206,5 +193,24 @@ public class GameManager : Singleton<GameManager>
             bestTime = playTime;
         }
         _uiManager.SetClearUI(playTime,bestTime);
+    }
+
+    public void LoadLobbyScene()
+    {
+        //데이터 초기화
+        isClear = false;
+        playTime = 0;
+        currentClearPuzzle = 0;
+        
+        //카메라 변경
+        _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
+        _lobbyCamera?.DisableCamera();
+        
+        //로비에선 타이머 없음
+        _uiManager.GameUI.SetTimer(false);
+
+        GameStart();
+        
+        _sceneHandle.LoadScene(SCENE_TYPE.Lobby);
     }
 }

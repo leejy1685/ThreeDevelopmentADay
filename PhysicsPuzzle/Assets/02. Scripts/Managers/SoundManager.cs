@@ -45,6 +45,7 @@ public class SoundManager : Singleton<SoundManager>
     public void ChangeBGM(AudioClip clip)
     {
         audioSource.clip = clip;
+        audioSource.volume = BGMVolume;
         audioSource.Play();
     }
 
