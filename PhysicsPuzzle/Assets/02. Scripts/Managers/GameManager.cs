@@ -15,12 +15,23 @@ public class GameManager : Singleton<GameManager>
 
     private Transform player;
     public Door[] doors;
+    public bool isLoad = false;
     private void Awake()
     {
         base.Awake();
 
         _stagePuzzleClearCount = new int[(int)SCENE_TYPE.Count];
         _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
+        
+        //testCode
+        PlayerPrefs.SetInt(SCENE_TYPE.ObjectAndPipe.ToString(),3);
+    }
+
+    //씬이 넘어갈 때 사용
+    void OnEnable()
+    {
+        // 씬 매니저의 sceneLoaded에 체인을 건다.
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Update()
@@ -30,7 +41,27 @@ public class GameManager : Singleton<GameManager>
             ClearPuzzle(SceneHandleManager.Instance.currentScene);
         }
     }
+    
+    // 체인을 걸어서 이 함수는 매 씬마다 호출된다.
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        doors = FindObjectsOfType<Door>();
+        Array.Sort(doors);
 
+        //로딩 씬에선 캐릭터가 없기 떄문에 잡히지 않음.
+        player = FindAnyObjectByType<Player>()?.transform;
+        if (player != null)
+        {
+            player.position = new Vector3(20, 0, 0);
+            if (isLoad)
+            {
+                Debug.Log("load");
+                Debug.Log(_stagePuzzleClearCount[(int)SceneHandleManager.Instance.currentScene]);
+                player.position = doors[_stagePuzzleClearCount[(int)SceneHandleManager.Instance.currentScene]]
+                    .PuzzleClearPosition();
+            }
+        }
+    }
     public void GameStart()
     {
         //카메라 변경
@@ -43,25 +74,6 @@ public class GameManager : Singleton<GameManager>
         UIManager.Instance.ChangeState(UIState.Game);
     }
 
-    //씬이 넘어갈 때 사용
-    void OnEnable()
-    {
-        // 씬 매니저의 sceneLoaded에 체인을 건다.
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    // 체인을 걸어서 이 함수는 매 씬마다 호출된다.
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        //로딩 씬에선 캐릭터가 없기 떄문에 잡히지 않음.
-        player = FindAnyObjectByType<Player>()?.transform;
-        if(player != null)
-            player.position = new Vector3(20, 0, 0);
-        
-        doors = FindObjectsOfType<Door>();
-        Array.Sort(doors);
-    }
-
     // 저장 데이터 불러오기
     public void GameLoad()
     {
@@ -72,6 +84,8 @@ public class GameManager : Singleton<GameManager>
         
         //test
         SceneHandleManager.Instance.LoadScene(SCENE_TYPE.ObjectAndPipe);
+
+        isLoad = true;
     }
 
     public void StageClear()
@@ -84,6 +98,7 @@ public class GameManager : Singleton<GameManager>
         //문 오픈
         doors[_stagePuzzleClearCount[(int)sceneType]].DestroyDoor();
         
+        //클리어 저장
         _stagePuzzleClearCount[(int)sceneType]++;
         PlayerPrefs.SetInt(sceneType.ToString(),_stagePuzzleClearCount[(int)sceneType]);
         

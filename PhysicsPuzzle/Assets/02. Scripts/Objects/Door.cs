@@ -20,6 +20,12 @@ public class Door : MonoBehaviour, IComparable<Door>
         Destroy(gameObject,3f);
     }
 
+    public Vector3 PuzzleClearPosition()
+    {
+
+        return transform.position - (transform.forward*2);
+    }
+
     public int CompareTo(Door other)
     {
         return this.puzzleNumber.CompareTo(other.puzzleNumber);
