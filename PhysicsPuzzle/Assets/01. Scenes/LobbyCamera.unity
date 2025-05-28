@@ -2182,6 +2182,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyCanvas: {fileID: 0}
   optioinCanvas: {fileID: 0}
+  clearCanvas: {fileID: 0}
 --- !u!114 &457002064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8633,6 +8634,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lobbyCanvas: {fileID: 0}
   optioinCanvas: {fileID: 1605747830}
+  clearCanvas: {fileID: 0}
 --- !u!4 &1725353002
 Transform:
   m_ObjectHideFlags: 0
