@@ -18,7 +18,7 @@ namespace _02._Scripts.Managers
         public ItemTable ItemTable => itemTable;
             
         private void Awake()
-        {
+        { 
             if (!Instance)
             {
                 Instance = this;
@@ -26,6 +26,7 @@ namespace _02._Scripts.Managers
                 StartCoroutine(LoadItemTable_Coroutine());
             } 
             else { if (Instance != this) Destroy(gameObject); }
+            
         }
 
         private IEnumerator LoadItemTable_Coroutine()
@@ -42,7 +43,12 @@ namespace _02._Scripts.Managers
             else
             {
                 Debug.LogError("ItemTable Load Failed!");
+
+                
             }
         }
     }
+
+
+    
 }
