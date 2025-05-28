@@ -55,6 +55,11 @@ namespace _02._Scripts.Character.Player
             if(context.started) playerController.OnChangeGravity();
         }
 
+        public void OnChangeTime(InputAction.CallbackContext context)
+        {
+            if(context.started) playerController.OnChangeTime();
+        }
+
         public void OnInteract(InputAction.CallbackContext context)
         {
             if(context.started) playerInteraction.OnInteract();

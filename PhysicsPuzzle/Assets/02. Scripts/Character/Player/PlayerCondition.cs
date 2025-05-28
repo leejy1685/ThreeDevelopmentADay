@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using _02._Scripts.UI;
 using Cinemachine;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace _02._Scripts.Character.Player
 {
@@ -27,6 +26,7 @@ namespace _02._Scripts.Character.Player
         public bool IsTimeSkillAvailable { get; private set; }
         public bool IsPlayerCharacterHasControl => isPlayerCharacterHasControl;
         public bool IsPlayerUpsideDown { get; private set; }
+        public bool IsMoonTime { get; private set; }
 
         private void Start()
         {
@@ -44,7 +44,9 @@ namespace _02._Scripts.Character.Player
 
         public void RunTimeSkillCoolTime()
         {
+            IsMoonTime = !IsMoonTime;
             IsTimeSkillAvailable = false;
+            _gameUI.ChangeTime(IsMoonTime);
             
             StartCoroutine(HandleTimeSkillCoolTime());
         }

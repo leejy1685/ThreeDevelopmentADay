@@ -235,6 +235,18 @@ namespace _02._Scripts.Character.Player
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
         }
+
+        /// <summary>
+        /// Change Time of the Day.
+        /// </summary>
+        public void OnChangeTime()
+        {
+            if (!playerCondition.IsPlayerCharacterHasControl) return;
+            if (!playerCondition.IsTimeSkillAvailable) return;
+            
+            playerCondition.RunTimeSkillCoolTime();
+            // TODO: Implement Time Change Skill
+        }
         
         #endregion
     }

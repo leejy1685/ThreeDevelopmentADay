@@ -58,8 +58,8 @@ namespace _02._Scripts.Managers
 
             for (var i = 0; i < maxDataCount; i++)
             {
-                var go = Instantiate(itemSlotPrefab, _uiManager.GameUI.InventoryUI.transform);
-                itemSlots.Add(Helper.GetComponent_Helper<ItemSlot>(go)); 
+                var go = Instantiate(itemSlotPrefab, _uiManager.GameUI.InventoryUITransform);
+                itemSlots.Add(Helper.GetComponent_Helper<ItemSlot>(go));
                 itemSlots[i].Index = i;
             }
             UpdateSlots();

@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "ChangeTime",
+                    "type": "Button",
+                    "id": "49df188c-ad27-4ad7-bacf-a41017dd8f18",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "c2ad731c-cddc-4c8a-9c7e-73610b0c993e",
@@ -283,6 +292,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "19012ca2-b124-48b5-8f2b-0cad743e2cec",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChangeTime",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
