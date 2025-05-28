@@ -58,7 +58,7 @@ public class UIManager : Singleton<UIManager>
     //     int seconds = Mathf.FloorToInt(remainingTime % 60f);
     //     _timeName.text = $"{minutes:00}:{seconds:00}"; 
     // }
-    
+    public GameUI GameUI => gameUI;
     UIState currentState = UIState.Lobby;
     
     LobbyUI lobbyUI = null;
