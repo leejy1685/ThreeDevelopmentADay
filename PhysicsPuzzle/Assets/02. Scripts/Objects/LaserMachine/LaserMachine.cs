@@ -119,23 +119,7 @@ namespace _02._Scripts.Objects.LaserMachine
             StartCoroutine(ReturnLineAfterFrame_Coroutine(lr));
         }
 
-        // <summary>
-        /// LAZER_COLOR를 실제 UnityEngine.Color로 변환합니다.
-        /// </summary>
-        private Color LaserBeamColor(LASER_COLOR colorType)
-        {
-            // LaserBeam.ColorValue 프로퍼티와 동일한 기능.
-            switch (colorType)
-            {
-                case LASER_COLOR.Red: return Color.red;
-                case LASER_COLOR.Blue: return Color.blue;
-                case LASER_COLOR.Green: return Color.green;
-                case LASER_COLOR.Purple: return Color.magenta;
-                case LASER_COLOR.Yellow: return Color.yellow;
-                case LASER_COLOR.White:
-                default: return Color.white;
-            }
-        }
+        
 
         /// <summary>
         /// 지정된 LineRenderer를 한 프레임 뒤 풀로 되돌립니다.
@@ -177,7 +161,23 @@ namespace _02._Scripts.Objects.LaserMachine
             _lineRenderer.startColor = lazerColor;
             _lineRenderer.endColor = lazerColor;
         }
-    
+        // <summary>
+        /// LAZER_COLOR를 실제 UnityEngine.Color로 변환합니다.
+        /// </summary>
+        private Color LaserBeamColor(LASER_COLOR colorType)
+        {
+            // LaserBeam.ColorValue 프로퍼티와 동일한 기능.
+            switch (colorType)
+            {
+                case LASER_COLOR.Red: return Color.red;
+                case LASER_COLOR.Blue: return Color.blue;
+                case LASER_COLOR.Green: return Color.green;
+                case LASER_COLOR.Purple: return Color.magenta;
+                case LASER_COLOR.Yellow: return Color.yellow;
+                case LASER_COLOR.White:
+                default: return Color.white;
+            }
+        }
         public void OnInteract()
         {
             //_playerCondition.MigrateCameraFocusToOtherObject(body);
