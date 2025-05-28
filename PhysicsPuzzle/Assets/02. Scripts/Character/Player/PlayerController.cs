@@ -48,7 +48,6 @@ namespace _02._Scripts.Character.Player
         
         // Properties
         public bool IsPlayerUpsideDown => _isPlayerUpsideDown;
-        public Vector2 MovementDirection => movementDirection;
 
         private void Awake()
         {
@@ -224,6 +223,8 @@ namespace _02._Scripts.Character.Player
         public void OnChangeGravity()
         {
             if (!playerCondition.IsPlayerCharacterHasControl) return;
+            if (!playerCondition.IsGravitySkillAvailable) return;
+            
             if (gravityDirection == Vector3.down)
             {
                 gravityDirection = Vector3.up;
