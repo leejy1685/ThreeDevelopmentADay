@@ -104,6 +104,7 @@ public class GameManager : Singleton<GameManager>
 
     public void StageClear()
     {
+        Cursor.lockState = CursorLockMode.None;
         _uiManager.ChangeState(UIState.Clear);
     }
 

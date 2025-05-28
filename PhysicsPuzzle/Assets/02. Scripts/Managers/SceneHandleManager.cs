@@ -7,13 +7,10 @@ using UnityEngine.SceneManagement;
 public enum SCENE_TYPE
 {
     // 여기에 하드코딩 방지용 SceneName
-    TestMain,
     LoadingScene,
-    TestGoalScene,
+    Lobby,
     ObjectAndPipe,
     DayAndNightGravity,
-    ClearUIScene, // UITest용. UI 병합 이후 삭제
-    LobbyCamera,   // UI 병합 전 테스트용
     Count,
 }
 public class SceneHandleManager : Singleton<SceneHandleManager>
