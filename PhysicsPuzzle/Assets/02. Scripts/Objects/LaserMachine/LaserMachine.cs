@@ -89,8 +89,14 @@ namespace _02._Scripts.Objects.LaserMachine
                         receiver.OnLaserHit(beam);
                     }
                 }
-                // 레이저 광선
-                DrawLaserLine(startPosition, endPosition, laserColor);
+
+                // 캐시된 LineRenderer로 한 번만 설정
+                // 기존 DrawLaserLine() 대신 사용 
+                //->  LineRenderer lr = LinePoolManager.Instance.Get(); 프레임 단위 할당 방지
+                _lineRenderer.enabled = true;
+                _lineRenderer.startColor = _lineRenderer.endColor = new LaserBeam(direction, laserColor).ColorValue;
+                _lineRenderer.SetPosition(0, startPosition);
+                _lineRenderer.SetPosition(1, endPosition);
             }
             else
             {
@@ -99,27 +105,6 @@ namespace _02._Scripts.Objects.LaserMachine
             }
         }
 
-        /// <summary>
-        /// 레이저 광선을 시각적으로 그려주는 메서드 (LineRenderer 풀 사용).
-        /// </summary>
-        /// <param name="start">레이저 시작 위치</param>
-        /// <param name="end">레이저 끝 위치 (충돌 지점 또는 최대 사거리 지점)</param>
-        /// <param name="colorType">레이저 색상 (LAZER_COLOR)</param>
-        private void DrawLaserLine(Vector3 start, Vector3 end, LASER_COLOR colorType)
-        {
-            LineRenderer lr = LinePoolManager.Instance.Get();   // 라인 풀에서 LineRenderer 하나 꺼냄
-            lr.positionCount = 2;
-            lr.SetPosition(0, start);
-            lr.SetPosition(1, end);
-            // 레이저 색상에 맞춰 라인 색상 설정
-            Color lineColor = LaserBeamColor(colorType);
-            lr.startColor = lineColor;
-            lr.endColor = lineColor;
-            // 짧은 시간 후 라인을 풀로 반환 (한 프레임 동안만 표시)
-            StartCoroutine(ReturnLineAfterFrame_Coroutine(lr));
-        }
-
-        
 
         /// <summary>
         /// 지정된 LineRenderer를 한 프레임 뒤 풀로 되돌립니다.
@@ -182,8 +167,6 @@ namespace _02._Scripts.Objects.LaserMachine
         {
             //_playerCondition.MigrateCameraFocusToOtherObject(body);
         }
-
-
 
         public void TestControl() // (테스트용)
         {
