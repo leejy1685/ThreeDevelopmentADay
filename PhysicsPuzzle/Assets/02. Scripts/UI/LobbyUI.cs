@@ -40,7 +40,7 @@ public class LobbyUI : BaseUI
     
     private void OnClickLoadButton()
     {
-  
+        //GameManager.Instance.GameLoad();
     }
     
     private void OnClickOptionButton()
