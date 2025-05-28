@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using Unity.XR.GoogleVr;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameUI : BaseUI
@@ -35,8 +36,6 @@ public class GameUI : BaseUI
     }
     private void Start()
     {
-        currentStage.text = SceneHandleManager.Instance.NextSceneName; // 스테이지 이름 
-        
         _animator.SetBool("IsMoonTime_b", false); // 초기 낮 상태
     }
 
@@ -44,6 +43,11 @@ public class GameUI : BaseUI
     {
         TestChangeTime();// 테스트용
         UpdatePlayTime();
+    }
+
+    private void ChangeSceneName()
+    {
+        currentStage.text = SceneManager.GetActiveScene().name; // 스테이지 이름 
     }
     public void ChangeGravity(bool isPlayerUpsideDown) // g키 입력씨 중력반전 UI전환
     {
@@ -103,7 +107,6 @@ public class GameUI : BaseUI
         {
             _isMoonTime = !_isMoonTime;
             _animator.SetBool("IsMoonTime_b", _isMoonTime);
-            Debug.Log("test");
         }
     }
 
