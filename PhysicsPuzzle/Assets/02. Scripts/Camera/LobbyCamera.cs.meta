@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:PhysicsPuzzle/Assets/02. Scripts/Camera/LobbyCamera.cs.meta
+guid: 2a20cdd9889ba9d49a0e36328bd8ba51
+========
+guid: 27365a03da5decb45b53074128352b5c
+>>>>>>>> origin/develop/GameUI:PhysicsPuzzle/Assets/02. Scripts/Objects/LaserMachine/LaserMachine.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

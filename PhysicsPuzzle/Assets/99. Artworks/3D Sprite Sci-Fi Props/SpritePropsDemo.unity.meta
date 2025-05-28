@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:PhysicsPuzzle/Assets/01. Scenes/HyobinScene_1.unity.meta
+guid: 1ed2c3b32ab5d29428f3d0711d2d1acf
+========
 guid: 8b2c1c488e979d54fa25769eef7711fb
+>>>>>>>> origin/develop/GameUI:PhysicsPuzzle/Assets/99. Artworks/3D Sprite Sci-Fi Props/SpritePropsDemo.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
