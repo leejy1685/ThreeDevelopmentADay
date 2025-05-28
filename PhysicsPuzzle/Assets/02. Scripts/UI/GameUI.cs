@@ -43,6 +43,7 @@ public class GameUI : BaseUI
     private void Update()
     {
         TestChangeTime();// 테스트용
+        UpdatePlayTime();
     }
     public void ChangeGravity(bool isPlayerUpsideDown) // g키 입력씨 중력반전 UI전환
     {
