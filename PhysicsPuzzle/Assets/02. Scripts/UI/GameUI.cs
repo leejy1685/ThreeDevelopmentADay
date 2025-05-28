@@ -25,6 +25,9 @@ public class GameUI : BaseUI
 
     [SerializeField] public GameObject InventoryUI; //인벤토리
     [SerializeField] private TextMeshProUGUI itemName; //아이템 이름
+    [SerializeField] private Animator _animator; //애니메이터
+    public bool _isMoonTime = false; // 현재 시간이 밤인지 여부
+    public bool _isChangingTime = false; // 전환 중인지 여부
 
     protected override UIState GetUIState()
     {
@@ -33,8 +36,15 @@ public class GameUI : BaseUI
     private void Start()
     {
         currentStage.text = SceneHandleManager.Instance.NextSceneName; // 스테이지 이름 
+        
+        _animator.SetBool("IsMoonTime_b", false); // 초기 낮 상태
     }
-    public void ChangeGravity(bool isPlayerUpsideDown) // tab키 입력씨 중력반전 UI전환
+
+    private void Update()
+    {
+        TestChangeTime();// 테스트용
+    }
+    public void ChangeGravity(bool isPlayerUpsideDown) // g키 입력씨 중력반전 UI전환
     {
         if (!isPlayerUpsideDown)
         {
@@ -68,9 +78,33 @@ public class GameUI : BaseUI
 
     }
 
-    public void ShowItemName() //아이템 이름
-    {
-        //itemName.text = 
 
+    public void SetPromptText(string text)
+    {
+
+        itemName.gameObject.SetActive(true);
+
+        itemName.text = text;
+        
     }
+
+    public void ClearPromptText()
+    {
+        itemName.gameObject.SetActive(false);
+
+        itemName.text = string.Empty;
+    }
+
+    public void TestChangeTime() // 애니메이션 작동 확인용 테스트 메서드
+    {
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            _isMoonTime = !_isMoonTime;
+            _animator.SetBool("IsMoonTime_b", _isMoonTime);
+            Debug.Log("test");
+        }
+    }
+
+
 }
