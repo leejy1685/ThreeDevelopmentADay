@@ -12,6 +12,7 @@ public class GameUI : BaseUI
     [Header("Top UI")]
     [SerializeField] private GameObject timeIcon; //현재 시간 UI 우측 상단
     [SerializeField] private TextMeshProUGUI currentStage; // 스테이지 이름
+    [SerializeField] private GameObject currentTimeUI;
     [SerializeField] private TextMeshProUGUI currentTime; // 진행 시간
     private float playTime = 0f; // 진행 시간 담을 변수
 
@@ -107,5 +108,8 @@ public class GameUI : BaseUI
         }
     }
 
-
+    public void SetTimer(bool onOff)
+    {
+        currentTimeUI.SetActive(onOff);
+    }
 }

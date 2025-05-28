@@ -7256,7 +7256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stageCount: 0
-  _lobbyCamera: {fileID: 522093841}
   doors: []
   isLoad: 0
 --- !u!1 &1036241149
@@ -7571,6 +7570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeIcon: {fileID: 2143745197}
   currentStage: {fileID: 1908599120}
+  currentTimeUI: {fileID: 1603729969}
   currentTime: {fileID: 1972374671}
   changeGravityUI: {fileID: 1185749743}
   gravityUpIcon: {fileID: 196017051}

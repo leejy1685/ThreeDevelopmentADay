@@ -19,7 +19,14 @@ public class SceneHandleManager : Singleton<SceneHandleManager>
     public SCENE_TYPE currentScene;
     private string nextSceneName;
     public string NextSceneName { get => nextSceneName; }
-    
+
+    protected override void Awake()
+    {
+        base.Awake();
+        
+        currentScene = SCENE_TYPE.Lobby;
+    }
+
     //씬이 넘어갈 때 사용
     void OnEnable()
     {

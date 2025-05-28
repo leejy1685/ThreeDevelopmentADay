@@ -13,12 +13,15 @@ public enum UIState
 
 public class UIManager : Singleton<UIManager>
 {
-    public GameUI GameUI => gameUI;
+    
     UIState currentState = UIState.Lobby;
     LobbyUI lobbyUI = null;
     ObtionUI obtionUI = null;
     GameUI gameUI = null;
     ClearUI clearUI = null;
+    
+    public GameUI GameUI => gameUI;
+    public ClearUI ClearUI => clearUI;
     
     private float currentClearTime;
     public float CurrentClearTime => currentClearTime;
@@ -77,8 +80,9 @@ public class UIManager : Singleton<UIManager>
         return PlayerPrefs.GetFloat($"{sceneType}_BestClearTime", 0f);
     }
 
-    public void ClearTime(float time)
+    public void SetClearUI(float time,float bestTime)
     {
-        currentClearTime = time;
+        clearUI.SetClearTime(time,bestTime);
+        ChangeState(UIState.Clear);
     }
 }
