@@ -404,17 +404,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75421e405918bd4781c731f921e9b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeIcon: {fileID: 0}
-  currentStage: {fileID: 0}
-  currentTime: {fileID: 0}
-  changeGravityUI: {fileID: 0}
-  gravityUpIcon: {fileID: 0}
-  gravityDownIcon: {fileID: 0}
-  gravityCooldownImage: {fileID: 0}
-  changeTimeUI: {fileID: 0}
-  timeCooldownImage: {fileID: 0}
-  InventoryUI: {fileID: 0}
-  itemName: {fileID: 0}
+  animator: {fileID: 2300908774721477817}
+  timeIcon: {fileID: 9087779184293785364}
+  currentStage: {fileID: 3771959408993024745}
+  currentTime: {fileID: 7337529997048568602}
+  changeGravityUI: {fileID: 2165411332502004589}
+  gravityUpIcon: {fileID: 6522012478612544593}
+  gravityDownIcon: {fileID: 3481189576038503471}
+  gravityCooldownImage: {fileID: 1363173486596045046}
+  changeTimeUI: {fileID: 9025075990989485855}
+  timeCooldownImage: {fileID: 2774624062780781022}
+  inventoryUI: {fileID: 3072100387131096204}
+  itemName: {fileID: 3685496588951296356}
 --- !u!1 &2138699043945832179
 GameObject:
   m_ObjectHideFlags: 0
