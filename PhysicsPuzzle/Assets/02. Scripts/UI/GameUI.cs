@@ -35,9 +35,13 @@ public class GameUI : BaseUI
     {
         return UIState.Game;
     }
-    private void Start()
+
+    public override void Init(UIManager uiManager)
     {
+        base.Init(uiManager);
+        
         _animator.SetBool("IsMoonTime_b", false); // 초기 낮 상태
+        ChangeSceneName();
     }
 
     private void Update()

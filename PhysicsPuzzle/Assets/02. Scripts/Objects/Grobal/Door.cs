@@ -7,12 +7,6 @@ public class Door : MonoBehaviour, IComparable<Door>
 {
     [SerializeField] private GameObject fire;
     [SerializeField] private int puzzleNumber;
-
-    private void OnCollisionEnter(Collision other)
-    {
-        //test code
-        SceneHandleManager.Instance.LoadScene(SCENE_TYPE.ObjectAndPipe);
-    }
     
     public void DestroyDoor()
     {
@@ -22,8 +16,7 @@ public class Door : MonoBehaviour, IComparable<Door>
 
     public Vector3 PuzzleClearPosition()
     {
-
-        return transform.position - (transform.forward*2);
+        return transform.position + (transform.forward*2);
     }
 
     public int CompareTo(Door other)

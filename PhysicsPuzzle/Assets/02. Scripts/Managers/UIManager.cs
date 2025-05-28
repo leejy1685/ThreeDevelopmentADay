@@ -21,10 +21,6 @@ public class UIManager : Singleton<UIManager>
     ClearUI clearUI = null;
     
     public GameUI GameUI => gameUI;
-    public ClearUI ClearUI => clearUI;
-    
-    private float currentClearTime;
-    public float CurrentClearTime => currentClearTime;
     
     private void Awake()
     {
