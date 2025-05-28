@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     private UIManager _uiManager;
+    private SceneHandleManager _sceneHandle;
     
     private int[] _stagePuzzleClearCount;
     [SerializeField] private int stageCount;
@@ -33,8 +34,6 @@ public class GameManager : Singleton<GameManager>
         //testCode
         isLoad = false;
         PlayerPrefs.SetInt(SCENE_TYPE.ObjectAndPipe.ToString(),3);
-        
-        
     }
 
     //씬이 넘어갈 때 사용
@@ -47,6 +46,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         _uiManager = UIManager.Instance;
+        _sceneHandle = SceneHandleManager.Instance;
         
         //시작 카메라 연출
         _lobbyCamera.gameObject.SetActive(true);
@@ -56,10 +56,10 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            ClearPuzzle(SceneHandleManager.Instance.currentScene);
+            ClearPuzzle(_sceneHandle.currentScene);
         }
 
-        if (SceneHandleManager.Instance.currentScene != SCENE_TYPE.Lobby && !isClear)
+        if (_sceneHandle.currentScene != SCENE_TYPE.Lobby && !isClear)
         {
             playTime += Time.deltaTime;
             _uiManager.GameUI.UpdatePlayTime(playTime);
@@ -71,6 +71,7 @@ public class GameManager : Singleton<GameManager>
     {
         _uiManager.GameUI.ChangeSceneName();
         
+        //문 찾기
         doors = FindObjectsOfType<Door>();
         Array.Sort(doors);
 
@@ -83,24 +84,29 @@ public class GameManager : Singleton<GameManager>
             if (isLoad)
             {
                 Debug.Log("load");
-                Debug.Log(_stagePuzzleClearCount[(int)SceneHandleManager.Instance.currentScene]);
-                player.position = doors[_stagePuzzleClearCount[(int)SceneHandleManager.Instance.currentScene]]
+                Debug.Log(_stagePuzzleClearCount[(int)_sceneHandle.currentScene]);
+                player.position = doors[_stagePuzzleClearCount[(int)_sceneHandle.currentScene]]
                     .PuzzleClearPosition();
             }
         }
 
         //로비로 돌아오면
-        if (SceneHandleManager.Instance.currentScene == SCENE_TYPE.Lobby)
+        if (_sceneHandle.currentScene == SCENE_TYPE.Lobby)
         {
             StartGameLobby();
         }
         else//로비가 아니면 타이머 UI 생성
         {
             _uiManager.GameUI.SetTimer(true);
+            //StartCoroutine(itemManager.Instnace.)
         }
     }
     public void StartGameLobby()
     {
+        //데이터 초기화
+        playTime = 0;
+        isClear = false;
+        
         //카메라 변경
         _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
         _lobbyCamera.DisableCamera();
@@ -109,6 +115,7 @@ public class GameManager : Singleton<GameManager>
         
         //로비에선 타이머 없음
         _uiManager.GameUI.SetTimer(false);
+        
     }
 
     public void GameStart()
@@ -130,29 +137,11 @@ public class GameManager : Singleton<GameManager>
         }
         
         //test
-        SceneHandleManager.Instance.LoadScene(SCENE_TYPE.ObjectAndPipe);
+        _sceneHandle.LoadScene(SCENE_TYPE.ObjectAndPipe);
 
         isLoad = true;
         
         GameStart();
-    }
-
-    public void StageClear()
-    {
-        //마우스 고정 해제
-        Cursor.lockState = CursorLockMode.None;
-        
-        //타이머 멈추기
-        isClear = true;
-
-        //최고 시간초 UI에 
-        float bestTime = PlayerPrefs.GetInt(SceneHandleManager.Instance.currentScene.ToString(),0);
-        if (bestTime > playTime)
-        {
-            bestTime = playTime;
-        }
-        _uiManager.SetClearUI(playTime,bestTime);
-        
     }
 
     public void ClearPuzzle(SCENE_TYPE sceneType)
@@ -167,5 +156,24 @@ public class GameManager : Singleton<GameManager>
         if(doors.Length == _stagePuzzleClearCount[(int)sceneType])
             StageClear();
         
+    }
+    public void StageClear()
+    {
+        //마우스 고정 해제
+        Cursor.lockState = CursorLockMode.None;
+        
+        //타이머 멈추기
+        isClear = true;
+
+        //최고 시간초 UI에 설정
+        float bestTime = PlayerPrefs.GetInt(_sceneHandle.currentScene.ToString(),0);
+        if (bestTime > playTime)
+        {
+            bestTime = playTime;
+        }
+        _uiManager.SetClearUI(playTime,bestTime);
+        
+        //퍼즐 클리어 데이터 초기화
+        _stagePuzzleClearCount[(int)_sceneHandle.currentScene] = 0;
     }
 }

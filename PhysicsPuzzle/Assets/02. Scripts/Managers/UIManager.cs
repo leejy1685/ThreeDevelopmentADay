@@ -57,7 +57,6 @@ public class UIManager : Singleton<UIManager>
     
     public void OnClickStart()
     {
-        ChangeState(UIState.Game);
         SceneHandleManager.Instance.LoadScene(SCENE_TYPE.Lobby); // 게임매니저에서 씬 전환을 통합할지 확인
     }
     
