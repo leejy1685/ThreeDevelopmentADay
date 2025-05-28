@@ -22,6 +22,9 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] private Canvas optioinCanvas;
     [SerializeField] private Canvas clearCanvas;
 
+    private float currentClearTime;
+    public float CurrentClearTime => currentClearTime;
+    
     private void Awake()
     {
         base.Awake();
@@ -75,5 +78,20 @@ public class UIManager : Singleton<UIManager>
         #else
             Application.Quit();
         #endif
+    }
+    
+    public float LoadBestScore(SCENE_TYPE sceneType)
+    {
+        int clearCount = PlayerPrefs.GetInt(sceneType.ToString(), 0);
+        
+        if (clearCount == 0)
+            return 0f;
+
+        return PlayerPrefs.GetFloat($"{sceneType}_BestClearTime", 0f);
+    }
+
+    public void ClearTime(float time)
+    {
+        currentClearTime = time;
     }
 }
