@@ -18,10 +18,6 @@ public class UIManager : Singleton<UIManager>
     GameUI gameUI = null;
     ClearUI clearUI = null;
     
-    [SerializeField] private Canvas lobbyCanvas;
-    [SerializeField] private Canvas optioinCanvas;
-    [SerializeField] private Canvas clearCanvas;
-
     private float currentClearTime;
     public float CurrentClearTime => currentClearTime;
     
@@ -57,18 +53,6 @@ public class UIManager : Singleton<UIManager>
     {
         ChangeState(UIState.Game);
         SceneHandleManager.Instance.LoadScene(SCENE_TYPE.TestMain); // 게임매니저에서 씬 전환을 통합할지 확인
-    }
-
-    public void OnClickLoad()
-    {
-        ChangeState(UIState.Game);
-        SceneHandleManager.Instance.LoadScene(SCENE_TYPE.TestMain); // 게임매니저에서 씬 전환을 통합할지 확인
-    }
-    
-    public void OnClickOption()
-    {
-        lobbyCanvas.gameObject.SetActive(false);
-        optioinCanvas.gameObject.SetActive(true);
     }
     
     public void OnClickExit()
