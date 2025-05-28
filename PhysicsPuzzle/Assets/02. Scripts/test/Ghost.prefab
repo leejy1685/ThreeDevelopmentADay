@@ -627,7 +627,7 @@ GameObject:
   - component: {fileID: 3731219428169771217}
   - component: {fileID: 173726487976119407}
   m_Layer: 6
-  m_Name: Player (1)
+  m_Name: Ghost
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -715,7 +715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathToFollow: []
   moveSpeed: 30
-  vanishDelay: 2
+  del_Delay: 2
 --- !u!114 &173726487976119407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -728,7 +728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cba9f71029a4a48998355d5ce2a492c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 178175801005640823}
 --- !u!1 &3217309767789552663
 GameObject:
   m_ObjectHideFlags: 0

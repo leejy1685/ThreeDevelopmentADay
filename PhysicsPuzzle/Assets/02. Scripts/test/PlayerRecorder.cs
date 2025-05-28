@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerRecorder : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerRecorder : MonoBehaviour
     void Update()
     {
         // R 키를 눌러 녹화 on/off 토글
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R)  )
         {
             isRecording = !isRecording;
 
