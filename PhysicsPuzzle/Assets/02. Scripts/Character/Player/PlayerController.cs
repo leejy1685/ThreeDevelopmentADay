@@ -1,6 +1,7 @@
 ﻿using System;
 using _02._Scripts.Character.Player.Camera;
 using _02._Scripts.Managers;
+using _02._Scripts.Objects.LaserMachine;
 using _02._Scripts.Utils;
 using UnityEngine;
 
@@ -11,8 +12,10 @@ namespace _02._Scripts.Character.Player
         [Header("Components")] 
         [SerializeField] private Rigidbody rigidBody;
         [SerializeField] private CapsuleCollider capsuleCollider;
+        [SerializeField] private PlayerCondition playerCondition;
         [SerializeField] private PlayerAnimation playerAnimator;
         [SerializeField] private CameraController cameraController;
+        [SerializeField] private PlayerInteraction playerInteraction;
         
         [Header("Movement Settings")]
         [SerializeField] private Vector2 movementDirection;
@@ -61,15 +64,28 @@ namespace _02._Scripts.Character.Player
             
             playerAnimator = _characterManager.Player.PlayerAnimation;
             cameraController = _characterManager.Player.CameraController;
+            playerCondition = _characterManager.Player.PlayerCondition;
+            playerInteraction = _characterManager.Player.PlayerInteraction;
         }
 
         private void FixedUpdate()
         {
+            if (!playerCondition.IsPlayerCharacterHasControl) return;
             CalculateMovement();
+        }
+
+        private void Update()
+        {
+            if (!playerCondition.IsPlayerCharacterHasControl)
+            {
+                if(playerInteraction.Interactable is LaserMachine laserMachine)
+                    laserMachine.ControlLaserPitch(movementDirection);
+            }
         }
 
         private void LateUpdate()
         {
+            if (!playerCondition.IsPlayerCharacterHasControl) return;
             SetPositionOfCameraPivot();
         }
 
@@ -159,11 +175,6 @@ namespace _02._Scripts.Character.Player
             }
         }
 
-        private void SetRotationOfPlayerTransform()
-        {
-            
-        }
-
         /// <summary>
         /// Check if the player is on the Ground.
         /// </summary>
@@ -190,7 +201,7 @@ namespace _02._Scripts.Character.Player
         /// <param name="jump"></param>
         public void OnJump(bool jump)
         {
-            if(_isGrounded) _isJumpPressed = jump;
+            if(_isGrounded && playerCondition.IsPlayerCharacterHasControl) _isJumpPressed = jump;
         }
 
         /// <summary>
@@ -198,6 +209,7 @@ namespace _02._Scripts.Character.Player
         /// </summary>
         public void OnCrouch()
         {
+            if (!playerCondition.IsPlayerCharacterHasControl) return;
             _isCrouchPressed = !_isCrouchPressed;
             _isCrouch = true;
             playerAnimator.SetPlayerIsCrouch(_isCrouchPressed);
@@ -210,6 +222,9 @@ namespace _02._Scripts.Character.Player
         /// </summary>
         public void OnChangeGravity()
         {
+            if (!playerCondition.IsPlayerCharacterHasControl) return;
+            if (!playerCondition.IsGravitySkillAvailable) return;
+            
             if (gravityDirection == Vector3.down)
             {
                 gravityDirection = Vector3.up;

@@ -6,32 +6,32 @@ using UnityEngine;
 
 public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private static T instance;
+    private static T _instance;
     public static T Instance
     {
         get
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = FindAnyObjectByType<T>();
+                _instance = FindAnyObjectByType<T>();
 
-                if (instance == null)
+                if (_instance == null)
                 {
                     GameObject temp = new GameObject(typeof(T).Name);
-                    instance = temp.AddComponent<T>();
+                    _instance = temp.AddComponent<T>();
                 }
             }
-            return instance;
+            return _instance;
         }
     }
 
     protected virtual void Awake()
     {
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this as T;
+            _instance = this as T;
         }
-        else if (instance != this)
+        else if (_instance != this)
         {
             Destroy(gameObject);
         }

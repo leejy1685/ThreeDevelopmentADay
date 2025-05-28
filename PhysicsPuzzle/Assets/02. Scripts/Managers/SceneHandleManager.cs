@@ -12,7 +12,9 @@ public enum SCENE_TYPE
     TestGoalScene,
     ObjectAndPipe,
     DayAndNightGravity,
-    Count
+    ClearUIScene, // UITest용. UI 병합 이후 삭제
+    LobbyCamera,   // UI 병합 전 테스트용
+    Count,
 }
 public class SceneHandleManager : Singleton<SceneHandleManager>
 {

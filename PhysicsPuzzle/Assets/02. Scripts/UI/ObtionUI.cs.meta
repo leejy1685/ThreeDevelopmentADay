@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:PhysicsPuzzle/Assets/02. Scripts/UI/ObtionUI.cs.meta
 guid: 03a26e43918c0f341b9d54be6bbac206
+========
+guid: 5223df261ec965b46a3ecef6709a8250
+>>>>>>>> origin/develop/GameUI:PhysicsPuzzle/Assets/02. Scripts/UI/UIInventory.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:PhysicsPuzzle/Assets/04. Prefabs/Sound.meta
 guid: 0c864fc4405ec33419ae88d8d7b5d682
+========
+guid: 933bd8d218e669e40a25205836c700d1
+>>>>>>>> origin/develop/GameUI:PhysicsPuzzle/Assets/04. Prefabs/Player.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

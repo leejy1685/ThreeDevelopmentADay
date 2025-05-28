@@ -103,6 +103,4 @@ public class GameManager : Singleton<GameManager>
         PlayerPrefs.SetInt(sceneType.ToString(),_stagePuzzleClearCount[(int)sceneType]);
         
     }
-    
-    
 }

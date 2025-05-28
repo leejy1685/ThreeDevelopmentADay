@@ -1,4 +1,4 @@
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,18 +10,19 @@ public enum UIState
     Obtion
 }
 
+
 public class UIManager : Singleton<UIManager>
 {
+    public GameUI GameUI => gameUI;
     UIState currentState = UIState.Lobby;
     LobbyUI lobbyUI = null;
     ObtionUI obtionUI = null;
     GameUI gameUI = null;
     ClearUI clearUI = null;
     
-    [SerializeField] private Canvas lobbyCanvas;
-    [SerializeField] private Canvas optioinCanvas;
-    [SerializeField] private Canvas clearCanvas;
-
+    private float currentClearTime;
+    public float CurrentClearTime => currentClearTime;
+    
     private void Awake()
     {
         base.Awake();
@@ -41,6 +42,7 @@ public class UIManager : Singleton<UIManager>
     }
 
 
+
     public void ChangeState(UIState state)
     {
         currentState = state;
@@ -55,18 +57,6 @@ public class UIManager : Singleton<UIManager>
         ChangeState(UIState.Game);
         SceneHandleManager.Instance.LoadScene(SCENE_TYPE.TestMain); // 게임매니저에서 씬 전환을 통합할지 확인
     }
-
-    public void OnClickLoad()
-    {
-        ChangeState(UIState.Game);
-        SceneHandleManager.Instance.LoadScene(SCENE_TYPE.TestMain); // 게임매니저에서 씬 전환을 통합할지 확인
-    }
-    
-    public void OnClickOption()
-    {
-        lobbyCanvas.gameObject.SetActive(false);
-        optioinCanvas.gameObject.SetActive(true);
-    }
     
     public void OnClickExit()
     {
@@ -75,5 +65,20 @@ public class UIManager : Singleton<UIManager>
         #else
             Application.Quit();
         #endif
+    }
+    
+    public float LoadBestScore(SCENE_TYPE sceneType)
+    {
+        int clearCount = PlayerPrefs.GetInt(sceneType.ToString(), 0);
+        
+        if (clearCount == 0)
+            return 0f;
+
+        return PlayerPrefs.GetFloat($"{sceneType}_BestClearTime", 0f);
+    }
+
+    public void ClearTime(float time)
+    {
+        currentClearTime = time;
     }
 }
