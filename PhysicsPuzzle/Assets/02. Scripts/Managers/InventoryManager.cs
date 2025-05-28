@@ -61,6 +61,7 @@ namespace _02._Scripts.Managers
                 var go = Instantiate(itemSlotPrefab, _uiManager.GameUI.InventoryUITransform);
                 itemSlots.Add(Helper.GetComponent_Helper<ItemSlot>(go));
                 itemSlots[i].Index = i;
+                if(i > 0) itemSlots[i].SetOutline(false);
             }
             UpdateSlots();
             SelectItem(0);
@@ -75,17 +76,23 @@ namespace _02._Scripts.Managers
             {
                 slot.Quantity++;
                 UpdateSlots();
-                SelectItem(itemSlots.IndexOf(slot));
+                itemSlots[selectedItemIndex].SetOutline(false);
+                var index = itemSlots.IndexOf(slot);
+                itemSlots[index].SetOutline(true);
+                SelectItem(index);
                 return;
             }
             
             // If Item is not stackable or reached to maxStackCount, find Empty Slot
             var emptySlot = GetEmptySlot();
-            if(emptySlot)
+            if (emptySlot)
             {
                 emptySlot.ItemData = data;
                 emptySlot.Quantity = 1;
                 UpdateSlots();
+                itemSlots[selectedItemIndex].SetOutline(false);
+                var index = itemSlots.IndexOf(emptySlot);
+                itemSlots[index].SetOutline(true);
                 SelectItem(itemSlots.IndexOf(emptySlot));
                 return;
             }

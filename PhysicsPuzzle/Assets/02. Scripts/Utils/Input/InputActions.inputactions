@@ -60,6 +60,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SelectItem",
+                    "type": "Value",
+                    "id": "a5e1f2fa-ce06-47bb-a603-d4a0b37facf5",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Interact",
                     "type": "Button",
                     "id": "c2ad731c-cddc-4c8a-9c7e-73610b0c993e",
@@ -303,6 +312,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ChangeTime",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4290fe49-5020-455b-8987-10845ab0b5ac",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

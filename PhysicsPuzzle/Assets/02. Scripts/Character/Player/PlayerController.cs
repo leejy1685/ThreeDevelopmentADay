@@ -36,6 +36,7 @@ namespace _02._Scripts.Character.Player
         // Components
         private Transform _cameraPivot;
         private CharacterManager _characterManager;
+        private EnvironmentManager _environmentManager;
         
         // Player State Fields
         private bool _isGrounded = true;
@@ -56,8 +57,9 @@ namespace _02._Scripts.Character.Player
         {
             _cameraPivot = cameraController.CameraPivot;
             _characterManager = CharacterManager.Instance;
-            originalCameraPositionY = _cameraPivot.localPosition.y;
+            _environmentManager = EnvironmentManager.Instance;
             
+            originalCameraPositionY = _cameraPivot.localPosition.y;
             playerAnimator = _characterManager.Player.PlayerAnimation;
             cameraController = _characterManager.Player.CameraController;
             playerCondition = _characterManager.Player.PlayerCondition;
@@ -245,7 +247,7 @@ namespace _02._Scripts.Character.Player
             if (!playerCondition.IsTimeSkillAvailable) return;
             
             playerCondition.RunTimeSkillCoolTime();
-            // TODO: Implement Time Change Skill
+            _environmentManager.DayAndNight.ChangeDayAndNight();
         }
         
         #endregion

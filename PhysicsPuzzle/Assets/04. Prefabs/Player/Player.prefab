@@ -728,6 +728,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 49df188c-ad27-4ad7-bacf-a41017dd8f18
     m_ActionName: Player/ChangeTime[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6850557317937054288}
+        m_TargetAssemblyTypeName: _02._Scripts.Character.Player.PlayerInput, Assembly-CSharp
+        m_MethodName: OnSelectItem
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a5e1f2fa-ce06-47bb-a603-d4a0b37facf5
+    m_ActionName: Player/SelectItem
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
