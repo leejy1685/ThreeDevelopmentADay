@@ -10,7 +10,6 @@ namespace _02._Scripts.Objects.Blocks
     {
         [SerializeField] private TIME_TYPE timeBlockType;
         
-    
         public void ChangeSetActive(TIME_TYPE isDay)
         {
             if (isDay == timeBlockType) gameObject.SetActive(true);
