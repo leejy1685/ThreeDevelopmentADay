@@ -480,7 +480,7 @@ MonoBehaviour:
   playerCondition: {fileID: 9204080799817005099}
   playerAnimator: {fileID: 8901723863115515097}
   cameraController: {fileID: 3506878476624293076}
-  playerInteraction: {fileID: 0}
+  playerInteraction: {fileID: 40961569538208126}
   movementDirection: {x: 0, y: 0}
   maxSpeed: 8
   currentSpeed: 0
@@ -510,7 +510,7 @@ MonoBehaviour:
   playerController: {fileID: 3731292494306958236}
   cameraController: {fileID: 3506878476624293076}
   playerInteraction: {fileID: 40961569538208126}
-  playerCondition: {fileID: 0}
+  playerCondition: {fileID: 9204080799817005099}
 --- !u!114 &3087116806064683726
 MonoBehaviour:
   m_ObjectHideFlags: 0
