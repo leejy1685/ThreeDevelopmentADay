@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    private UIManager _uiManager;
+    
     private int[] _stagePuzzleClearCount;
     [SerializeField] private int stageCount;
     
@@ -34,17 +36,26 @@ public class GameManager : Singleton<GameManager>
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    private void Start()
+    {
+        _uiManager = UIManager.Instance;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
             ClearPuzzle(SceneHandleManager.Instance.currentScene);
         }
+        
+        if(SceneHandleManager.Instance.currentScene == SCENE_TYPE.ObjectAndPipe)
+            _uiManager.GameUI.UpdatePlayTime();
     }
     
     // 체인을 걸어서 이 함수는 매 씬마다 호출된다.
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        _uiManager.GameUI.ChangeSceneName();
         doors = FindObjectsOfType<Door>();
         Array.Sort(doors);
 
@@ -71,7 +82,8 @@ public class GameManager : Singleton<GameManager>
         //게임 정보 초기화
         
         //게임UI로 변경
-        UIManager.Instance.ChangeState(UIState.Game);
+        _uiManager.ChangeState(UIState.Game);
+        _uiManager.GameUI.ChangeSceneName();
     }
 
     // 저장 데이터 불러오기
@@ -86,11 +98,13 @@ public class GameManager : Singleton<GameManager>
         SceneHandleManager.Instance.LoadScene(SCENE_TYPE.ObjectAndPipe);
 
         isLoad = true;
+        
+        GameStart();
     }
 
     public void StageClear()
     {
-        //ClearUI 띄우고 시간 정지 등등
+        _uiManager.ChangeState(UIState.Clear);
     }
 
     public void ClearPuzzle(SCENE_TYPE sceneType)
@@ -101,6 +115,9 @@ public class GameManager : Singleton<GameManager>
         //클리어 저장
         _stagePuzzleClearCount[(int)sceneType]++;
         PlayerPrefs.SetInt(sceneType.ToString(),_stagePuzzleClearCount[(int)sceneType]);
+        
+        if(doors.Length == _stagePuzzleClearCount[(int)sceneType])
+            StageClear();
         
     }
 }

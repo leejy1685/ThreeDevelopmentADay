@@ -42,10 +42,9 @@ public class GameUI : BaseUI
     private void Update()
     {
         TestChangeTime();// 테스트용
-        UpdatePlayTime();
     }
 
-    private void ChangeSceneName()
+    public void ChangeSceneName()
     {
         currentStage.text = SceneManager.GetActiveScene().name; // 스테이지 이름 
     }
