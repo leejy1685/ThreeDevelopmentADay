@@ -26,6 +26,7 @@ namespace _02._Scripts.Managers
         
         // Fields
         private CharacterManager _characterManager;
+        private UIManager _uiManager;
         private PlayerEquipment _playerEquipment;
         private PlayerInteraction _playerInteraction;
         private PlayerCondition _playerCondition;
@@ -50,18 +51,19 @@ namespace _02._Scripts.Managers
             _playerInteraction = _characterManager.Player.PlayerInteraction;
             _playerCondition = _characterManager.Player.PlayerCondition;
             _player = _characterManager.Player;
+            _uiManager = UIManager.Instance;
             itemThrowPivot = _player.ItemThrowPivot;
             
             itemSlots = new List<ItemSlot> { Capacity = maxDataCount };
 
-            for (var i = 0; i < itemSlots.Count; i++)
+            for (var i = 0; i < maxDataCount; i++)
             {
-                var go = Instantiate(itemSlotPrefab);
-                itemSlots[i] = Helper.GetComponent_Helper<ItemSlot>(go); 
+                var go = Instantiate(itemSlotPrefab, _uiManager.GameUI.InventoryUI.transform);
+                itemSlots.Add(Helper.GetComponent_Helper<ItemSlot>(go)); 
                 itemSlots[i].Index = i;
             }
             UpdateSlots();
-            selectedItem = null;
+            SelectItem(0);
         }
         
         public void AddItem(ItemData data)
@@ -84,7 +86,7 @@ namespace _02._Scripts.Managers
                 emptySlot.ItemData = data;
                 emptySlot.Quantity = 1;
                 UpdateSlots();
-                SelectItem(itemSlots.IndexOf(slot));
+                SelectItem(itemSlots.IndexOf(emptySlot));
                 return;
             }
             
@@ -111,7 +113,7 @@ namespace _02._Scripts.Managers
         {
             foreach (var slot in itemSlots)
             {
-                if(slot.ItemData) slot.Set();
+                if (slot.ItemData) slot.Set();
                 else slot.Clear();
             }
         }
@@ -125,27 +127,51 @@ namespace _02._Scripts.Managers
         {
             return itemSlots.FirstOrDefault(slot => !slot.ItemData);
         }
-        
-        public void SelectItem(int index)
+
+        public void SelectNextItem()
         {
-            if (!itemSlots[index].ItemData) { _playerEquipment.UnequipItem(); return; }
+            // Set ItemSlot Outline
+            itemSlots[selectedItemIndex].SetOutline(false);
+            selectedItemIndex = (selectedItemIndex + 1) % maxDataCount;
+            itemSlots[selectedItemIndex].SetOutline(true);
+            
+            SelectItem(selectedItemIndex);
+        }
+
+        public void SelectPrevItem()
+        {
+            // Set ItemSlot Outline
+            itemSlots[selectedItemIndex].SetOutline(false);
+            if (selectedItemIndex <= 0) selectedItemIndex = maxDataCount - 1;
+            else selectedItemIndex = (selectedItemIndex - 1) % maxDataCount;
+            itemSlots[selectedItemIndex].SetOutline(true);
+            
+            SelectItem(selectedItemIndex);
+        }
+        
+        private void SelectItem(int index)
+        {
+            if (!itemSlots[index].ItemData) 
+            { 
+                _playerEquipment.UnequipItem();
+                selectedItem = null; 
+                return;
+            }
             
             selectedItem = itemSlots[index].ItemData;
             selectedItemIndex = index;
             _playerEquipment.EquipItem(selectedItem);
         }
         
-        public void RemoveSelectedItem()
+        private void RemoveSelectedItem()
         {
             itemSlots[selectedItemIndex].Quantity--;
             if (itemSlots[selectedItemIndex].Quantity <= 0)
             {
                 selectedItem = null;
                 itemSlots[selectedItemIndex].ItemData = null;
-                selectedItemIndex = -1;
                 _playerEquipment.UnequipItem();
             }
-            
             UpdateSlots();
         }
         

@@ -19,6 +19,7 @@ namespace _02._Scripts.Item.DataAndTable
         public Sprite icon;
         public LASER_COLOR color;
         public GameObject itemPrefab;
+        public GameObject equipPrefab;
         
         [Header("Max Stack Count")]
         public int maxStackCount;

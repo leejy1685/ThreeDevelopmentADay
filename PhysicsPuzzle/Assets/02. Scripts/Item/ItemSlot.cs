@@ -50,5 +50,10 @@ namespace _02._Scripts.Item
             icon.gameObject.SetActive(false);
             quantityText.text = string.Empty;
         }
+        
+        public void SetOutline(bool isSelected)
+        {
+            outline.enabled = isSelected;
+        }
     }
 }

@@ -39,7 +39,6 @@ namespace _02._Scripts.Objects.LaserMachine
     
         private void Awake()
         {
-            testColor = LASER_COLOR.Blue; // 테스트용 고정 초기값
             _currPitch = 0f;
         }
 
@@ -66,8 +65,6 @@ namespace _02._Scripts.Objects.LaserMachine
             Vector3 endPosition = startPosition + direction * _maxDistance;
     
             GoalMachine hitTarget = null;
-    
-            SetLineColor(testColor);
     
             if (_isFiring)
             {

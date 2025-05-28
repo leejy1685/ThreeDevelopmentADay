@@ -9,8 +9,7 @@ namespace _02._Scripts.Character.Player.Camera
     public class CameraController : MonoBehaviour
     {
         // Components
-        [Header("Components")] 
-        [SerializeField] private PlayerController playerController;
+        [Header("Components")]
         [SerializeField] private PlayerCondition playerCondition;
         
         // Camera Attributes
@@ -34,7 +33,6 @@ namespace _02._Scripts.Character.Player.Camera
             _characterManager = CharacterManager.Instance;
             
             originalCameraPivotAngleX = cameraPivot.localEulerAngles.x;
-            playerController = _characterManager.Player.PlayerController;
             playerCondition = _characterManager.Player.PlayerCondition;
         }
 
@@ -48,7 +46,7 @@ namespace _02._Scripts.Character.Player.Camera
             cameraVerticalMovement += mouseDelta.y * cameraSensitivity;
             cameraVerticalMovement = Mathf.Clamp(cameraVerticalMovement, minX, maxX);
             cameraPivot.localEulerAngles = new Vector3(-cameraVerticalMovement + originalCameraPivotAngleX, 0, 0);
-            transform.eulerAngles += new Vector3(0, playerController.IsPlayerUpsideDown ? -mouseDelta.x * cameraSensitivity : mouseDelta.x * cameraSensitivity, 0);
+            transform.eulerAngles += new Vector3(0, playerCondition.IsPlayerUpsideDown ? -mouseDelta.x * cameraSensitivity : mouseDelta.x * cameraSensitivity, 0);
         }
 
         #region Player Input Methods

@@ -32,7 +32,7 @@ namespace _02._Scripts.Character.Player
         public void EquipItem(ItemData data)
         {
             UnequipItem();
-            var item = Instantiate(data.itemPrefab, equipmentPivot);
+            var item = Instantiate(data.equipPrefab, equipmentPivot);
             currentKeyItem = Helper.GetComponent_Helper<KeyItem>(item);
             _isEquipped = true;
         }

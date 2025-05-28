@@ -340,7 +340,6 @@ Transform:
   - {fileID: 4796647481465184370}
   - {fileID: 7400930726095756771}
   - {fileID: 3649441381204702470}
-  - {fileID: 5587412774736443434}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &347741198787532272
@@ -427,6 +426,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayerCharacterHasControl: 1
+  timeChangeCooldown: 3
+  gravityChangeCooldown: 3
   firstPersonCamera: {fileID: 0}
   thirdPersonCamera: {fileID: 0}
 --- !u!114 &8901723863115515097
@@ -454,7 +455,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5177bdffd33e4620b31a2203ccc959b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 3731292494306958236}
   playerCondition: {fileID: 9204080799817005099}
   cameraPivot: {fileID: 7400930726095756771}
   cameraSensitivity: 0.2
@@ -899,12 +899,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598986846029705679}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.249, y: 1.381, z: 0.642}
+  m_LocalRotation: {x: 0.00000017881389, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.356, y: -0.372, z: 0.592}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1394431625068058889}
+  m_Father: {fileID: 7400930726095756771}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1696175823521277819
 GameObject:
@@ -1164,7 +1164,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.65, z: 0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5587412774736443434}
   m_Father: {fileID: 1394431625068058889}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3925855140452929275

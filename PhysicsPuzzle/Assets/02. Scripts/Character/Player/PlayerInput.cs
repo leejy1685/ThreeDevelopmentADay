@@ -62,12 +62,12 @@ namespace _02._Scripts.Character.Player
 
         public void OnUse(InputAction.CallbackContext context)
         {
-            if(context.started) InventoryManager.Instance.UseItem();    
+            if(context.started) InventoryManager.Instance.UseItem();
         }
         
         public void OnDrop(InputAction.CallbackContext context)
         {
-            if(context.started) InventoryManager.Instance.DropItem();
+            if(context.performed) InventoryManager.Instance.DropItem();
         }
         
         public void OnFire(InputAction.CallbackContext context)

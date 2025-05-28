@@ -44,10 +44,6 @@ namespace _02._Scripts.Character.Player
         // Player Input Checking Fields
         private bool _isJumpPressed;
         private bool _isCrouchPressed;
-        private bool _isPlayerUpsideDown;
-        
-        // Properties
-        public bool IsPlayerUpsideDown => _isPlayerUpsideDown;
 
         private void Awake()
         {
@@ -225,6 +221,7 @@ namespace _02._Scripts.Character.Player
             if (!playerCondition.IsPlayerCharacterHasControl) return;
             if (!playerCondition.IsGravitySkillAvailable) return;
             
+            playerCondition.RunGravitySkillCoolTime();
             if (gravityDirection == Vector3.down)
             {
                 gravityDirection = Vector3.up;
@@ -237,7 +234,6 @@ namespace _02._Scripts.Character.Player
                 transform.position += transform.up * capsuleCollider.height; 
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
-            _isPlayerUpsideDown = !_isPlayerUpsideDown;
         }
         
         #endregion

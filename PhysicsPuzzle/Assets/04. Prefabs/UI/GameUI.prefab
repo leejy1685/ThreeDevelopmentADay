@@ -404,20 +404,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75421e405918bd4781c731f921e9b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nowTImeIcon: {fileID: 0}
-  _stageNameText: {fileID: 3771959408993024745}
-  _timeText: {fileID: 7337529997048568602}
-  _changeGravityUI: {fileID: 2165411332502004589}
-  _gravityUpIcon: {fileID: 6522012478612544593}
-  _gravityDownIcon: {fileID: 3481189576038503471}
-  _gravityCooldown: {fileID: 1363173486596045046}
-  _changeTimeUI: {fileID: 3061454152953472062}
-  _timecooldown: {fileID: 2774624062780781022}
-  timechangeCooldown: 3
-  gravityCooldown: 3
-  InventoryBG: {fileID: 3072100387131096204}
-  _itemText: {fileID: 0}
-  _itemdescription: {fileID: 0}
+  timeIcon: {fileID: 0}
+  currentStage: {fileID: 0}
+  currentTime: {fileID: 0}
+  changeGravityUI: {fileID: 0}
+  gravityUpIcon: {fileID: 0}
+  gravityDownIcon: {fileID: 0}
+  gravityCooldownImage: {fileID: 0}
+  changeTimeUI: {fileID: 0}
+  timeCooldownImage: {fileID: 0}
+  InventoryUI: {fileID: 0}
+  itemName: {fileID: 0}
 --- !u!1 &2138699043945832179
 GameObject:
   m_ObjectHideFlags: 0
@@ -768,8 +765,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 476382950938967963}
+  m_Children: []
   m_Father: {fileID: 4918654558467165236}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1255,11 +1251,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3565475499093281150}
+  m_Father: {fileID: 4918654558467165236}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -2, y: 0}
+  m_AnchoredPosition: {x: -8, y: 8}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &5909811766943098848
@@ -1290,7 +1286,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: G
+  m_text: Tab
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f0d803ca9e24c8a4ca3764e70464e98e, type: 2}
   m_sharedMaterial: {fileID: -8682157575594799043, guid: f0d803ca9e24c8a4ca3764e70464e98e, type: 2}
@@ -1317,8 +1313,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8.5
-  m_fontSizeBase: 8.5
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1977,6 +1973,7 @@ RectTransform:
   m_Children:
   - {fileID: 3565475499093281150}
   - {fileID: 6099038123126501436}
+  - {fileID: 476382950938967963}
   m_Father: {fileID: 1505666643773077720}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
