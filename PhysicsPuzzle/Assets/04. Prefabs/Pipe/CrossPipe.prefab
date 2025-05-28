@@ -239,6 +239,7 @@ MonoBehaviour:
   rotationAngle: 90
   rotationDuration: 0.5
   maxRayDistance: 100
+  lineRenderer: {fileID: 0}
 --- !u!1 &2878434878688902551
 GameObject:
   m_ObjectHideFlags: 0
@@ -5123,7 +5124,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.06
-  m_Center: {x: 0, y: 0.0070200264, z: 1.12617e-17}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4699656917453294819
 MonoBehaviour:
   m_ObjectHideFlags: 0
