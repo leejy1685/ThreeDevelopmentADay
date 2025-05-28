@@ -22,8 +22,8 @@ namespace _02._Scripts.Character.Player
         private GameUI _gameUI;
         
         // Properties
-        public bool IsGravitySkillAvailable { get; private set; }
-        public bool IsTimeSkillAvailable { get; private set; }
+        public bool IsGravitySkillAvailable { get; private set; } = true;
+        public bool IsTimeSkillAvailable { get; private set; } = true;
         public bool IsPlayerCharacterHasControl => isPlayerCharacterHasControl;
         public bool IsPlayerUpsideDown { get; private set; }
         public bool IsMoonTime { get; private set; }
@@ -35,9 +35,9 @@ namespace _02._Scripts.Character.Player
 
         public void RunGravitySkillCoolTime()
         {
-            IsPlayerUpsideDown = !IsPlayerUpsideDown;
-            IsGravitySkillAvailable = false;
             _gameUI.ChangeGravity(IsPlayerUpsideDown);
+            IsGravitySkillAvailable = false;
+            IsPlayerUpsideDown = !IsPlayerUpsideDown;
             
             StartCoroutine(HandleGravitySkillCoolTime());
         }
@@ -45,8 +45,8 @@ namespace _02._Scripts.Character.Player
         public void RunTimeSkillCoolTime()
         {
             IsMoonTime = !IsMoonTime;
-            IsTimeSkillAvailable = false;
             _gameUI.ChangeTime(IsMoonTime);
+            IsTimeSkillAvailable = false;
             
             StartCoroutine(HandleTimeSkillCoolTime());
         }

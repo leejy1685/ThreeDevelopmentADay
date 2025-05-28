@@ -15,10 +15,12 @@ namespace _02._Scripts.Character.Player
         [SerializeField] private PlayerCondition playerCondition;
 
         private CharacterManager _characterManager;
+        private InventoryManager _inventoryManager;
 
         private void Start()
         {
             _characterManager = CharacterManager.Instance;
+            _inventoryManager = InventoryManager.Instance;
             
             playerController = _characterManager.Player.PlayerController;
             cameraController = _characterManager.Player.CameraController;
@@ -80,9 +82,18 @@ namespace _02._Scripts.Character.Player
             if (context.started)
             {
                 if (playerCondition.IsPlayerCharacterHasControl) return;
-                if(playerInteraction.Interactable is LaserMachine laserMachine)
+                if (playerInteraction.Interactable is LaserMachine laserMachine)
                     laserMachine.ToggleLaser();
             }
+        }
+
+        public void OnSelectItem(InputAction.CallbackContext context)
+        {
+            if (!context.performed || !playerCondition.IsPlayerCharacterHasControl) return;
+            var val = context.ReadValue<float>();
+            Debug.Log(val);
+            if(val > 0) _inventoryManager.SelectPrevItem();
+            else _inventoryManager.SelectNextItem();
         }
         
         #endregion
