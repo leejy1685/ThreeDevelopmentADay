@@ -2,6 +2,7 @@
 using _02._Scripts.Managers;
 using _02._Scripts.Utils.Interface;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -56,7 +57,7 @@ namespace _02._Scripts.Objects.LaserMachine
         {
             // 발사 토글(일단은 좌 컨트롤) => LazerToggle 호출시에 지워도 됨
             if (Input.GetKeyDown(KeyCode.LeftControl))
-                _isFiring = !_isFiring;
+                ToggleLaser();
             TestControl();
     
 
@@ -154,6 +155,8 @@ namespace _02._Scripts.Objects.LaserMachine
         public void ToggleLaser()
         {
             _isFiring = !_isFiring;
+            // if(_isFiring){LineRenderer lr = LinePoolManager.Instance.Get();}
+            // else{ LinePoolManager.Instance.Return(); }
         }
         /// <summary>
         /// 배럴 != null 이라면, 배럴의 칼라값을 이용하여 SetLineColor(itemData.Color); <br/>
