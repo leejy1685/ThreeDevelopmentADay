@@ -1,6 +1,7 @@
 ﻿using _02._Scripts.Character.Player.Camera;
 using _02._Scripts.Managers;
 using _02._Scripts.Objects.LaserMachine;
+using _02._Scripts.PIpe.ConnectionPipe;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -82,8 +83,15 @@ namespace _02._Scripts.Character.Player
             if (context.started)
             {
                 if (playerCondition.IsPlayerCharacterHasControl) return;
-                if (playerInteraction.Interactable is LaserMachine laserMachine)
-                    laserMachine.ToggleLaser();
+                switch (playerInteraction.Interactable)
+                {
+                    case LaserMachine laserMachine:
+                        laserMachine.ToggleLaser();
+                        break;
+                    case ReactiveMachine reactiveMachine:
+                        reactiveMachine.ToggleLaser();
+                        break;
+                }
             }
         }
 

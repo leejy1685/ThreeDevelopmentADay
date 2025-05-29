@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 2300908774721477817}
-  timeIcon: {fileID: 9087779184293785364}
+  currentInfo: {fileID: 9087779184293785364}
   currentStage: {fileID: 3771959408993024745}
   currentTime: {fileID: 7337529997048568602}
   changeGravityUI: {fileID: 2165411332502004589}

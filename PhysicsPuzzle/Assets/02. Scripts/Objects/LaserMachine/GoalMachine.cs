@@ -36,11 +36,14 @@ namespace _02._Scripts.Objects.LaserMachine
                 _lastHitTime = Time.time;
                 OnLight(); // 지속 갱신
                 StageManager.Instance.IncreaseActiveCount();
+
             }
             else
             {
                 OffLight();
+
                 StageManager.Instance.DecreaseActiveCount();
+
             }
         }
     

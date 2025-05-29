@@ -1,12 +1,14 @@
-﻿using _02._Scripts.Character.Player;
-using _02._Scripts.Objects.LaserMachine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using _02._Scripts.Character.Player;
 using _02._Scripts.Managers;
+using _02._Scripts.Objects.LaserMachine;
+using _02._Scripts.Utils.Interface;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
-namespace _02._Scripts.Objects.LaserMachine
+
+namespace _02._Scripts.PIpe.ConnectionPipe
 {
-    public class ReactiveMachine : MonoBehaviour
+    public class ReactiveMachine : MonoBehaviour, IInteractable
     {
         [Header(" [ Components ] ")]
         [SerializeField] private Transform _pitchPivot;         // Z축 회전만 담당
@@ -14,7 +16,12 @@ namespace _02._Scripts.Objects.LaserMachine
         [SerializeField] private Transform _body;
         [SerializeField] private Transform _pillar;
 
-        private GoalMachine _currentTarget = null;
+        [Header(" [ Body Textures ] ")] 
+        [SerializeField] private List<Renderer> renderers;
+        [SerializeField] private List<Texture2D> textures;
+        [SerializeField] private List<Texture2D> lightMaps;
+        [SerializeField] private SerializedDictionary<LASER_COLOR, Texture2D> textureDictionary;
+        [SerializeField] private SerializedDictionary<LASER_COLOR, Texture2D> lightMapDictionary;
 
         [Header(" [ Object Options ] ")]
         [SerializeField] private float _maxDistance = 100f; // 레이저 최대거리
@@ -25,20 +32,23 @@ namespace _02._Scripts.Objects.LaserMachine
         [Header("Laser State")]
         [SerializeField] public LASER_COLOR laserColor = LASER_COLOR.Blue; // 현재 레이저 색상
 
-        private bool _isFiring = false;  // 발사 체크 
+        private GoalMachine _currentTarget = null;
+        private bool _isFiring;  // 발사 체크 
         private float _currPitch;        // 현재 Z축 회전값
         private PlayerCondition _playerCondition;
 
         private void Awake()
         {
-            //testColor = LASER_COLOR.Blue; // 테스트용 고정 초기값
-            _currPitch = 0f;
+            var i = 0;
+            foreach (var texture in textures) textureDictionary.TryAdd((LASER_COLOR)i++, texture);
+            i = 0;
+            foreach (var lightMap in lightMaps) lightMapDictionary.TryAdd((LASER_COLOR)i++, lightMap);
         }
 
         private void Start()
         {
-            // #########플레이어 세팅 완료되면 주석 풀것##########
-            //_playerCondition = CharacterManager.Instance.Player.PlayerCondition;
+            _currPitch = 0f;
+            _playerCondition = CharacterManager.Instance.Player.PlayerCondition;
         }
 
         void LateUpdate()
@@ -71,7 +81,7 @@ namespace _02._Scripts.Objects.LaserMachine
                 {
                     endPosition = hit.point;
                     // 충돌 대상에 ILaserReceiver가 있으면 레이저 정보를 전달해서
-                    if (hit.collider.TryGetComponent<ILaserReceiver>(out ILaserReceiver receiver))
+                    if (hit.collider.TryGetComponent(out ILaserReceiver receiver))
                     {
                         // LaserBeam 구조체 생성 
                         LaserBeam beam = new LaserBeam(direction, laserColor);
@@ -91,6 +101,7 @@ namespace _02._Scripts.Objects.LaserMachine
             {
                 // 발사 중이 아니면 레이저 라인을 보여주지 않음
                 // (라인 시작/끝을 동일하게 설정하여 길이 0인 선으로 처리하거나, 풀에 반환하여 제거)
+                _lineRenderer.enabled = false;
             }
         }
         
@@ -102,6 +113,7 @@ namespace _02._Scripts.Objects.LaserMachine
         {
             _isFiring = !_isFiring;
         }
+        
         /// <summary>
         /// 배럴 != null 이라면, 배럴의 칼라값을 이용하여 SetLineColor(itemData.Color); <br/>
         /// Update에서 처리할 필요 없이 배럴을 끼고 빼고 할때 변경시키면 될듯<br/>
@@ -110,32 +122,13 @@ namespace _02._Scripts.Objects.LaserMachine
         /// </summary>
         public void SetLineColor(LASER_COLOR color)
         {
-            // 여기서 
-            var bodyColor = color switch
-            {
-                LASER_COLOR.White => Color.white,
-                LASER_COLOR.Blue => Color.blue,
-                LASER_COLOR.Green => Color.green,
-                LASER_COLOR.Purple => Color.magenta,
-                LASER_COLOR.Red => Color.red,
-                LASER_COLOR.Yellow => Color.yellow,
-                _ => new Color()
-            };
             laserColor = color;
-            Debug.LogWarning($"색 체크 : {laserColor}");
-            var bodyRenderer = _body.GetComponent<Renderer>();
-            if (bodyRenderer != null)
-            {
-                bodyRenderer.material.EnableKeyword("_EMISSION");
-                bodyRenderer.material.SetColor("_EmissionColor", bodyColor);
-            }
+            Debug.Log($"색 체크 : {laserColor}");
 
-            //  Pillar Emission 설정
-            var pillarRenderer = _pillar.GetComponent<Renderer>();
-            if (pillarRenderer != null)
+            foreach (var render in renderers)
             {
-                pillarRenderer.material.EnableKeyword("_EMISSION");
-                pillarRenderer.material.SetColor("_EmissionColor", bodyColor);
+                render.material.mainTexture = textureDictionary[color];
+                render.material.SetTexture("_EmissionMap", lightMapDictionary[color]);
             }
         }
 
@@ -151,8 +144,5 @@ namespace _02._Scripts.Objects.LaserMachine
             if (Input.GetKey(KeyCode.DownArrow))
                 _currPitch -= _pitchSpeed * Time.deltaTime;
         }
-
-
     }
-
 }

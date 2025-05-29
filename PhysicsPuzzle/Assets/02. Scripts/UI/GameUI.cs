@@ -12,9 +12,9 @@ namespace _02._Scripts.UI
         [Header("Components")] [SerializeField]
         private Animator animator;
 
-        [Header("Top UI")] [SerializeField] private GameObject timeIcon; //현재 시간 UI 우측 상단
+        [Header("Top UI")]
+        [SerializeField] private GameObject currentInfo; //현재 시간 UI 우측 상단
         [SerializeField] private TextMeshProUGUI currentStage; // 스테이지 이름
-        [SerializeField] private GameObject currentTimeUI;
         [SerializeField] private TextMeshProUGUI currentTime; // 진행 시간
 
         [Header("Bottom UI")] [SerializeField] private GameObject changeGravityUI; // 중력 전환 아이콘
@@ -101,7 +101,7 @@ namespace _02._Scripts.UI
 
         public void SetTimer(bool onOff)
         {
-            currentTimeUI.SetActive(onOff);
+            currentInfo.SetActive(onOff);
         }
     }
 }

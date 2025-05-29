@@ -2,6 +2,7 @@
 using _02._Scripts.Item;
 using _02._Scripts.Managers;
 using _02._Scripts.Objects.LaserMachine;
+using _02._Scripts.PIpe.ConnectionPipe;
 using _02._Scripts.Utils.Interface;
 using AYellowpaper.SerializedCollections.Editor.Data;
 using JetBrains.Annotations;
@@ -55,8 +56,6 @@ namespace _02._Scripts.Character.Player
                 Interactable = null;
                 UIManager.Instance.GameUI.ClearPromptText();
             }
-
-
         }
 
         public void OnInteract()
@@ -65,7 +64,7 @@ namespace _02._Scripts.Character.Player
             
             Interactable?.OnInteract();
             
-            if (Interactable is LaserMachine) return;
+            if (Interactable is LaserMachine or ReactiveMachine) return;
             interactableObject = null;
             Interactable = null;
         }
