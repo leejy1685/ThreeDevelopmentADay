@@ -328,7 +328,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.02
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 8965806539318086713}
   m_Layer: 7
   m_Name: LaserMachine
-  m_TagString: Untagged
+  m_TagString: LaserBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
