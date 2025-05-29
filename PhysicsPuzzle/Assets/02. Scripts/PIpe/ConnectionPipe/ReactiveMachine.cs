@@ -38,7 +38,7 @@ namespace _02._Scripts.Objects.LaserMachine
         private void Start()
         {
             // #########플레이어 세팅 완료되면 주석 풀것##########
-            _playerCondition = CharacterManager.Instance.Player.PlayerCondition;
+            //_playerCondition = CharacterManager.Instance.Player.PlayerCondition;
         }
 
         void LateUpdate()

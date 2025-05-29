@@ -87,7 +87,7 @@ public class GameManager : Singleton<GameManager>
         if (player != null)
         {
             //플레이어 배치
-            player.position = new Vector3(20, 0, 0); //일단은 하드코딩
+            //player.position = new Vector3(20, 0, 0); //일단은 하드코딩
             LoadPlayerPosition();
         }
     }
