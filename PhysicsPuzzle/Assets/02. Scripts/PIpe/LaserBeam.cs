@@ -37,16 +37,3 @@ public struct LaserBeam
         }
     }
 }
-
-/// <summary>
-/// 레이저 색상 종류를 정의한 열거형, LaserMachine에 있어서 주석 처리
-/// </summary>
-//public enum LAZER_COLOR
-//{
-//    White,
-//    Blue,
-//    Green,
-//    Purple,
-//    Red,
-//    Yellow
-//}

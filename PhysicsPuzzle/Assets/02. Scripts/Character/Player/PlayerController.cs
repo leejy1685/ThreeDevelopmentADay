@@ -2,6 +2,7 @@
 using _02._Scripts.Character.Player.Camera;
 using _02._Scripts.Managers;
 using _02._Scripts.Objects.LaserMachine;
+using _02._Scripts.PIpe.ConnectionPipe;
 using _02._Scripts.Utils;
 using UnityEngine;
 
@@ -74,10 +75,15 @@ namespace _02._Scripts.Character.Player
 
         private void Update()
         {
-            if (!playerCondition.IsPlayerCharacterHasControl)
+            if (playerCondition.IsPlayerCharacterHasControl) return;
+            switch (playerInteraction.Interactable)
             {
-                if(playerInteraction.Interactable is LaserMachine laserMachine)
+                case LaserMachine laserMachine:
                     laserMachine.ControlLaserPitch(movementDirection);
+                    break;
+                case ReactiveMachine reactiveMachine:
+                    reactiveMachine.ControlLaserPitch(movementDirection);
+                    break;
             }
         }
 

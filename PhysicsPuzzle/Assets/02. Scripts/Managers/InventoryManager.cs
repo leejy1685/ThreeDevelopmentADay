@@ -105,7 +105,7 @@ namespace _02._Scripts.Managers
         {
             if (!selectedItem || !_playerCondition.IsPlayerCharacterHasControl) return;
             if (_playerInteraction.Interactable is not LaserMachine laserMachine) return;
-            laserMachine.SetLineColor(selectedItem.color);
+            laserMachine.SetColorOfMachine(selectedItem.color);
             RemoveSelectedItem();
         }
 
