@@ -1,66 +1,102 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+
+
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace _02._Scripts.Objects.LaserMachine
 {
+    [Serializable]
     public class GoalMachine : MonoBehaviour, ILaserReceiver
     {
-        [SerializeField] private Transform _body;
-        [SerializeField] private Renderer _renderer;
-        [SerializeField] private bool _isActivate;
-        [SerializeField] private LASER_COLOR _color;
-
+        [Header("Components ")]
+        [SerializeField] private bool isActivate;
+        [SerializeField] private LASER_COLOR mainColor;
+        
+        [Header("Body Textures")]
+        [SerializeField] private List<Renderer> renderers;
+        [SerializeField] private List<Texture2D> textures;
+        [SerializeField] private List<Texture2D> lightMaps;
+        [SerializeField] private SerializedDictionary<LASER_COLOR, Texture2D> textureDictionary;
+        [SerializeField] private SerializedDictionary<LASER_COLOR, Texture2D> lightMapDictionary;
 
         private float _lastHitTime;
         private float _emissionDuration = 0.05f;
+        private GameManager gameManager;
+        private StageManager stageManager;
 
-        void Awake()
+        private void Awake()
         {
-            OffLight();
-            // 색깔별로 그냥 프리팹 만들어서 써도 무관할 듯 싶습니다.
-            _color = LASER_COLOR.Blue;
-            // 접근 시 자동으로 머티리얼 인스턴스를 복제
-            _renderer.material.EnableKeyword("_EMISSION");
+            var i = 0;
+            foreach (var texture in textures) textureDictionary.TryAdd((LASER_COLOR)i++, texture);
+            i = 0;
+            foreach (var lightMap in lightMaps) lightMapDictionary.TryAdd((LASER_COLOR)i++, lightMap);
         }
+
+        private void Start()
+        {
+            gameManager = GameManager.Instance;
+            stageManager = StageManager.Instance;
+
+            SetTextureOfBody(mainColor);
+            OffLight();
+
+        }
+
         private void Update()
         {
-            if (_isActivate && Time.time - _lastHitTime > _emissionDuration)
+            if (isActivate && Time.time - _lastHitTime > _emissionDuration)
             {
+                _lastHitTime = Time.time;
                 OffLight(); // 너무 오래 레이저가 안 들어오면 자동 off
             }
         }
 
         public void CheckActive(LASER_COLOR color)
         {
-            if (color == _color)
+            if (color == mainColor)
             {
                 _lastHitTime = Time.time;
+                if(!isActivate)
+                    stageManager.Puzzles[gameManager.CurrentClearPuzzle].IncreaseCount();
                 OnLight(); // 지속 갱신
-                StageManager.Instance.IncreaseActiveCount();
-
             }
             else
             {
+                if(isActivate)
+                    stageManager.Puzzles[gameManager.CurrentClearPuzzle].decreaseCount();
                 OffLight();
-
-                StageManager.Instance.DecreaseActiveCount();
-
             }
         }
     
         private void OnLight()
         {
-            _isActivate = true;
+            isActivate = true;
             SetEmissionColor(Color.white);
         }
         private void OffLight()
         {
-            _isActivate = false;
+            isActivate = false;
             SetEmissionColor(Color.black);
         }
+
+        private void SetTextureOfBody(LASER_COLOR color)
+        {
+            foreach (var render in renderers)
+            {
+                render.material.mainTexture = textureDictionary[color];
+                render.material.SetTexture("_EmissionMap", lightMapDictionary[color]);
+            }
+        }
+        
         private void SetEmissionColor(Color color)
         {
-            var mat = _renderer.material; 
-            mat.SetColor("_EmissionColor", color);
+            foreach (var render in renderers)
+            {
+                render.material.SetColor("_EmissionColor", color);
+            }
         }
 
         public void OnLaserHit(LaserBeam beam)
