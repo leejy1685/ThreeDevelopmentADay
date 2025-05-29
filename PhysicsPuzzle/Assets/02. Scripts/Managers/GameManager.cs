@@ -75,8 +75,6 @@ public class GameManager : Singleton<GameManager>
     // 체인을 걸어서 이 함수는 매 씬마다 호출된다.
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log(scene.name);
-
         _uiManager.GameUI.ChangeSceneName();
         
         //문 찾기
@@ -149,7 +147,7 @@ public class GameManager : Singleton<GameManager>
         if (isLoad)
         {
             //퍼즐 해결했을 때 위치
-            player.position = doors[currentClearPuzzle].PuzzleClearPosition();
+            player.position = doors[lastClearPuzzle].PuzzleClearPosition();
 
             //해결 했던 퍼즐의 문 파괴
             for (int i = 0; i <= lastClearPuzzle; i++)
