@@ -1,7 +1,9 @@
 ﻿using System;
+using _02._Scripts.Item;
 using _02._Scripts.Managers;
 using _02._Scripts.Objects.LaserMachine;
 using _02._Scripts.Utils.Interface;
+using AYellowpaper.SerializedCollections.Editor.Data;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -44,12 +46,17 @@ namespace _02._Scripts.Character.Player
                 interactableObject = hit.collider.gameObject;
                 if (!interactableObject.TryGetComponent<IInteractable>(out var interactable)) return;
                 Interactable = interactable;
+                if (interactable is KeyItem keyItem) { UIManager.Instance.GameUI.SetPromptText(keyItem.name); }
+
             }
             else
             {
                 interactableObject = null;
                 Interactable = null;
+                UIManager.Instance.GameUI.ClearPromptText();
             }
+
+
         }
 
         public void OnInteract()
