@@ -2,6 +2,8 @@ using _02._Scripts.Character.Player;
 using _02._Scripts.Managers;
 using _02._Scripts.Utils.Interface;
 using System.Collections;
+using Unity.VisualScripting;
+
 using UnityEngine;
 
 namespace _02._Scripts.Objects.LaserMachine
@@ -22,11 +24,11 @@ namespace _02._Scripts.Objects.LaserMachine
         [SerializeField] private Transform body;
         [SerializeField] private LineRenderer _lineRenderer;      // 라인
         [SerializeField] public Transform barrel;   // <= 배럴 오브젝트 담당할듯...?
-    
+
         //[SerializeField] public LASER_COLOR testColor;  //배럴 오브젝트에서 칼라정보 뽑아올것
         private GoalMachine _currentTarget = null;
-    
-    
+
+
         [Header(" [ Object Options ] ")]
         [SerializeField] private float _maxDistance = 100f; // 레이저 최대거리
         [SerializeField] private float _pitchSpeed = 60f;   // 상하 회전 속도
@@ -55,39 +57,41 @@ namespace _02._Scripts.Objects.LaserMachine
         void LateUpdate()
         {
 
+
             // 회전 제한(현재는 수직 ~ 수평)
             _currPitch = Mathf.Clamp(_currPitch, _minRotate, _maxRotate);
                 
             // Z축 기준으로 회전
             _pitchPivot.localRotation = Quaternion.Euler(0f, 0f, _currPitch);
                 
-            UpdateLaser();
+            if (_isFiring)
+                UpdateLaser();
+            else
+                _lineRenderer.enabled = false;
         }
 
-        private void UpdateLaser()
+        
+        void UpdateLaser()
         {
             Vector3 direction = _pitchPivot.up;
             Vector3 startPosition = _pitchPivot.position + direction;
             Vector3 endPosition = startPosition + direction * _maxDistance;
 
-    
-            GoalMachine hitTarget = null;
-    
-            
-            if (_isFiring)
-            {
-                // Raycast로 광선이 충돌하는 지점 검사함
-                if (Physics.Raycast(startPosition, direction, out RaycastHit hit, _maxDistance))
-                {
-                    endPosition = hit.point;
 
-                    // 충돌 대상에 ILaserReceiver가 있으면 레이저 정보를 전달해서
-                    if (hit.collider.TryGetComponent<ILaserReceiver>(out ILaserReceiver receiver))
-                    {
-                        // LaserBeam 구조체 생성 
-                        LaserBeam beam = new LaserBeam(direction, laserColor);
-                        receiver.OnLaserHit(beam);
-                    }
+            GoalMachine hitTarget = null;
+
+
+            // Raycast로 광선이 충돌하는 지점 검사함
+            if (Physics.Raycast(startPosition, direction, out RaycastHit hit, _maxDistance))
+            {
+                endPosition = hit.point;
+
+                // 충돌 대상에 ILaserReceiver가 있으면 레이저 정보를 전달해서
+                if (hit.collider.TryGetComponent<ILaserReceiver>(out ILaserReceiver receiver))
+                {
+                    // LaserBeam 구조체 생성 
+                    LaserBeam beam = new LaserBeam(direction, laserColor);
+                    receiver.OnLaserHit(beam);
                 }
 
                 // 캐시된 LineRenderer로 한 번만 설정
@@ -117,23 +121,12 @@ namespace _02._Scripts.Objects.LaserMachine
         {
             _currPitch += direction.y * _pitchSpeed * Time.deltaTime;
         }
-        
-
-        /// <summary>
-        /// 지정된 LineRenderer를 한 프레임 뒤 풀로 되돌립니다.
-        /// </summary>
-        private IEnumerator ReturnLineAfterFrame_Coroutine(LineRenderer lr)
-        {
-            // 매우 짧은 지연 후 라인 비활성화하여 다음 프레임에서 제거
-            yield return new WaitForEndOfFrame();
-            LinePoolManager.Instance.Return(lr);
-        }
 
         public void ToggleLaser()
         {
             _isFiring = !_isFiring;
         }
-        
+
         /// <summary>
         /// 배럴 != null 이라면, 배럴의 칼라값을 이용하여 SetLineColor(itemData.Color); <br/>
         /// Update에서 처리할 필요 없이 배럴을 끼고 빼고 할때 변경시키면 될듯<br/>
@@ -142,27 +135,9 @@ namespace _02._Scripts.Objects.LaserMachine
         /// </summary>
         public void SetLineColor(LASER_COLOR color)
         {
-            // 여기서 
             laserColor = color;
-
         }
-        // <summary>
-        /// LAZER_COLOR를 실제 UnityEngine.Color로 변환합니다.
-        /// </summary>
-        private Color LaserBeamColor(LASER_COLOR colorType)
-        {
-            // LaserBeam.ColorValue 프로퍼티와 동일한 기능.
-            switch (colorType)
-            {
-                case LASER_COLOR.Red: return Color.red;
-                case LASER_COLOR.Blue: return Color.blue;
-                case LASER_COLOR.Green: return Color.green;
-                case LASER_COLOR.Purple: return Color.magenta;
-                case LASER_COLOR.Yellow: return Color.yellow;
-                case LASER_COLOR.White:
-                default: return Color.white;
-            }
-        }
+    
         public void OnInteract()
         {
             _playerCondition.MigrateCameraFocusToOtherObject(body);

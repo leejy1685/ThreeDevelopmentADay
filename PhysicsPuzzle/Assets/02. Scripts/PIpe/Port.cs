@@ -12,6 +12,9 @@ public class Port : MonoBehaviour, ILaserReceiver
     [Header("이 포트의 로컬 기준 배출 방향")]
     public Vector3 exitLocalDirection = Vector3.up;
 
+    [Header("파티클 효과")]
+    [SerializeField] private ParticleSystem portEffect;
+
     private void Awake()
     {
         // 시작 시 자신의 parentPipe 설정 (부모 객체의 Pipe 컴포넌트)
@@ -35,8 +38,23 @@ public class Port : MonoBehaviour, ILaserReceiver
     public void OnLaserHit(LaserBeam beam)
     {
         Debug.Log($"[Port] {name} 수신: 방향={beam.direction}, 색상={beam.colorType}");
+        EmitEffect(beam.ColorValue);
         // 자신이 속한 파이프에 이 포트로 레이저가 들어왔음을 알림
         parentPipe.OnPortHit(this, beam);
+    }
+
+    // 레이저 입력 시 호출
+    public void EmitEffect(Color laserColor)
+    {
+        var main = portEffect.main;
+        main.startColor = laserColor;     // 레이저 색상 적용
+
+        portEffect.Stop();                // 이전 재생 중지
+        portEffect.Play();                // 재생
+    }
+    public void StopEffect()
+    {
+        portEffect.Stop();
     }
 
     /// <summary>
