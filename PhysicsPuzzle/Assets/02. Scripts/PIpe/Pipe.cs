@@ -74,7 +74,11 @@ public class Pipe : MonoBehaviour, IInteractable
             var port = kv.Key;
             var lr = kv.Value;
             if (Time.frameCount > lastShotFrameByPort[port])
+            {
                 lr.enabled = false;
+                port.StopEffect(); //파티클 정지
+            }
+
         }
     }
     public virtual void OnInteract(){}
