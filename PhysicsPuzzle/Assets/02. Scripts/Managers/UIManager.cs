@@ -1,4 +1,5 @@
 ﻿using _02._Scripts.UI;
+using UnityEngine;
 
 public enum UIState
 {
@@ -12,8 +13,6 @@ public enum UIState
 
 public class UIManager : Singleton<UIManager>
 {
-
-    
     public UIState currentState = UIState.Lobby;
     LobbyUI lobbyUI = null;
     ObtionUI obtionUI = null;
@@ -35,6 +34,11 @@ public class UIManager : Singleton<UIManager>
         gameUI?.Init(this);
         clearUI = GetComponentInChildren<ClearUI>(true);
         clearUI?.Init(this);
+        
+        Debug.Log(lobbyUI);
+        Debug.Log(obtionUI);
+        Debug.Log(gameUI);
+        Debug.Log(clearUI);
 
         // 초기 상태를 로비 화면으로 설정
         ChangeState(UIState.Lobby);

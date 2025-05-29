@@ -6286,6 +6286,63 @@ MonoBehaviour:
   clearTimeText: {fileID: 2024871966}
   bestClearTimeText: {fileID: 731480777}
   lobbyButton: {fileID: 580661497}
+--- !u!1001 &854396060
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4209045108637913066, guid: 37ea0cc59bbd8cc469d976882b58a138, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4209045108637913066, guid: 37ea0cc59bbd8cc469d976882b58a138, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4209045108637913066, guid: 37ea0cc59bbd8cc469d976882b58a138, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4209045108637913066, guid: 37ea0cc59bbd8cc469d976882b58a138, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4209045108637913066, guid: 37ea0cc59bbd8cc469d976882b58a138, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4209045108637913066, guid: 37ea0cc59bbd8cc469d976882b58a138, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4209045108637913066, guid: 37ea0cc59bbd8cc469d976882b58a138, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4209045108637913066, guid: 37ea0cc59bbd8cc469d976882b58a138, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4209045108637913066, guid: 37ea0cc59bbd8cc469d976882b58a138, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4209045108637913066, guid: 37ea0cc59bbd8cc469d976882b58a138, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588369809687288475, guid: 37ea0cc59bbd8cc469d976882b58a138, type: 3}
+      propertyPath: m_Name
+      value: LaserMachine
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 37ea0cc59bbd8cc469d976882b58a138, type: 3}
 --- !u!1 &864055287
 GameObject:
   m_ObjectHideFlags: 0
@@ -6782,63 +6839,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903297195}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1001 &957698243
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4209045108637913066, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209045108637913066, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209045108637913066, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209045108637913066, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209045108637913066, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209045108637913066, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209045108637913066, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209045108637913066, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209045108637913066, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4209045108637913066, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7588369809687288475, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Name
-      value: LaserMachine
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
 --- !u!1 &959546020
 GameObject:
   m_ObjectHideFlags: 0
@@ -7859,10 +7859,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b75421e405918bd4781c731f921e9b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  timeIcon: {fileID: 2143745197}
+  animator: {fileID: 793063740}
+  currentInfo: {fileID: 1603729969}
   currentStage: {fileID: 1908599120}
-  currentTimeUI: {fileID: 1603729969}
   currentTime: {fileID: 1972374671}
   changeGravityUI: {fileID: 1185749743}
   gravityUpIcon: {fileID: 196017051}
@@ -14753,5 +14752,5 @@ SceneRoots:
   - {fileID: 773039960}
   - {fileID: 502211713}
   - {fileID: 1921575616}
-  - {fileID: 957698243}
   - {fileID: 864055289}
+  - {fileID: 854396060}

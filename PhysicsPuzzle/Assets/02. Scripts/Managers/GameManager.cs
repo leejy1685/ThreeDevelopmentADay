@@ -65,6 +65,11 @@ public class GameManager : Singleton<GameManager>
         {
             ClearPuzzle();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            _uiManager.ChangeState(UIState.Obtion);
+        }
 
         if (_sceneHandle.currentScene != SCENE_TYPE.Lobby && !isClear)
         {

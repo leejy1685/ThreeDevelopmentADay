@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7818361125689148200}
   - component: {fileID: 7636484619384253379}
   - component: {fileID: 4647169923957391048}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Body
   m_TagString: LaserBody
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1466311019402294628}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1177507669495994297}
   - component: {fileID: 4647451931080444151}
   - component: {fileID: 6699929541657119954}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube_Small_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 149501554533157499}
   - component: {fileID: 6801076046546323960}
   - component: {fileID: 8021219230423881063}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -193,7 +193,7 @@ Transform:
   m_GameObject: {fileID: 4105514845315249046}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0.000000014901163, z: -0.000000014901163, w: 0.7071068}
-  m_LocalPosition: {x: -0.75, y: 1, z: -0.6}
+  m_LocalPosition: {x: -0.75, y: 2, z: -0.6}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -259,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6957292762557151807}
   - component: {fileID: 8844393228854191351}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6749543430067527238}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -394,8 +394,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4209045108637913066}
+  - component: {fileID: 3758330510145281255}
   - component: {fileID: 8965806539318086713}
-  - component: {fileID: 4000823872369617307}
   m_Layer: 7
   m_Name: LaserMachine
   m_TagString: Untagged
@@ -411,8 +411,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7588369809687288475}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.5, y: 1, z: 10}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -421,28 +421,7 @@ Transform:
   - {fileID: 8906077530768570630}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8965806539318086713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7588369809687288475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8503a82b81abbcb44be6a7fd7a13b6dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pitchPivot: {fileID: 8906077530768570630}
-  body: {fileID: 7818361125689148200}
-  _lineRenderer: {fileID: 8844393228854191351}
-  barrel: {fileID: 149501554533157499}
-  _maxDistance: 100
-  _pitchSpeed: 60
-  _maxRotate: 0
-  _minRotate: -90
-  laserColor: 1
---- !u!65 &4000823872369617307
+--- !u!65 &3758330510145281255
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -461,8 +440,52 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8965806539318086713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7588369809687288475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8503a82b81abbcb44be6a7fd7a13b6dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pitchPivot: {fileID: 8906077530768570630}
+  body: {fileID: 7818361125689148200}
+  lineRenderer: {fileID: 8844393228854191351}
+  renderers:
+  - {fileID: 4647169923957391048}
+  - {fileID: 8021219230423881063}
+  - {fileID: 6699929541657119954}
+  textures:
+  - {fileID: 2800000, guid: 58b428eb92770a545acb30f3cb330b55, type: 3}
+  - {fileID: 2800000, guid: 3378f532704110a43a0ee394537fdf0c, type: 3}
+  - {fileID: 2800000, guid: 7eccc7aead3b976459fb18b6bfb23b03, type: 3}
+  - {fileID: 2800000, guid: 31c6dd87ad55e264791da6f82c245bbc, type: 3}
+  - {fileID: 2800000, guid: e34010f3f7339304997ed1b388bec9ba, type: 3}
+  - {fileID: 2800000, guid: 8ffe284ffd9d5c7479aa77b540d5bd6c, type: 3}
+  lightMaps:
+  - {fileID: 2800000, guid: 1a439cd1ef483ec4c8ea718b0a7e7a72, type: 3}
+  - {fileID: 2800000, guid: dcea81c3da0e12342928cc2424f037ab, type: 3}
+  - {fileID: 2800000, guid: 1d1faa3bc3e287240b38c7e3cb21d7ee, type: 3}
+  - {fileID: 2800000, guid: ea442db4af3b4624c9060de21757122c, type: 3}
+  - {fileID: 2800000, guid: 08d0bdd0d25184a4aae6768511c07cb4, type: 3}
+  - {fileID: 2800000, guid: 250a591bb1d240a42a9f23083b58f817, type: 3}
+  textureDictionary:
+    m_Keys: 
+    m_Values: []
+  lightMapDictionary:
+    m_Keys: 
+    m_Values: []
+  maxDistance: 100
+  pitchSpeed: 60
+  maxRotate: 0
+  minRotate: -90
+  laserColor: 0
 --- !u!1 &8040798536340954770
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8906077530768570630}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: PillarCenter
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -488,7 +511,7 @@ Transform:
   m_GameObject: {fileID: 8040798536340954770}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
