@@ -25,7 +25,8 @@ namespace _02._Scripts.Objects.LaserMachine
         private float _lastHitTime;
         private float _emissionDuration = 0.05f;
         private GameManager gameManager;
-        private StageManager stageManager;
+        
+        public bool IsActivate => isActivate;
 
         private void Awake()
         {
@@ -38,7 +39,6 @@ namespace _02._Scripts.Objects.LaserMachine
         private void Start()
         {
             gameManager = GameManager.Instance;
-            stageManager = StageManager.Instance;
 
             SetTextureOfBody(mainColor);
             OffLight();
@@ -59,14 +59,12 @@ namespace _02._Scripts.Objects.LaserMachine
             if (color == mainColor)
             {
                 _lastHitTime = Time.time;
-                if(!isActivate)
-                    stageManager.Puzzles[gameManager.CurrentClearPuzzle].IncreaseCount();
+                if(gameManager.CheckLastPuzzle())
+                    gameManager.Puzzle.ClearPuzzle();
                 OnLight(); // 지속 갱신
             }
             else
             {
-                if(isActivate)
-                    stageManager.Puzzles[gameManager.CurrentClearPuzzle].decreaseCount();
                 OffLight();
             }
         }
