@@ -47,7 +47,7 @@ public class LinkedPipe : MonoBehaviour
         mat.EnableKeyword("_EMISSION");
         mat.SetTexture("_BaseMap", texture);
 
-        Debug.Log($"{name} 색 변경: {_receivedColor}");
+        //Debug.Log($"{name} 색 변경: {_receivedColor}");
     }
 
     public void PropagateColor(LASER_COLOR color, HashSet<LinkedPipe> visited)

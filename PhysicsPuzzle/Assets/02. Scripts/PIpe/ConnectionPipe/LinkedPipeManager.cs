@@ -23,7 +23,7 @@ public class LinkedPipeManager : MonoBehaviour
             {
                 if (port.IsConnectedToLaser(out LASER_COLOR color))
                 {
-                    Debug.Log($"[Init] {pipe.name}이 LaserMachine과 연결됨. 색: {color}");
+                    //Debug.Log($"[Init] {pipe.name}이 LaserMachine과 연결됨. 색: {color}");
                     pipe.SetPipeColor(color);
                     pipe.PropagateColor(color, visited);
                     break;
