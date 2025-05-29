@@ -54,11 +54,7 @@ namespace _02._Scripts.Objects.LaserMachine
         
         void LateUpdate()
         {
-            // 발사 토글(일단은 좌 컨트롤) => LazerToggle 호출시에 지워도 됨
-            // if (Input.GetKeyDown(KeyCode.LeftControl))
-            //     _isFiring = !_isFiring;
-            // TestControl();
-            
+
             // 회전 제한(현재는 수직 ~ 수평)
             _currPitch = Mathf.Clamp(_currPitch, _minRotate, _maxRotate);
                 
@@ -147,18 +143,8 @@ namespace _02._Scripts.Objects.LaserMachine
         public void SetLineColor(LASER_COLOR color)
         {
             // 여기서 
-            var lazerColor = color switch
-            {
-                LASER_COLOR.White => Color.white,
-                LASER_COLOR.Blue => Color.blue,
-                LASER_COLOR.Green => Color.green,
-                LASER_COLOR.Purple => Color.magenta,
-                LASER_COLOR.Red => Color.red,
-                LASER_COLOR.Yellow => Color.yellow,
-                _ => new Color()
-            };
-            _lineRenderer.startColor = lazerColor;
-            _lineRenderer.endColor = lazerColor;
+            laserColor = color;
+
         }
         // <summary>
         /// LAZER_COLOR를 실제 UnityEngine.Color로 변환합니다.
@@ -181,13 +167,6 @@ namespace _02._Scripts.Objects.LaserMachine
         {
             _playerCondition.MigrateCameraFocusToOtherObject(body);
         }
-
-        public void TestControl() // (테스트용)
-        {
-            if (Input.GetKey(KeyCode.UpArrow))
-                _currPitch += _pitchSpeed * Time.deltaTime;
-            if (Input.GetKey(KeyCode.DownArrow))
-                _currPitch -= _pitchSpeed * Time.deltaTime;
-        }
+        
     }
 }

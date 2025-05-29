@@ -2,6 +2,7 @@
 using _02._Scripts.Objects.LaserMachine;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Managers;
 using UnityEngine;
 namespace _02._Scripts.Objects.LaserMachine
 {
@@ -37,7 +38,7 @@ namespace _02._Scripts.Objects.LaserMachine
         private void Start()
         {
             // #########플레이어 세팅 완료되면 주석 풀것##########
-            //_playerCondition = CharacterManager.Instance.Player.PlayerCondition;
+            _playerCondition = CharacterManager.Instance.Player.PlayerCondition;
         }
 
         void LateUpdate()
@@ -92,18 +93,7 @@ namespace _02._Scripts.Objects.LaserMachine
                 // (라인 시작/끝을 동일하게 설정하여 길이 0인 선으로 처리하거나, 풀에 반환하여 제거)
             }
         }
-
-
-        /// <summary>
-        /// 지정된 LineRenderer를 한 프레임 뒤 풀로 되돌립니다.
-        /// </summary>
-        private IEnumerator ReturnLineAfterFrame_Coroutine(LineRenderer lr)
-        {
-            // 매우 짧은 지연 후 라인 비활성화하여 다음 프레임에서 제거
-            yield return new WaitForEndOfFrame();
-            LinePoolManager.Instance.Return(lr);
-        }
-
+        
         public void ControlLaserPitch(Vector2 direction)
         {
             _currPitch += direction.y * _pitchSpeed * Time.deltaTime;
@@ -121,7 +111,7 @@ namespace _02._Scripts.Objects.LaserMachine
         public void SetLineColor(LASER_COLOR color)
         {
             // 여기서 
-            var lazerColor = color switch
+            var bodyColor = color switch
             {
                 LASER_COLOR.White => Color.white,
                 LASER_COLOR.Blue => Color.blue,
@@ -131,15 +121,13 @@ namespace _02._Scripts.Objects.LaserMachine
                 LASER_COLOR.Yellow => Color.yellow,
                 _ => new Color()
             };
-            _lineRenderer.startColor = lazerColor;
-            _lineRenderer.endColor = lazerColor;
             laserColor = color;
             Debug.LogWarning($"색 체크 : {laserColor}");
             var bodyRenderer = _body.GetComponent<Renderer>();
             if (bodyRenderer != null)
             {
                 bodyRenderer.material.EnableKeyword("_EMISSION");
-                bodyRenderer.material.SetColor("_EmissionColor", lazerColor);
+                bodyRenderer.material.SetColor("_EmissionColor", bodyColor);
             }
 
             //  Pillar Emission 설정
@@ -147,29 +135,13 @@ namespace _02._Scripts.Objects.LaserMachine
             if (pillarRenderer != null)
             {
                 pillarRenderer.material.EnableKeyword("_EMISSION");
-                pillarRenderer.material.SetColor("_EmissionColor", lazerColor);
+                pillarRenderer.material.SetColor("_EmissionColor", bodyColor);
             }
         }
-        // <summary>
-        /// LAZER_COLOR를 실제 UnityEngine.Color로 변환합니다.
-        /// </summary>
-        private Color LaserBeamColor(LASER_COLOR colorType)
-        {
-            // LaserBeam.ColorValue 프로퍼티와 동일한 기능.
-            switch (colorType)
-            {
-                case LASER_COLOR.Red: return Color.red;
-                case LASER_COLOR.Blue: return Color.blue;
-                case LASER_COLOR.Green: return Color.green;
-                case LASER_COLOR.Purple: return Color.magenta;
-                case LASER_COLOR.Yellow: return Color.yellow;
-                case LASER_COLOR.White:
-                default: return Color.white;
-            }
-        }
+
         public void OnInteract()
         {
-            //_playerCondition.MigrateCameraFocusToOtherObject(body);
+            _playerCondition.MigrateCameraFocusToOtherObject(_body);
         }
 
         public void TestControl() // (테스트용)

@@ -1,12 +1,8 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:PhysicsPuzzle/Assets/05. ScriptableObjects/LobbyCamera.asset.meta
-guid: 8018f4f7f1dc8bc469ffd0b348ddd47c
-========
 guid: 7e04f706f9e3f7f468772566c9b75da8
->>>>>>>> origin/develop/GameUI:PhysicsPuzzle/Assets/99. Artworks/3D Sprite Sci-Fi Props/SpriteProps_Materials/SpriteProps_Blue.mat.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 11400000
+  mainObjectFileID: 2100000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.Character.Player;
+using _02._Scripts.Objects.LaserMachine;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -16,7 +17,7 @@ public class GameManager : Singleton<GameManager>
     
     [Header("[LoadData]")]
     public bool isLoad;         //Load
-    private int lastClearPuzzle;     //스테이지 수
+    private int lastClearPuzzle;     //
     private const string LASTSTAGE = "LastStage";   //마지막 스테이지
     private const string LASTTIME = "LastTime";     //마지막 시간
     private const string LASTCLEARPUZZLE = "LastClearPuzzle";//마지막 퍼즐
@@ -24,13 +25,13 @@ public class GameManager : Singleton<GameManager>
     [Header("[ClearData]")]
     private bool isClear;
     public float playTime;
-    private int currentClearPuzzle;   //스테이지 별 클리어 퍼즐 수
+    public int CurrentClearPuzzle;   //스테이지 별 클리어 퍼즐 수
     
     [SerializeField] public LobbyCamera _lobbyCamera;   //로비 연출용 카메라
-    
+
+
     public Door[] doors;    //퍼즐 클리어 시 열리는 문
     private Transform player;   //플레이어 좌표
-    
     
     private void Awake()
     {
@@ -105,7 +106,7 @@ public class GameManager : Singleton<GameManager>
         //데이터 초기화
         isClear = false;
         playTime = 0;
-        currentClearPuzzle = 0;
+        CurrentClearPuzzle = 0;
         
         //카메라 변경
         _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
@@ -162,17 +163,17 @@ public class GameManager : Singleton<GameManager>
     public void ClearPuzzle()
     {
         //문 오픈
-        doors[currentClearPuzzle].DestroyDoor();
+        doors[CurrentClearPuzzle].DestroyDoor();
         
         //클리어 저장
         PlayerPrefs.SetString(LASTSTAGE,_sceneHandle.currentScene.ToString());
         PlayerPrefs.SetFloat(LASTTIME,playTime);
-        PlayerPrefs.SetInt(LASTCLEARPUZZLE,currentClearPuzzle);
+        PlayerPrefs.SetInt(LASTCLEARPUZZLE,CurrentClearPuzzle);
         
         //퍼즐 해결 카운트
-        currentClearPuzzle++;
+        CurrentClearPuzzle++;
 
-        if (doors.Length == currentClearPuzzle) 
+        if (doors.Length == CurrentClearPuzzle) 
             StageClear();
         
     }
@@ -198,7 +199,7 @@ public class GameManager : Singleton<GameManager>
         //데이터 초기화
         isClear = false;
         playTime = 0;
-        currentClearPuzzle = 0;
+        CurrentClearPuzzle = 0;
         
         //카메라 변경
         _lobbyCamera = FindAnyObjectByType<LobbyCamera>();

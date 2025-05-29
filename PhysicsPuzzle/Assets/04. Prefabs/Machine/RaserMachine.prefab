@@ -460,7 +460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4209045108637913066}
-  - component: {fileID: 6654137039573161523}
+  - component: {fileID: 8965806539318086713}
   m_Layer: 0
   m_Name: RaserMachine
   m_TagString: Untagged
@@ -486,7 +486,7 @@ Transform:
   - {fileID: 8906077530768570630}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6654137039573161523
+--- !u!114 &8965806539318086713
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -495,10 +495,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7588369809687288475}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27365a03da5decb45b53074128352b5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8503a82b81abbcb44be6a7fd7a13b6dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _pitchPivot: {fileID: 8906077530768570630}
+  body: {fileID: 7818361125689148200}
   _lineRenderer: {fileID: 8844393228854191351}
   barrel: {fileID: 149501554533157499}
   _maxDistance: 100
