@@ -91,8 +91,12 @@ public class Pipe : MonoBehaviour, IInteractable
         lastShotFrameByPort[hitPort] = Time.frameCount;
 
         // 입력된 포트 제외하고 나머지 포트들로 레이저 분기
-        foreach (var outPort in ports.Where(p => p != hitPort))
+        for (int i = 0; i < ports.Count; i++)
+        {
+            var outPort = ports[i];
+            if (outPort == hitPort) continue;
             ShootFromPort(outPort, beam);
+        }
     }
 
     /// <summary>
