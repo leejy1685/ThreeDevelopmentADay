@@ -9,13 +9,13 @@ public class StraightPipe : Pipe
     public override void OnInteract()
     {
 
-        if (!isRotating)
+        if (!_isRotating)
             StartCoroutine(RotateSmoothStraight());
     }
 
     private IEnumerator RotateSmoothStraight()
     {
-        isRotating = true;
+        _isRotating = true;
 
         // 바운딩 박스 중심 계산
         Renderer rend = GetComponentInChildren<Renderer>();
@@ -47,6 +47,6 @@ public class StraightPipe : Pipe
         // 5) 최종 정확 보정
         transform.position = endPos;
         transform.rotation = endRot;
-        isRotating = false;
+        _isRotating = false;
     }
 }

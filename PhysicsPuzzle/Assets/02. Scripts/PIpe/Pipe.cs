@@ -14,18 +14,18 @@ using UnityEngine;
 /// </summary>
 public class Pipe : MonoBehaviour, IInteractable
 {
-    [Header("회전 설정")]
+    [Header("[회전 설정]")]
     public float rotationAngle = 90f;
     public float rotationDuration = 0.5f;
 
-    [Header("레이저 최대 사거리")]
+    [Header("[레이저 최대 사거리]")]
     public float maxRayDistance = 10f;
 
-    [Header("라인 렌더러 프리팹")]
+    [Header("[라인 렌더러 프리팹]")]
     [SerializeField]private LineRenderer lineRenderer;
 
     private List<Port> ports;  // 이 파이프에 포함된 모든 Port들
-    protected bool isRotating;
+    protected bool _isRotating;
 
     // 포트별로 캐싱된 LineRenderer
     private Dictionary<Port, LineRenderer> portLineMap;
@@ -56,16 +56,6 @@ public class Pipe : MonoBehaviour, IInteractable
         }
     }
 
-    //private void Update()
-    //{
-    //    //Pipe 회전 테스트용
-    //    //각 파이프에 따라 회전에 대해서 상속 구조 고려
-    //    if (Input.GetKeyDown(KeyCode.Y))
-    //    {
-    //        OnInteract();
-    //    }
-    //}
-
     private void LateUpdate()
     {
         // 포트별로, 마지막 사용 프레임이 지났다면 라인 끄기
@@ -81,9 +71,10 @@ public class Pipe : MonoBehaviour, IInteractable
 
         }
     }
+
     public virtual void OnInteract(){}
  
-    /// <summary>
+    /// <summary>z
     /// 특정 Port로 레이저가 들어왔을 때 호출됩니다. 해당 포트를 제외한 나머지 포트들로 레이저를 발사
     /// </summary>
     /// <param name="hitPort">레이저가 들어온 Port</param>
@@ -132,5 +123,25 @@ public class Pipe : MonoBehaviour, IInteractable
 
         // 이 포트 라인을 이번 프레임에 사용했음을 기록
         lastShotFrameByPort[port] = Time.frameCount;
+    }
+
+    public IEnumerator RotateAroundPivot(Vector3 axis)
+    {
+        _isRotating = true;
+
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRotation = startRotation * Quaternion.Euler(axis * rotationAngle);
+
+        float elapsed = 0f;
+
+        while (elapsed < rotationDuration)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsed / rotationDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.rotation = targetRotation;
+        _isRotating = false;
     }
 }
