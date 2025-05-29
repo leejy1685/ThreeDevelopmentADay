@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 7818361125689148200}
   - component: {fileID: 7636484619384253379}
   - component: {fileID: 4647169923957391048}
-  - component: {fileID: 2912618227092958181}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: LaserBody
   m_Icon: {fileID: 0}
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2912618227092958181
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466311019402294628}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 2.0000002, z: 2.0000002}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3602097030777999689
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,8 +94,7 @@ GameObject:
   - component: {fileID: 1177507669495994297}
   - component: {fileID: 4647451931080444151}
   - component: {fileID: 6699929541657119954}
-  - component: {fileID: 2800948393657566437}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube_Small_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,27 +166,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2800948393657566437
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3602097030777999689}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1.0000001, z: 1.0000001}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4105514845315249046
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,8 +177,7 @@ GameObject:
   - component: {fileID: 149501554533157499}
   - component: {fileID: 6801076046546323960}
   - component: {fileID: 8021219230423881063}
-  - component: {fileID: 209845462203829498}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,27 +249,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &209845462203829498
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4105514845315249046}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2, y: 2.4000006, z: 2.0000005}
-  m_Center: {x: 0, y: 1.2, z: 0.00000017881393}
 --- !u!1 &6749543430067527238
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6957292762557151807}
   - component: {fileID: 8844393228854191351}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -461,7 +395,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4209045108637913066}
   - component: {fileID: 8965806539318086713}
-  m_Layer: 0
+  - component: {fileID: 4000823872369617307}
+  m_Layer: 7
   m_Name: LaserMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,6 +442,27 @@ MonoBehaviour:
   _maxRotate: 0
   _minRotate: -90
   laserColor: 1
+--- !u!65 &4000823872369617307
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7588369809687288475}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8040798536340954770
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +472,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8906077530768570630}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PillarCenter
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
