@@ -56,15 +56,15 @@ public class Pipe : MonoBehaviour, IInteractable
         }
     }
 
-    private void Update()
-    {
-        //Pipe 회전 테스트용
-        //각 파이프에 따라 회전에 대해서 상속 구조 고려
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            OnInteract();
-        }
-    }
+    //private void Update()
+    //{
+    //    //Pipe 회전 테스트용
+    //    //각 파이프에 따라 회전에 대해서 상속 구조 고려
+    //    if (Input.GetKeyDown(KeyCode.Y))
+    //    {
+    //        OnInteract();
+    //    }
+    //}
 
     private void LateUpdate()
     {
