@@ -321,4 +321,5 @@ MonoBehaviour:
   rotationAngle: 90
   rotationDuration: 0.5
   maxRayDistance: 100
+  lineRenderer: {fileID: 520362244276233644, guid: 9cf663f20972077458fa8253eed9eb25, type: 3}
   axis: {x: 0, y: 1, z: 0}

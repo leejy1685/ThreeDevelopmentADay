@@ -101,6 +101,7 @@ MonoBehaviour:
   rotationAngle: 90
   rotationDuration: 0.5
   maxRayDistance: 100
+  lineRenderer: {fileID: 520362244276233644, guid: 9cf663f20972077458fa8253eed9eb25, type: 3}
 --- !u!1 &5061187774019698103
 GameObject:
   m_ObjectHideFlags: 0
