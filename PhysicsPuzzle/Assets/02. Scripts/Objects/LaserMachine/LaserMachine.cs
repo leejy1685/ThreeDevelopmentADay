@@ -57,6 +57,7 @@ namespace _02._Scripts.Objects.LaserMachine
         {
             _currPitch = 0f;
             _playerCondition = CharacterManager.Instance.Player.PlayerCondition;
+            SetColorOfMachine(laserColor);
         }
         
         private void LateUpdate()

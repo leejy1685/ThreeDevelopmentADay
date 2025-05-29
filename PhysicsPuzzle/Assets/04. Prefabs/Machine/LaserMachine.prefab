@@ -485,7 +485,7 @@ MonoBehaviour:
   pitchSpeed: 60
   maxRotate: 0
   minRotate: -90
-  laserColor: 0
+  laserColor: 1
 --- !u!1 &8040798536340954770
 GameObject:
   m_ObjectHideFlags: 0
