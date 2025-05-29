@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -6,13 +7,13 @@ namespace _02._Scripts.Objects.LaserMachine
 {
     public class GoalMachine : MonoBehaviour, ILaserReceiver
     {
-        [Header(" [ Components ] ")]
+        [Header("Components ")]
         [SerializeField] private bool isActivate;
         [SerializeField] private LASER_COLOR mainColor;
 
-        [Header(" [ Body Textures ] ")]
+        [Header("Body Textures")]
         [SerializeField] private List<Renderer> renderers;
-        [SerializeField] private List<Texture2D> bodyTextures;
+        [SerializeField] private List<Texture2D> textures;
         [SerializeField] private List<Texture2D> lightMaps;
         [SerializeField] private SerializedDictionary<LASER_COLOR, Texture2D> textureDictionary;
         [SerializeField] private SerializedDictionary<LASER_COLOR, Texture2D> lightMapDictionary;
@@ -22,10 +23,18 @@ namespace _02._Scripts.Objects.LaserMachine
 
         private void Awake()
         {
+            var i = 0;
+            foreach (var texture in textures) textureDictionary.TryAdd((LASER_COLOR)i++, texture);
+            i = 0;
+            foreach (var lightMap in lightMaps) lightMapDictionary.TryAdd((LASER_COLOR)i++, lightMap);
+        }
+
+        private void Start()
+        {
             SetTextureOfBody(mainColor);
             OffLight();
         }
-        
+
         private void Update()
         {
             if (isActivate && Time.time - _lastHitTime > _emissionDuration)
@@ -41,13 +50,13 @@ namespace _02._Scripts.Objects.LaserMachine
             {
                 _lastHitTime = Time.time;
                 OnLight(); // 지속 갱신
-                StageManager.Instance.IncreaseActiveCount();
+                //StageManager.Instance.IncreaseActiveCount();
 
             }
             else
             {
                 OffLight();
-                StageManager.Instance.DecreaseActiveCount();
+                //StageManager.Instance.DecreaseActiveCount();
             }
         }
     

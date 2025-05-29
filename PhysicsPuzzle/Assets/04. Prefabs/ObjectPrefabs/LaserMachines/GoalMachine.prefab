@@ -46,10 +46,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9235057f6073c004f898f5a084bab9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _body: {fileID: 1631908060166003727}
-  _renderer: {fileID: 3742341423619981092}
-  _isActivate: 0
-  _color: 0
+  isActivate: 0
+  mainColor: 1
+  renderers:
+  - {fileID: 3742341423619981092}
+  textures:
+  - {fileID: 2800000, guid: 58b428eb92770a545acb30f3cb330b55, type: 3}
+  - {fileID: 2800000, guid: 3378f532704110a43a0ee394537fdf0c, type: 3}
+  - {fileID: 2800000, guid: 7eccc7aead3b976459fb18b6bfb23b03, type: 3}
+  - {fileID: 2800000, guid: 31c6dd87ad55e264791da6f82c245bbc, type: 3}
+  - {fileID: 2800000, guid: e34010f3f7339304997ed1b388bec9ba, type: 3}
+  - {fileID: 2800000, guid: 8ffe284ffd9d5c7479aa77b540d5bd6c, type: 3}
+  lightMaps:
+  - {fileID: 2800000, guid: 1a439cd1ef483ec4c8ea718b0a7e7a72, type: 3}
+  - {fileID: 2800000, guid: dcea81c3da0e12342928cc2424f037ab, type: 3}
+  - {fileID: 2800000, guid: 1d1faa3bc3e287240b38c7e3cb21d7ee, type: 3}
+  - {fileID: 2800000, guid: ea442db4af3b4624c9060de21757122c, type: 3}
+  - {fileID: 2800000, guid: 08d0bdd0d25184a4aae6768511c07cb4, type: 3}
+  - {fileID: 2800000, guid: 250a591bb1d240a42a9f23083b58f817, type: 3}
+  textureDictionary:
+    m_Keys: 
+    m_Values: []
+  lightMapDictionary:
+    m_Keys: 
+    m_Values: []
 --- !u!65 &8447717460547994811
 BoxCollider:
   m_ObjectHideFlags: 0
