@@ -29,7 +29,8 @@ public class GameManager : Singleton<GameManager>
     
     [SerializeField] public LobbyCamera _lobbyCamera;   //로비 연출용 카메라
 
-
+    private Puzzle[] puzzles;
+    public Puzzle Puzzle => puzzles[CurrentClearPuzzle];
     public Door[] doors;    //퍼즐 클리어 시 열리는 문
     private Transform player;   //플레이어 좌표
     
@@ -82,6 +83,11 @@ public class GameManager : Singleton<GameManager>
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         _uiManager.GameUI.ChangeSceneName();
+        
+        
+        //퍼즐 찾기
+        puzzles = FindObjectsOfType<Puzzle>();
+        Array.Sort(puzzles);
         
         //문 찾기
         doors = FindObjectsOfType<Door>();
@@ -169,7 +175,7 @@ public class GameManager : Singleton<GameManager>
     public void ClearPuzzle()
     {
         //문 오픈
-        doors[CurrentClearPuzzle].DestroyDoor();
+        doors[CurrentClearPuzzle].OpenDoor();
         
         //클리어 저장
         PlayerPrefs.SetString(LASTSTAGE,_sceneHandle.currentScene.ToString());
@@ -217,5 +223,10 @@ public class GameManager : Singleton<GameManager>
         GameStart();
         
         _sceneHandle.LoadScene(SCENE_TYPE.Lobby);
+    }
+
+    public bool CheckLastPuzzle()
+    {
+        return puzzles.Length > CurrentClearPuzzle;
     }
 }

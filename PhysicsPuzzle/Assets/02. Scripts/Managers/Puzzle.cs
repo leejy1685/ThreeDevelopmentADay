@@ -5,32 +5,29 @@ using _02._Scripts.Objects.LaserMachine;
 using UnityEngine;
 
 [Serializable]
-public class Puzzle : MonoBehaviour
+public class Puzzle : MonoBehaviour, IComparable<Puzzle>
 {
+    [SerializeField] public int puzzleNumber;
     [SerializeField] private List<GoalMachine> goalMachines;
-    [SerializeField] private int count;
-    [SerializeField] private  StageManager stageManager;
-
-    public int GetCount => goalMachines.Count;
-
-    public void Init(StageManager stageManager)
+    
+    public void ClearPuzzle()
     {
-        this.stageManager = stageManager;
-        count = 0;
+        int count = 0;
+        foreach (var goalMachine in goalMachines)
+        {
+            if(goalMachine.IsActivate)
+                count++;
+        }
+        
+        if(count >= goalMachines.Count)
+        {
+            GameManager.Instance.ClearPuzzle();
+            this.enabled = false;
+        }
     }
 
-    public void IncreaseCount()
+    public int CompareTo(Puzzle other)
     {
-        count++;
-        stageManager.ClearPuzzle(count);
+        return this.puzzleNumber.CompareTo(other.puzzleNumber);
     }
-
-    public void decreaseCount()
-    {
-        count--;
-        count = Mathf.Clamp(count, 0, goalMachines.Count);
-    }
-    
-    
-    
 }
