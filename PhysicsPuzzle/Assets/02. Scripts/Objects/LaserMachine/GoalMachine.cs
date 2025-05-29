@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace _02._Scripts.Objects.LaserMachine
 {
+    [Serializable]
     public class GoalMachine : MonoBehaviour, ILaserReceiver
     {
         [SerializeField] private Transform _body;
@@ -9,9 +11,12 @@ namespace _02._Scripts.Objects.LaserMachine
         [SerializeField] private bool _isActivate;
         [SerializeField] private LASER_COLOR _color;
 
-
+        public bool isActivate => _isActivate;
         private float _lastHitTime;
         private float _emissionDuration = 0.05f;
+
+        private GameManager gameManager;
+        private StageManager stageManager;
 
         void Awake()
         {
@@ -21,6 +26,13 @@ namespace _02._Scripts.Objects.LaserMachine
             // 접근 시 자동으로 머티리얼 인스턴스를 복제
             _renderer.material.EnableKeyword("_EMISSION");
         }
+
+        private void Start()
+        {
+            gameManager = GameManager.Instance;
+            stageManager = StageManager.Instance;
+        }
+
         private void Update()
         {
             if (_isActivate && Time.time - _lastHitTime > _emissionDuration)
@@ -34,16 +46,15 @@ namespace _02._Scripts.Objects.LaserMachine
             if (color == _color)
             {
                 _lastHitTime = Time.time;
+                if(!_isActivate)
+                    stageManager.Puzzles[gameManager.CurrentClearPuzzle].IncreaseCount();
                 OnLight(); // 지속 갱신
-                StageManager.Instance.IncreaseActiveCount();
-
             }
             else
             {
+                if(_isActivate)
+                    stageManager.Puzzles[gameManager.CurrentClearPuzzle].decreaseCount();
                 OffLight();
-
-                StageManager.Instance.DecreaseActiveCount();
-
             }
         }
     

@@ -86,6 +86,7 @@ public class GameManager : Singleton<GameManager>
         //문 찾기
         doors = FindObjectsOfType<Door>();
         Array.Sort(doors);
+        
 
         //로딩 씬에선 캐릭터가 없기 떄문에 잡히지 않음.
         player = FindAnyObjectByType<Player>()?.transform;
