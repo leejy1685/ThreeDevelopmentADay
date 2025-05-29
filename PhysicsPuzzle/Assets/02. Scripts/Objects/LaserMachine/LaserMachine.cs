@@ -1,7 +1,7 @@
-﻿using System;
 using _02._Scripts.Character.Player;
 using _02._Scripts.Managers;
 using _02._Scripts.Utils.Interface;
+using System.Collections;
 using UnityEngine;
 
 namespace _02._Scripts.Objects.LaserMachine
@@ -23,7 +23,7 @@ namespace _02._Scripts.Objects.LaserMachine
         [SerializeField] private LineRenderer _lineRenderer;      // 라인
         [SerializeField] public Transform barrel;   // <= 배럴 오브젝트 담당할듯...?
     
-        [SerializeField] public LASER_COLOR testColor;  //배럴 오브젝트에서 칼라정보 뽑아올것
+        //[SerializeField] public LASER_COLOR testColor;  //배럴 오브젝트에서 칼라정보 뽑아올것
         private GoalMachine _currentTarget = null;
     
     
@@ -32,13 +32,17 @@ namespace _02._Scripts.Objects.LaserMachine
         [SerializeField] private float _pitchSpeed = 60f;   // 상하 회전 속도
         [SerializeField] private float _maxRotate = 0f;     // 회전 최대각 (위 방향)
         [SerializeField] private float _minRotate = -90f;   // 회전 최소각 (앞 방향)
-        
+
+        [Header("Laser State")]
+        [SerializeField] public LASER_COLOR laserColor = LASER_COLOR.Blue; // 현재 레이저 색상
+
         private bool _isFiring = false;  // 발사 체크 
         private float _currPitch;        // 현재 Z축 회전값
         private PlayerCondition _playerCondition;
-    
+
         private void Awake()
         {
+            //testColor = LASER_COLOR.Blue; // 테스트용 고정 초기값
             _currPitch = 0f;
         }
 
@@ -47,8 +51,14 @@ namespace _02._Scripts.Objects.LaserMachine
             _playerCondition = CharacterManager.Instance.Player.PlayerCondition;
         }
 
-        private void LateUpdate()
+        
+        void LateUpdate()
         {
+            // 발사 토글(일단은 좌 컨트롤) => LazerToggle 호출시에 지워도 됨
+            // if (Input.GetKeyDown(KeyCode.LeftControl))
+            //     _isFiring = !_isFiring;
+            // TestControl();
+            
             // 회전 제한(현재는 수직 ~ 수평)
             _currPitch = Mathf.Clamp(_currPitch, _minRotate, _maxRotate);
                 
@@ -63,31 +73,41 @@ namespace _02._Scripts.Objects.LaserMachine
             Vector3 direction = _pitchPivot.up;
             Vector3 startPosition = _pitchPivot.position + direction;
             Vector3 endPosition = startPosition + direction * _maxDistance;
+
     
             GoalMachine hitTarget = null;
     
+            
             if (_isFiring)
             {
-                // 일단은 goalObject의 레이어 체크는 안했습니다.
+                // Raycast로 광선이 충돌하는 지점 검사함
                 if (Physics.Raycast(startPosition, direction, out RaycastHit hit, _maxDistance))
                 {
                     endPosition = hit.point;
-                    if (hit.collider.TryGetComponent<GoalMachine>(out var target))
+
+                    // 충돌 대상에 ILaserReceiver가 있으면 레이저 정보를 전달해서
+                    if (hit.collider.TryGetComponent<ILaserReceiver>(out ILaserReceiver receiver))
                     {
-                        hitTarget = target;
-                        hitTarget.CheckActive(testColor);
+                        // LaserBeam 구조체 생성 
+                        LaserBeam beam = new LaserBeam(direction, laserColor);
+                        receiver.OnLaserHit(beam);
                     }
                 }
-    
+
+                // 캐시된 LineRenderer로 한 번만 설정
+                // 기존 DrawLaserLine() 대신 사용 
+                //->  LineRenderer lr = LinePoolManager.Instance.Get(); 프레임 단위 할당 방지
+                _lineRenderer.enabled = true;
+                _lineRenderer.startColor = _lineRenderer.endColor = new LaserBeam(direction, laserColor).ColorValue;
                 _lineRenderer.SetPosition(0, startPosition);
                 _lineRenderer.SetPosition(1, endPosition);
             }
             else
             {
-                _lineRenderer.SetPosition(0, startPosition);
-                _lineRenderer.SetPosition(1, startPosition);
+                // 발사 중이 아니면 레이저 라인을 보여주지 않음
+                // (라인 시작/끝을 동일하게 설정하여 길이 0인 선으로 처리하거나, 풀에 반환하여 제거)
             }
-    
+
             // 레이가 벗어나서 현재의 타겟이 바뀔 경우
             if (_currentTarget && _currentTarget != hitTarget)
             {
@@ -102,6 +122,17 @@ namespace _02._Scripts.Objects.LaserMachine
             _currPitch += direction.y * _pitchSpeed * Time.deltaTime;
         }
         
+
+        /// <summary>
+        /// 지정된 LineRenderer를 한 프레임 뒤 풀로 되돌립니다.
+        /// </summary>
+        private IEnumerator ReturnLineAfterFrame_Coroutine(LineRenderer lr)
+        {
+            // 매우 짧은 지연 후 라인 비활성화하여 다음 프레임에서 제거
+            yield return new WaitForEndOfFrame();
+            LinePoolManager.Instance.Return(lr);
+        }
+
         public void ToggleLaser()
         {
             _isFiring = !_isFiring;
@@ -129,10 +160,34 @@ namespace _02._Scripts.Objects.LaserMachine
             _lineRenderer.startColor = lazerColor;
             _lineRenderer.endColor = lazerColor;
         }
-    
+        // <summary>
+        /// LAZER_COLOR를 실제 UnityEngine.Color로 변환합니다.
+        /// </summary>
+        private Color LaserBeamColor(LASER_COLOR colorType)
+        {
+            // LaserBeam.ColorValue 프로퍼티와 동일한 기능.
+            switch (colorType)
+            {
+                case LASER_COLOR.Red: return Color.red;
+                case LASER_COLOR.Blue: return Color.blue;
+                case LASER_COLOR.Green: return Color.green;
+                case LASER_COLOR.Purple: return Color.magenta;
+                case LASER_COLOR.Yellow: return Color.yellow;
+                case LASER_COLOR.White:
+                default: return Color.white;
+            }
+        }
         public void OnInteract()
         {
             _playerCondition.MigrateCameraFocusToOtherObject(body);
+        }
+
+        public void TestControl() // (테스트용)
+        {
+            if (Input.GetKey(KeyCode.UpArrow))
+                _currPitch += _pitchSpeed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.DownArrow))
+                _currPitch -= _pitchSpeed * Time.deltaTime;
         }
     }
 }
