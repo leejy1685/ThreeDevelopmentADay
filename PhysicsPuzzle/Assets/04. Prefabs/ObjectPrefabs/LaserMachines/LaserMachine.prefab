@@ -230,8 +230,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4685936463110645030}
-  - component: {fileID: 4581852895974891102}
   - component: {fileID: 8379918533837984468}
+  - component: {fileID: 1695445697890262108}
   m_Layer: 7
   m_Name: LaserMachine
   m_TagString: Untagged
@@ -257,27 +257,6 @@ Transform:
   - {fileID: 3776369600319450795}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4581852895974891102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4743888777002400312}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27365a03da5decb45b53074128352b5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pitchPivot: {fileID: 3776369600319450795}
-  body: {fileID: 6027392697670808317}
-  _lineRenderer: {fileID: 6407259176535981763}
-  barrel: {fileID: 5307725396892921113}
-  testColor: 0
-  _maxDistance: 100
-  _pitchSpeed: 60
-  _maxRotate: 0
-  _minRotate: -90
 --- !u!65 &8379918533837984468
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -299,6 +278,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &1695445697890262108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4743888777002400312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8503a82b81abbcb44be6a7fd7a13b6dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pitchPivot: {fileID: 3776369600319450795}
+  body: {fileID: 6027392697670808317}
+  _lineRenderer: {fileID: 6407259176535981763}
+  barrel: {fileID: 5307725396892921113}
+  testColor: 0
+  _maxDistance: 100
+  _pitchSpeed: 60
+  _maxRotate: 0
+  _minRotate: -90
 --- !u!1 &4806239460770402657
 GameObject:
   m_ObjectHideFlags: 0
