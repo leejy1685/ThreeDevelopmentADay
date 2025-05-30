@@ -23,13 +23,12 @@ namespace _02._Scripts.Objects.LaserMachine
         [SerializeField] private Transform pitchPivot; // Z축 회전만 담당
         [SerializeField] private Transform body;
         [SerializeField] private LineRenderer lineRenderer; // 라인
+        [SerializeField] private Barrel barrel;
         
         [Header(" [ Body Textures ] ")] 
         [SerializeField] private List<Renderer> renderers;
-        [SerializeField] private List<Texture2D> textures;
-        [SerializeField] private List<Texture2D> lightMaps;
-        [SerializeField] private SerializedDictionary<LASER_COLOR, Texture2D> textureDictionary;
-        [SerializeField] private SerializedDictionary<LASER_COLOR, Texture2D> lightMapDictionary;
+        [SerializeField] private List<Material> materials;
+        [SerializeField] private SerializedDictionary<LASER_COLOR, Material> materialDictionary;
         
         [Header(" [ Object Options ] ")] 
         [SerializeField] private float maxDistance = 100f; // 레이저 최대거리
@@ -48,15 +47,14 @@ namespace _02._Scripts.Objects.LaserMachine
         private void Awake()
         {
             var i = 0;
-            foreach (var texture in textures) textureDictionary.TryAdd((LASER_COLOR)i++, texture);
-            i = 0;
-            foreach (var lightMap in lightMaps) lightMapDictionary.TryAdd((LASER_COLOR)i++, lightMap);
+            foreach (var material in materials) materialDictionary.TryAdd((LASER_COLOR)i++, material);
         }
 
         private void Start()
         {
             _currPitch = 0f;
             _playerCondition = CharacterManager.Instance.Player.PlayerCondition;
+            barrel.Init(this);
             SetColorOfMachine(laserColor);
         }
         
@@ -147,8 +145,7 @@ namespace _02._Scripts.Objects.LaserMachine
             laserColor = color;
             foreach (var render in renderers)
             {
-                render.material.mainTexture = textureDictionary[color];
-                render.material.SetTexture("_EmissionMap", lightMapDictionary[color]);
+                render.material = materialDictionary[color];
             }
         }
 
