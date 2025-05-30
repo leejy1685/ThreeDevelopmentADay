@@ -18,10 +18,8 @@ namespace _02._Scripts.PIpe.ConnectionPipe
 
         [Header(" [ Body Textures ] ")] 
         [SerializeField] private List<Renderer> renderers;
-        [SerializeField] private List<Texture2D> textures;
-        [SerializeField] private List<Texture2D> lightMaps;
-        [SerializeField] private SerializedDictionary<LASER_COLOR, Texture2D> textureDictionary;
-        [SerializeField] private SerializedDictionary<LASER_COLOR, Texture2D> lightMapDictionary;
+        [SerializeField] private List<Material> materials;
+        [SerializeField] private SerializedDictionary<LASER_COLOR, Material> materialDictionary;
 
         [Header(" [ Object Options ] ")]
         [SerializeField] private float _maxDistance = 100f; // 레이저 최대거리
@@ -40,9 +38,7 @@ namespace _02._Scripts.PIpe.ConnectionPipe
         private void Awake()
         {
             var i = 0;
-            foreach (var texture in textures) textureDictionary.TryAdd((LASER_COLOR)i++, texture);
-            i = 0;
-            foreach (var lightMap in lightMaps) lightMapDictionary.TryAdd((LASER_COLOR)i++, lightMap);
+            foreach (var material in materials) materialDictionary.TryAdd((LASER_COLOR)i++, material);
         }
 
         private void Start()
@@ -127,8 +123,7 @@ namespace _02._Scripts.PIpe.ConnectionPipe
 
             foreach (var render in renderers)
             {
-                render.material.mainTexture = textureDictionary[color];
-                render.material.SetTexture("_EmissionMap", lightMapDictionary[color]);
+                render.material = materialDictionary[color];
             }
         }
 

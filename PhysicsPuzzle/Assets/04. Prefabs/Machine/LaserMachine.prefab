@@ -461,24 +461,14 @@ MonoBehaviour:
   - {fileID: 4647169923957391048}
   - {fileID: 8021219230423881063}
   - {fileID: 6699929541657119954}
-  textures:
-  - {fileID: 2800000, guid: 58b428eb92770a545acb30f3cb330b55, type: 3}
-  - {fileID: 2800000, guid: 3378f532704110a43a0ee394537fdf0c, type: 3}
-  - {fileID: 2800000, guid: 7eccc7aead3b976459fb18b6bfb23b03, type: 3}
-  - {fileID: 2800000, guid: 31c6dd87ad55e264791da6f82c245bbc, type: 3}
-  - {fileID: 2800000, guid: e34010f3f7339304997ed1b388bec9ba, type: 3}
-  - {fileID: 2800000, guid: 8ffe284ffd9d5c7479aa77b540d5bd6c, type: 3}
-  lightMaps:
-  - {fileID: 2800000, guid: 1a439cd1ef483ec4c8ea718b0a7e7a72, type: 3}
-  - {fileID: 2800000, guid: dcea81c3da0e12342928cc2424f037ab, type: 3}
-  - {fileID: 2800000, guid: 1d1faa3bc3e287240b38c7e3cb21d7ee, type: 3}
-  - {fileID: 2800000, guid: ea442db4af3b4624c9060de21757122c, type: 3}
-  - {fileID: 2800000, guid: 08d0bdd0d25184a4aae6768511c07cb4, type: 3}
-  - {fileID: 2800000, guid: 250a591bb1d240a42a9f23083b58f817, type: 3}
-  textureDictionary:
-    m_Keys: 
-    m_Values: []
-  lightMapDictionary:
+  materials:
+  - {fileID: 2100000, guid: 5d747dcd45eab2a41a9f7149b0f026b6, type: 2}
+  - {fileID: 2100000, guid: 7e04f706f9e3f7f468772566c9b75da8, type: 2}
+  - {fileID: 2100000, guid: 1a63d72c6152ef54493960acf859fc4a, type: 2}
+  - {fileID: 2100000, guid: 805487a24eecbcf4a923c3ff4746bd22, type: 2}
+  - {fileID: 2100000, guid: 52e4708390753da4d9c262a4a102d958, type: 2}
+  - {fileID: 2100000, guid: eb42043ce030bd64abb0a0f6dfc0e4fd, type: 2}
+  materialDictionary:
     m_Keys: 
     m_Values: []
   maxDistance: 100
