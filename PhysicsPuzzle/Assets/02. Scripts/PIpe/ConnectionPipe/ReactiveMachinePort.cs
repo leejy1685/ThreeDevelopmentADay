@@ -12,7 +12,7 @@ public class ReactiveMachinePort : MonoBehaviour
     {
         if (_currentPipe != null)
         {
-            var color = _currentPipe._receivedColor;
+            var color = _currentPipe.receivedColor;
             _paretMachine.SetLineColor(color);
         }
     }
@@ -25,8 +25,8 @@ public class ReactiveMachinePort : MonoBehaviour
             if (pipe != null)
             {
                 _currentPipe = pipe;
-                Debug.Log($"{pipe.name} 에서 전달받은 색: {pipe._receivedColor}");
-                ReactToColor(pipe._receivedColor);
+                // Debug.Log($"{pipe.name} 에서 전달받은 색: {pipe.receivedColor}");
+                ReactToColor(pipe.receivedColor);
             }
         }
     }
@@ -46,7 +46,7 @@ public class ReactiveMachinePort : MonoBehaviour
 
     private void ReactToColor(LASER_COLOR color)
     {
-        Debug.Log($"[ReactivePort] 색에 반응함: {color}");
+        // Debug.Log($"[ReactivePort] 색에 반응함: {color}");
         _paretMachine.SetLineColor(color);
     }
 }

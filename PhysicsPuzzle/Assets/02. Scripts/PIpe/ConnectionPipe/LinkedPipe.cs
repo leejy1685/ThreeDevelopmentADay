@@ -1,51 +1,41 @@
 ﻿using _02._Scripts.Objects.LaserMachine;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Utils;
+using _02._Scripts.Utils.Interface;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
 public class LinkedPipe : MonoBehaviour
 {
-    [Header("Color Textures")]
-    [SerializeField] private Texture2D _whiteTex;
-    [SerializeField] private Texture2D _redTex;
-    [SerializeField] private Texture2D _blueTex;
-    [SerializeField] private Texture2D _greenTex;
-    [SerializeField] private Texture2D _purpleTex;
-    [SerializeField] private Texture2D _yellowTex;
+    private readonly int _baseMap = Shader.PropertyToID("_BaseMap");
+    
+    [Header("Color Materials")]
+    [SerializeField] private List<Material> materials;
+    [SerializeField] private SerializedDictionary<LASER_COLOR, Material> materialDictionary;
 
     // 해당 파이프의 포트들, inspector 창에서 직접 연결
+    [Header("Pipe Ports")]
     [SerializeField] public LinkedPipePort[] ports;
-
-
-    [SerializeField] private Renderer _renderer;
-    [SerializeField] public LASER_COLOR _receivedColor;
-
+    
+    [Header("Pipe Renderer")]
+    [SerializeField] private Renderer render;
+    [SerializeField] public LASER_COLOR receivedColor;
+    
     private void Awake()
     {
-        _renderer = GetComponent<Renderer>();
-        if (_renderer == null)
-            Debug.LogError($"{name}의 Renderer가 연결되지 않음");
+        if (!render) render = Helper.GetComponent_Helper<Renderer>(gameObject);
+        var i = 0;
+        foreach(var material in materials) materialDictionary.TryAdd((LASER_COLOR)i++, material);
     }
 
     public void SetPipeColor(LASER_COLOR color)
     {
-        _receivedColor = color;
-        if (_renderer == null) return;
+        receivedColor = color;
+        if (!render) return;
 
-        Texture2D texture = color switch
-        {
-            LASER_COLOR.White => _whiteTex,
-            LASER_COLOR.Blue => _blueTex,
-            LASER_COLOR.Green => _greenTex,
-            LASER_COLOR.Purple => _purpleTex,
-            LASER_COLOR.Red => _redTex,
-            LASER_COLOR.Yellow => _yellowTex,
-            _ => _whiteTex
-        };
-
-        Material mat = _renderer.material;
-        mat.EnableKeyword("_EMISSION");
-        mat.SetTexture("_BaseMap", texture);
+        var material = materialDictionary[color];
+        render.material = material;
 
         //Debug.Log($"{name} 색 변경: {_receivedColor}");
     }
