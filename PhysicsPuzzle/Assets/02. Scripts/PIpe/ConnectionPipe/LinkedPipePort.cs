@@ -1,6 +1,7 @@
 ﻿using _02._Scripts.Objects.LaserMachine;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Utils;
 using UnityEngine;
 
 public class LinkedPipePort : MonoBehaviour
@@ -10,8 +11,7 @@ public class LinkedPipePort : MonoBehaviour
     private void Awake()
     {
         parentPipe = GetComponentInParent<LinkedPipe>();
-        if (parentPipe == null)
-            Debug.LogError($"{name} → parentPipe is NULL!");
+        if (!parentPipe) Debug.LogError($"{name} → parentPipe is NULL!");
     }
 
     public bool IsConnectedToLaser(out LASER_COLOR color)
@@ -21,8 +21,8 @@ public class LinkedPipePort : MonoBehaviour
         {
             if (hit.CompareTag("LaserBody"))
             {
-                var laser = hit.GetComponentInParent<LaserMachine>();
-                if (laser != null)
+                var laser = Helper.GetComponent_Helper<LaserMachine>(hit.gameObject);
+                if (laser)
                 {
                     color = laser.laserColor;
                     return true;

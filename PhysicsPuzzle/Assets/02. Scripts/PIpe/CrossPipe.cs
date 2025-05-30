@@ -15,19 +15,19 @@ public class CrossPipe : Pipe
     {
         isRotating = true;
 
-        Quaternion startRotation = transform.rotation;
+        Quaternion startRotation = transform.localRotation;
         Quaternion targetRotation = startRotation * Quaternion.Euler(axis * rotationAngle);
 
         float elapsed = 0f;
 
         while (elapsed < rotationDuration)
         {
-            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, elapsed / rotationDuration);
+            transform.localRotation = Quaternion.Slerp(startRotation, targetRotation, elapsed / rotationDuration);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        transform.rotation = targetRotation;
+        transform.localRotation = targetRotation;
         isRotating = false;
     }
 }

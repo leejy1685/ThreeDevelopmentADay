@@ -5,28 +5,13 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IComparable<Door>
 {
-    [SerializeField] private GameObject door;
+    [SerializeField] private GameObject fire;
     [SerializeField] private int puzzleNumber;
     
-
-    public void OpenDoor()
+    public void DestroyDoor()
     {
-        StartCoroutine(OpenDoor_Coroutine());
-    }
-
-    private IEnumerator OpenDoor_Coroutine()
-    {
-        while (true)
-        {
-            Vector3 openDoorPosition = transform.position + new Vector3(0, 0, 1.3f);
-            Vector3 doorPosition = Vector3.Lerp(door.transform.position, openDoorPosition, Time.deltaTime);
-            door.transform.position = doorPosition;
-            yield return null;
-            if (openDoorPosition == doorPosition)
-            {
-                break;
-            }
-        }
+        fire.SetActive(true);
+        Destroy(gameObject,3f);
     }
 
     public Vector3 PuzzleClearPosition()

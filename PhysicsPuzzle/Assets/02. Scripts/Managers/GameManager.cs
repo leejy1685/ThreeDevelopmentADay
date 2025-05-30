@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,8 +29,7 @@ public class GameManager : Singleton<GameManager>
     
     [SerializeField] public LobbyCamera _lobbyCamera;   //로비 연출용 카메라
 
-    private Puzzle[] puzzles;
-    public Puzzle Puzzle => puzzles[CurrentClearPuzzle];
+
     public Door[] doors;    //퍼즐 클리어 시 열리는 문
     private Transform player;   //플레이어 좌표
     
@@ -57,7 +56,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         //시작 카메라 연출
-        //_lobbyCamera.gameObject.SetActive(true);
+        _lobbyCamera.gameObject.SetActive(true);
     }
 
     private void Update()
@@ -65,11 +64,6 @@ public class GameManager : Singleton<GameManager>
         if (Input.GetKeyDown(KeyCode.T))
         {
             ClearPuzzle();
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            _uiManager.ChangeState(UIState.Obtion);
         }
 
         if (_sceneHandle.currentScene != SCENE_TYPE.Lobby && !isClear)
@@ -84,22 +78,16 @@ public class GameManager : Singleton<GameManager>
     {
         _uiManager.GameUI.ChangeSceneName();
         
-        
-        //퍼즐 찾기
-        puzzles = FindObjectsOfType<Puzzle>();
-        Array.Sort(puzzles);
-        
         //문 찾기
         doors = FindObjectsOfType<Door>();
         Array.Sort(doors);
-        
 
         //로딩 씬에선 캐릭터가 없기 떄문에 잡히지 않음.
         player = FindAnyObjectByType<Player>()?.transform;
         if (player != null)
         {
             //플레이어 배치
-            //player.position = new Vector3(20, 0, 0); //일단은 하드코딩
+            player.position = new Vector3(20, 0, 0); //일단은 하드코딩
             LoadPlayerPosition();
         }
     }
@@ -175,7 +163,7 @@ public class GameManager : Singleton<GameManager>
     public void ClearPuzzle()
     {
         //문 오픈
-        doors[CurrentClearPuzzle].OpenDoor();
+        doors[CurrentClearPuzzle].DestroyDoor();
         
         //클리어 저장
         PlayerPrefs.SetString(LASTSTAGE,_sceneHandle.currentScene.ToString());
@@ -223,10 +211,5 @@ public class GameManager : Singleton<GameManager>
         GameStart();
         
         _sceneHandle.LoadScene(SCENE_TYPE.Lobby);
-    }
-
-    public bool CheckLastPuzzle()
-    {
-        return puzzles.Length > CurrentClearPuzzle;
     }
 }
