@@ -60,7 +60,7 @@ namespace _02._Scripts.Objects.LaserMachine
             {
                 _lastHitTime = Time.time;
                 if(gameManager.CheckLastPuzzle())
-                    gameManager.Puzzle.ClearPuzzle();
+                   // gameManager.Puzzle.ClearPuzzle();
                 OnLight(); // 지속 갱신
             }
             else
