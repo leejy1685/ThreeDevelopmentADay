@@ -647,30 +647,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 747006409}
     m_Modifications:
-    - target: {fileID: 701081182315538695, guid: 3f8727300f715c64f99991635381bef0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1192275330342438834, guid: 3f8727300f715c64f99991635381bef0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 2008952387428490256, guid: 3f8727300f715c64f99991635381bef0, type: 3}
+      propertyPath: rotationAngle
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3807966870241956161, guid: 3f8727300f715c64f99991635381bef0, type: 3}
       propertyPath: m_Name
       value: Room1
       objectReference: {fileID: 0}
-    - target: {fileID: 4591331972361115414, guid: 3f8727300f715c64f99991635381bef0, type: 3}
-      propertyPath: laserColor
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5515319033184236120, guid: 3f8727300f715c64f99991635381bef0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6376131342646602533, guid: 3f8727300f715c64f99991635381bef0, type: 3}
-      propertyPath: PipeBodyParticleSystem
-      value: 
-      objectReference: {fileID: 1991505477}
     - target: {fileID: 6426756190491269100, guid: 3f8727300f715c64f99991635381bef0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -711,10 +695,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6845012181208623700, guid: 3f8727300f715c64f99991635381bef0, type: 3}
-      propertyPath: PipeBodyParticleSystem
-      value: 
-      objectReference: {fileID: 1991505477}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1158,17 +1138,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd767b40bf212954aa913d76f8a54803, type: 3}
---- !u!114 &1991505477 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6020520101247965161, guid: 3f8727300f715c64f99991635381bef0, type: 3}
-  m_PrefabInstance: {fileID: 989074024}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2ac09f1aa8809340b6aecdec45c2406, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
