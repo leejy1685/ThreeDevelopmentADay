@@ -59,13 +59,18 @@ namespace _02._Scripts.Objects.LaserMachine
             if (color == mainColor)
             {
                 _lastHitTime = Time.time;
-                if(gameManager.CheckLastPuzzle())
-                    gameManager.Puzzle.ClearPuzzle();
                 OnLight(); // 지속 갱신
+
+                //StageManager.Instance.IncreaseActiveCount();
+                
             }
             else
             {
                 OffLight();
+                
+                //StageManager.Instance.DecreaseActiveCount();
+
+
             }
         }
     
