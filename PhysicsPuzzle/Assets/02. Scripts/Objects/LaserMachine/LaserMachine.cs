@@ -33,7 +33,7 @@ namespace _02._Scripts.Objects.LaserMachine
         
         [Header(" [ Object Options ] ")] 
         [SerializeField] private float maxDistance = 100f; // 레이저 최대거리
-        [SerializeField] private float pitchSpeed = 60f; // 상하 회전 속도
+        [SerializeField] private float pitchSpeed = 30f; // 상하 회전 속도
         [SerializeField] private float maxRotate = 0f; // 회전 최대각 (위 방향)
         [SerializeField] private float minRotate = -90f; // 회전 최소각 (앞 방향)
 

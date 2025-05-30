@@ -205,7 +205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8844393228854191351, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
       propertyPath: m_Parameters.widthMultiplier
-      value: 0.02
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8965806539318086713, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
       propertyPath: laserColor
