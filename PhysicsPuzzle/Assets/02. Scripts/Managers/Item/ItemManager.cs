@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace _02._Scripts.Managers
+namespace _02._Scripts.Managers.Item
 {
     public class ItemManager : MonoBehaviour
     {
@@ -36,8 +36,7 @@ namespace _02._Scripts.Managers
             {
                 itemTable = handle.Result;
                 Debug.Log("ItemTable Load Completed!");
-                for (var i = 0; i < itemTable.GetItemCount(); i++)
-                    Instantiate(itemTable.GetItemByIndex(i).itemPrefab, new Vector3(-4f + i * 2, 0, 5f), Quaternion.identity);
+                ItemSpawnManager.Instance.SpawnItemBoxes();
             }
             else
             {
