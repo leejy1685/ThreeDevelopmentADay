@@ -15,6 +15,8 @@ public class Port : MonoBehaviour, ILaserReceiver
     [Header("파티클 효과")]
     [SerializeField] private ParticleSystem portEffect;
 
+    [SerializeField]private PipeBodyParticleSystem PipeBodyParticleSystem;
+
     private void Awake()
     {
         // 시작 시 자신의 parentPipe 설정 (부모 객체의 Pipe 컴포넌트)
@@ -39,6 +41,7 @@ public class Port : MonoBehaviour, ILaserReceiver
     {
         Debug.Log($"[Port] {name} 수신: 방향={beam.direction}, 색상={beam.colorType}");
         EmitEffect(beam.ColorValue);
+        PipeBodyParticleSystem.BodyEffect(beam.ColorValue);
         // 자신이 속한 파이프에 이 포트로 레이저가 들어왔음을 알림
         parentPipe.OnPortHit(this, beam);
     }

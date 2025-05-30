@@ -328,7 +328,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.1
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 8965806539318086713}
   m_Layer: 7
   m_Name: LaserMachine
-  m_TagString: Untagged
+  m_TagString: LaserBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -485,7 +485,7 @@ MonoBehaviour:
   pitchSpeed: 60
   maxRotate: 0
   minRotate: -90
-  laserColor: 0
+  laserColor: 1
 --- !u!1 &8040798536340954770
 GameObject:
   m_ObjectHideFlags: 0

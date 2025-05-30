@@ -24,6 +24,10 @@ public class Pipe : MonoBehaviour, IInteractable
     [Header("라인 렌더러 프리팹")]
     [SerializeField]private LineRenderer lineRenderer;
 
+    [Header("[파이브 몸체 파티클]")]
+    [SerializeField] private PipeBodyParticleSystem Body;
+    
+
     private List<Port> ports;  // 이 파이프에 포함된 모든 Port들
     protected bool isRotating;
 
@@ -77,6 +81,9 @@ public class Pipe : MonoBehaviour, IInteractable
             {
                 lr.enabled = false;
                 port.StopEffect(); //파티클 정지
+                Body.StopBodyEffect();
+
+
             }
 
         }
