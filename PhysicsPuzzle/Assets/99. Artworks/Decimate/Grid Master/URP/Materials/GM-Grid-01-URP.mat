@@ -10,7 +10,7 @@ Material:
   m_Name: GM-Grid-01-URP
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: f33991274cb50c047b101035d76c934e, type: 2}
-  m_ModifiedSerializedProperties: 10
+  m_ModifiedSerializedProperties: 14
   m_ValidKeywords:
   - _EMISSION
   - _SPECULAR_SETUP
