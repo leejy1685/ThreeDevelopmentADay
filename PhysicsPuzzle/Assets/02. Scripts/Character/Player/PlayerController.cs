@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using _02._Scripts.Character.Player.Camera;
 using _02._Scripts.Managers;
 using _02._Scripts.Objects.LaserMachine;
+using _02._Scripts.PIpe.ConnectionPipe;
 using _02._Scripts.Utils;
 using UnityEngine;
 
@@ -27,6 +29,7 @@ namespace _02._Scripts.Character.Player
         [SerializeField] private float gravityValue = 9.81f;
         [SerializeField] private Vector3 gravityDirection = Vector3.down;
         [SerializeField] private LayerMask groundLayer;
+        [SerializeField] private LayerMask wallLayer;
 
         [Header("CameraPivot Settings")] 
         [SerializeField] private Transform cameraPivot;
@@ -74,10 +77,15 @@ namespace _02._Scripts.Character.Player
 
         private void Update()
         {
-            if (!playerCondition.IsPlayerCharacterHasControl)
+            if (playerCondition.IsPlayerCharacterHasControl) return;
+            switch (playerInteraction.Interactable)
             {
-                if(playerInteraction.Interactable is LaserMachine laserMachine)
+                case LaserMachine laserMachine:
                     laserMachine.ControlLaserPitch(movementDirection);
+                    break;
+                case ReactiveMachine reactiveMachine:
+                    reactiveMachine.ControlLaserPitch(movementDirection);
+                    break;
             }
         }
 
@@ -92,7 +100,7 @@ namespace _02._Scripts.Character.Player
         /// </summary>
         private void CalculateMovement()
         {
-            _isGrounded = IsPlayerGrounded(); 
+            _isGrounded = IsPlayerGrounded();
             playerAnimator.SetPlayerIsGrounded(_isGrounded);
             
             var move = CalculateMovement_FlatSurface();
@@ -112,9 +120,11 @@ namespace _02._Scripts.Character.Player
                 
                 _isJumpPressed = false;
             } 
-            
+            if (CheckWallCollision()) rigidBody.AddForce(-move.normalized * 2f, ForceMode.Impulse);
             rigidBody.MovePosition(transform.position + move);
         }
+        
+        
 
         /// <summary>
         /// Calculate Player Movement in flat surface.
@@ -130,6 +140,11 @@ namespace _02._Scripts.Character.Player
             var velocityXZ = (transform.forward * movementDirection.y + transform.right * movementDirection.x).normalized * currentSpeed;
             playerAnimator.SetPlayerSpeed(velocityXZ.magnitude / maxSpeed);
             return velocityXZ * Time.fixedDeltaTime;
+        }
+
+        private bool CheckWallCollision()
+        {
+            return Physics.CheckCapsule(transform.position + transform.up * (capsuleCollider.height / 2f), transform.position + transform.up * (capsuleCollider.height / 2f),capsuleCollider.radius + 0.1f, wallLayer);
         }
 
         /// <summary>

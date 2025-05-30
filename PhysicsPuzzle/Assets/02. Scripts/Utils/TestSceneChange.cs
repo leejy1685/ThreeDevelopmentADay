@@ -16,6 +16,6 @@ public class TestSceneChange : MonoBehaviour
     public void OnClick()
     {
         // 매개변수로 씬타입 값으로 지정
-        SceneHandleManager.Instance.LoadScene(SCENE_TYPE.TestGoalScene);
+        SceneHandleManager.Instance.LoadScene(SCENE_TYPE.Lobby);
     }
 }
