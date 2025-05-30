@@ -23,6 +23,7 @@ namespace _02._Scripts.Objects.LaserMachine
         [SerializeField] private Transform pitchPivot; // Z축 회전만 담당
         [SerializeField] private Transform body;
         [SerializeField] private LineRenderer lineRenderer; // 라인
+        [SerializeField] private Barrel barrel;
         
         [Header(" [ Body Textures ] ")] 
         [SerializeField] private List<Renderer> renderers;
@@ -53,6 +54,7 @@ namespace _02._Scripts.Objects.LaserMachine
         {
             _currPitch = 0f;
             _playerCondition = CharacterManager.Instance.Player.PlayerCondition;
+            barrel.Init(this);
             SetColorOfMachine(laserColor);
         }
         

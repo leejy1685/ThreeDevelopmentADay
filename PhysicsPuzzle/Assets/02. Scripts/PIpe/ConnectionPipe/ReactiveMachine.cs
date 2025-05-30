@@ -119,7 +119,7 @@ namespace _02._Scripts.PIpe.ConnectionPipe
         public void SetLineColor(LASER_COLOR color)
         {
             laserColor = color;
-            Debug.Log($"색 체크 : {laserColor}");
+            // Debug.Log($"색 체크 : {laserColor}");
 
             foreach (var render in renderers)
             {
