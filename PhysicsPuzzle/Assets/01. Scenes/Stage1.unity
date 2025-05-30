@@ -652,17 +652,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 747006409}
     m_Modifications:
-    - target: {fileID: 2008952387428490256, guid: 3f8727300f715c64f99991635381bef0, type: 3}
-      propertyPath: rotationAngle
-      value: 90
-      objectReference: {fileID: 0}
     - target: {fileID: 3807966870241956161, guid: 3f8727300f715c64f99991635381bef0, type: 3}
       propertyPath: m_Name
       value: Room1
       objectReference: {fileID: 0}
-    - target: {fileID: 3807966870241956161, guid: 3f8727300f715c64f99991635381bef0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 4591331972361115414, guid: 3f8727300f715c64f99991635381bef0, type: 3}
+      propertyPath: laserColor
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6426756190491269100, guid: 3f8727300f715c64f99991635381bef0, type: 3}
       propertyPath: m_LocalPosition.x
