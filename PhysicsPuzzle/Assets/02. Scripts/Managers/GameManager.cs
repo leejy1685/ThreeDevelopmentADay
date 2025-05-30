@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -57,7 +57,7 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         //시작 카메라 연출
-        _lobbyCamera.gameObject.SetActive(true);
+        //_lobbyCamera.gameObject.SetActive(true);
     }
 
     private void Update()
