@@ -140,4 +140,30 @@ public class Pipe : MonoBehaviour, IInteractable
         // 이 포트 라인을 이번 프레임에 사용했음을 기록
         lastShotFrameByPort[port] = Time.frameCount;
     }
+
+    /// <summary>
+    /// 파이프 회전 코루틴
+    /// Pivot y축 기준으로 회전하는 파이프는 이 메소드 사용(Elboe,Cross)
+    /// </summary>
+    /// <param name="axis"></param>
+    /// <returns></returns>
+    public IEnumerator RotateAroundPivot(Vector3 axis)
+    {
+        isRotating = true;
+
+        Quaternion startRotation = transform.localRotation;
+        Quaternion targetRotation = startRotation * Quaternion.Euler(axis * rotationAngle);
+
+        float elapsed = 0f;
+
+        while (elapsed < rotationDuration)
+        {
+            transform.localRotation = Quaternion.Slerp(startRotation, targetRotation, elapsed / rotationDuration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localRotation = targetRotation;
+        isRotating = false;
+    }
 }
