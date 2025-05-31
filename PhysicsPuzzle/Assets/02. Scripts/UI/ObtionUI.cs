@@ -31,6 +31,6 @@ public class ObtionUI : BaseUI
 
     public void OnClickBackButton()
     {
-        uiManager.ChangeState(UIState.Lobby);
+        uiManager.ChangeState(uiManager.PrevState);
     }
 }

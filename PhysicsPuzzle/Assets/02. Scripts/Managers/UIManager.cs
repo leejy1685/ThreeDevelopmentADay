@@ -20,6 +20,9 @@ public class UIManager : Singleton<UIManager>
     ClearUI clearUI = null;
     
     public GameUI GameUI => gameUI;
+    
+    private UIState prevState;
+    public UIState PrevState => prevState;
 
     private void Awake()
     {
@@ -49,13 +52,6 @@ public class UIManager : Singleton<UIManager>
         gameUI?.SetActive(currentState);
         clearUI?.SetActive(currentState);
     }
-
-    
-    public void OnClickStart()
-    {
-        ChangeState(UIState.Game);
-        SceneHandleManager.Instance.LoadScene(SCENE_TYPE.Lobby); // 게임매니저에서 씬 전환을 통합할지 확인
-    }
     
     public void OnClickExit()
     {
@@ -71,5 +67,14 @@ public class UIManager : Singleton<UIManager>
         clearUI.SetClearTime(time,bestTime);
         ChangeState(UIState.Clear);
     }
+
+    public void SetOptionUI()
+    {
+        prevState = currentState;
+        ChangeState(UIState.Obtion);
+    }
+    
+    
+    
 }
 

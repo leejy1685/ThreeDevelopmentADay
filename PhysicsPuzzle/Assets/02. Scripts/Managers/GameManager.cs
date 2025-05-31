@@ -14,10 +14,12 @@ public class GameManager : Singleton<GameManager>
     [Header("[Managers]")]
     private UIManager _uiManager;
     private SceneHandleManager _sceneHandle;
+    //private StageManager _stageManager;
     
     [Header("[LoadData]")]
+    private Transform player;   //플레이어 좌표
     public bool isLoad;         //Load
-    private int lastClearPuzzle;     //
+    private int lastClearPuzzle;     //마지막 퍼즐
     private const string LASTSTAGE = "LastStage";   //마지막 스테이지
     private const string LASTTIME = "LastTime";     //마지막 시간
     private const string LASTCLEARPUZZLE = "LastClearPuzzle";//마지막 퍼즐
@@ -25,16 +27,13 @@ public class GameManager : Singleton<GameManager>
     [Header("[ClearData]")]
     private bool isClear;
     public float playTime;
-    public int CurrentClearPuzzle;   //스테이지 별 클리어 퍼즐 수
     
     [SerializeField] public LobbyCamera _lobbyCamera;   //로비 연출용 카메라
-
-    private Puzzle[] puzzles;
-    public Puzzle Puzzle => puzzles[CurrentClearPuzzle];
-    public Door[] doors;    //퍼즐 클리어 시 열리는 문
-    private Transform player;   //플레이어 좌표
     
-    private void Awake()
+    private bool isGameActive;
+    public bool IsGameActive { get => isGameActive; }
+    
+    protected override void Awake()
     {
         base.Awake();
         
@@ -54,6 +53,11 @@ public class GameManager : Singleton<GameManager>
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void Start()
     {
         //시작 카메라 연출
@@ -64,12 +68,13 @@ public class GameManager : Singleton<GameManager>
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            ClearPuzzle();
+            //ClearPuzzle();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            isGameActive = false;
             Cursor.lockState = CursorLockMode.None;
-            _uiManager.ChangeState(UIState.Obtion);
+            _uiManager.SetOptionUI();
         }
 
         if (_sceneHandle.currentScene != SCENE_TYPE.Lobby && !isClear)
@@ -84,28 +89,23 @@ public class GameManager : Singleton<GameManager>
     {
         _uiManager.GameUI.ChangeSceneName();
         
-        
-        //퍼즐 찾기
-        puzzles = FindObjectsOfType<Puzzle>();
-        Array.Sort(puzzles);
-        
-        //문 찾기
-        doors = FindObjectsOfType<Door>();
-        Array.Sort(doors);
-        
-
         //로딩 씬에선 캐릭터가 없기 떄문에 잡히지 않음.
         player = FindAnyObjectByType<Player>()?.transform;
         if (player != null)
         {
             //플레이어 배치
-            //player.position = new Vector3(20, 0, 0); //일단은 하드코딩
             LoadPlayerPosition();
         }
+        
+        //스테이지 매니저 할당하기
+        //_stageManager = StageManager.Instance;
     }
     
     public void GameStart()
     {
+        //게임 시작 중
+        isGameActive = true;
+        
         //마우스 커서 고정
         Cursor.lockState = CursorLockMode.Locked;
         
@@ -118,7 +118,6 @@ public class GameManager : Singleton<GameManager>
         //데이터 초기화
         isClear = false;
         playTime = 0;
-        CurrentClearPuzzle = 0;
         
         //카메라 변경
         _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
@@ -160,35 +159,26 @@ public class GameManager : Singleton<GameManager>
         if (isLoad)
         {
             //퍼즐 해결했을 때 위치
-            player.position = doors[lastClearPuzzle].PuzzleClearPosition();
+            //스테이지 매니저로 기능 할당
 
             //해결 했던 퍼즐의 문 파괴
             for (int i = 0; i <= lastClearPuzzle; i++)
             {
-                ClearPuzzle();
+                //스테이지 매니저로 기능 할당
             }
 
             isLoad = false;
         }
     }
 
-    public void ClearPuzzle()
+    public void SaveClearPuzzle()
     {
-        //문 오픈
-        doors[CurrentClearPuzzle].OpenDoor();
-        
         //클리어 저장
         PlayerPrefs.SetString(LASTSTAGE,_sceneHandle.currentScene.ToString());
         PlayerPrefs.SetFloat(LASTTIME,playTime);
-        PlayerPrefs.SetInt(LASTCLEARPUZZLE,CurrentClearPuzzle);
-        
-        //퍼즐 해결 카운트
-        CurrentClearPuzzle++;
-
-        if (doors.Length == CurrentClearPuzzle) 
-            StageClear();
-        
+        //PlayerPrefs.SetInt(LASTCLEARPUZZLE,CurrentClearPuzzle); 스테이지 매니저에서 퍼즐 번호 저장하기
     }
+    
     public void StageClear()
     {
         //마우스 고정 해제
@@ -211,7 +201,6 @@ public class GameManager : Singleton<GameManager>
         //데이터 초기화
         isClear = false;
         playTime = 0;
-        CurrentClearPuzzle = 0;
         
         //카메라 변경
         _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
@@ -224,9 +213,5 @@ public class GameManager : Singleton<GameManager>
         
         _sceneHandle.LoadScene(SCENE_TYPE.Lobby);
     }
-
-    public bool CheckLastPuzzle()
-    {
-        return puzzles.Length > CurrentClearPuzzle;
-    }
+    
 }
