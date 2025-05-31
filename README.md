@@ -54,12 +54,20 @@
 - E - 아이템 사용
 
 - Q - 아이템 버리기
-
+  
+- F - 오브젝트 상호작용
+  
 - C - 앉기
 
 - SCROLL - 아이템 선택
 
- ## 🛠️기술 스택
+### 🛠️기술 스택
+
+- Input System
+- URP
+- Shader Graph
+- Cinemachine
+- 
  
 ### 개발 환경
 - Unity 2022.3.17f1
@@ -67,5 +75,27 @@
   
  ### 리소스
 - 에셋 링크
-- 
 
+## 👥팀원 소개
+<a href="https://github.com/leejy1685" target="_blank">
+  <img src="https://github.com/leejy1685.png" width="80" style="border-radius: 50%;" />
+</a>
+<a href="https://github.com/ahb0923" target="_blank">
+  <img src="https://github.com/ahb0923.png" width="80" style="border-radius: 50%; margin-left: 10px;" />
+</a>
+<a href="https://github.com/hbks0224" target="_blank">
+  <img src="https://github.com/hbks0224.png" width="80" style="border-radius: 50%; margin-left: 10px;" />
+</a>
+<a href="https://github.com/Bangeunseong" target="_blank">
+  <img src="https://github.com/Bangeunseong.png" width="80" style="border-radius: 50%; margin-left: 10px;" />
+</a>
+<a href="https://github.com/gusdh8380" target="_blank">
+  <img src="https://github.com/gusdh8380.png" width="80" style="border-radius: 50%; margin-left: 10px;" />
+</a>
+<a href="https://github.com/codingnewwbie" target="_blank">
+  <img src="https://github.com/codingnewwbie.png" width="80" style="border-radius: 50%; margin-left: 10px;" />
+</a>
+
+### 플레이 링크
+
+- 플레이 링크 여기에
