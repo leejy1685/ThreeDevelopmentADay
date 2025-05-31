@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e591ce7f5a06432380c29f3b333bd15f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemTable: {fileID: 0}
+  itemTable: {fileID: 11400000, guid: a7992d446b5ea604d9357452c36b6c65, type: 2}
   itemTableLabel:
-    m_LabelString: 
+    m_LabelString: InkTable
