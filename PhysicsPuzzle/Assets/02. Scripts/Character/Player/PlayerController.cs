@@ -122,8 +122,8 @@ namespace _02._Scripts.Character.Player
             } 
             if (CheckWallCollision()) 
             { 
-                rigidBody.AddForce(-move.normalized * 2f, ForceMode.Impulse);
-                move /= currentSpeed;
+                // rigidBody.AddForce(-move.normalized * 2f, ForceMode.Impulse);
+                if(currentSpeed >= 0.1f) move /= currentSpeed;
             }
             rigidBody.MovePosition(transform.position + move);
         }
