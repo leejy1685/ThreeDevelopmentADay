@@ -6,22 +6,25 @@ namespace _02._Scripts.UI
 {
     public class ObtionUI : BaseUI
     {
-        [Header("[Option UI]")]
-        [SerializeField] private Slider bgmSlider;
+        [Header("[Option UI]")] [SerializeField]
+        private Slider bgmSlider;
+
         [SerializeField] private Slider sfxSlider;
         [SerializeField] private Button backButton;
 
         public override void Init(UIManager uiManager)
         {
             base.Init(uiManager);
-        
+
             backButton.onClick.AddListener(OnClickBackButton);
         }
 
         private void Update()
         {
-            sfxSlider.onValueChanged.AddListener((value) => SoundManager.Instance.SetSFXVolume = value);;
-            bgmSlider.onValueChanged.AddListener((value) => SoundManager.Instance.SetBGMVolume = value);;
+            sfxSlider.onValueChanged.AddListener((value) => SoundManager.Instance.SetSFXVolume = value);
+            ;
+            bgmSlider.onValueChanged.AddListener((value) => SoundManager.Instance.SetBGMVolume = value);
+            ;
         }
 
         protected override UIState GetUIState()
@@ -29,9 +32,10 @@ namespace _02._Scripts.UI
             return UIState.Obtion;
         }
 
+
         public void OnClickBackButton()
         {
-            uiManager.ChangeState(UIState.Lobby);
+            uiManager.ChangeState(uiManager.PrevState);
         }
     }
 }

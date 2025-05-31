@@ -104,4 +104,5 @@ public class SubDoors : MonoBehaviour
         _leftDoor.localPosition = leftTarget;
         _rightDoor.localPosition = rightTarget;
     }
+
 }
