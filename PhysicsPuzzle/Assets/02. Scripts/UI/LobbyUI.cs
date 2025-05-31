@@ -34,13 +34,12 @@ namespace _02._Scripts.UI
 
         private void OnClickStartButton()
         {
-            GameManager.Instance.StartGameLobby();
-            //UIManager.Instance.OnClickStart();
+            GameManager.Instance.GameStart();
         }
 
         private void OnClickLoadButton()
         {
-            GameManager.Instance.GameLoad();
+            GameManager.Instance.GameLoad_Button();
         }
 
 

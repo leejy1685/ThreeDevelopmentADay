@@ -6,31 +6,22 @@ using UnityEngine;
 
 namespace _02._Scripts.Managers.Destructable.Stage
 {
-    public class StageOneManager : Singleton<StageOneManager>
+    public class StageOneManager : StageManager
     {
-        [Header("Stage Clear Settings")]
-        [SerializeField] private bool isStageCleared;
-
-        [Header("Room Clear Settings")] 
-        [SerializeField] private int currentRoomCount;
-        [SerializeField] private bool[] isRoomCleared;
-        
         private ItemManager _itemManager;
         private ItemSpawnManager _itemSpawnManager;
-        private GameManager _gameManager;
-        private CharacterManager _characterManager;
-        private PlayerCondition _playerCondition;
         private bool _isItemSpawned;
-
-        private void Start()
+        
+        protected override void Awake()
         {
+            base.Awake();
             _itemManager = ItemManager.Instance;
             _itemSpawnManager = ItemSpawnManager.Instance;
-            _gameManager = GameManager.Instance;
-            _characterManager = CharacterManager.Instance;
-            _playerCondition = _characterManager.Player.PlayerCondition;
-            
-            isRoomCleared = new bool[currentRoomCount];
+        }
+
+        protected override void Start()
+        {
+            base.Start();
             _playerCondition.SetGravityAllow(false);
         }
 
@@ -44,14 +35,6 @@ namespace _02._Scripts.Managers.Destructable.Stage
                     _isItemSpawned = true;
                 }
             }
-        }
-
-        public void RoomCleared(int roomId)
-        {
-            isRoomCleared[roomId] = true;
-            if (isRoomCleared.Any(isCleared => !isCleared)) return;
-            isStageCleared = true;
-            _gameManager.StageClear();
         }
     }
 }

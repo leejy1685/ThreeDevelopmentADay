@@ -10,14 +10,14 @@ namespace _02._Scripts.Managers.Indestructable
         Game,
         Clear,
         Obtion,
-        ObjectAndPipe,
         LoadingScene
     }
     
     public class UIManager : Singleton<UIManager>
     {
-    
-        
+
+        private UIState prevState;
+        public UIState PrevState { get => prevState; }
         public UIState currentState = UIState.Lobby;
         LobbyUI lobbyUI = null;
         ObtionUI obtionUI = null;
@@ -54,13 +54,6 @@ namespace _02._Scripts.Managers.Indestructable
             gameUI?.SetActive(currentState);
             clearUI?.SetActive(currentState);
         }
-    
-        
-        public void OnClickStart()
-        {
-            ChangeState(UIState.Game);
-            SceneHandleManager.Instance.LoadScene(SCENE_TYPE.Lobby); // 게임매니저에서 씬 전환을 통합할지 확인
-        }
         
         public void OnClickExit()
         {
@@ -75,6 +68,19 @@ namespace _02._Scripts.Managers.Indestructable
         {
             clearUI.SetClearTime(time,bestTime);
             ChangeState(UIState.Clear);
+        }
+
+        public void SetOptionUI()
+        {
+            prevState = currentState;
+            ChangeState(UIState.Obtion);
+        }
+
+        public void SetGameUI(bool timer)
+        {
+            GameUI.ChangeSceneName();
+            gameUI.SetTimer(timer);
+            ChangeState(UIState.Game);
         }
     }
 }

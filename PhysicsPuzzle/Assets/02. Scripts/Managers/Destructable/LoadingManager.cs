@@ -12,6 +12,7 @@ namespace _02._Scripts.Managers.Destructable
 
         private void Start()
         {
+            UIManager.Instance.ChangeState(UIState.LoadingScene);
             StartCoroutine(LoadTargetScene_Coroutine());
         }
 

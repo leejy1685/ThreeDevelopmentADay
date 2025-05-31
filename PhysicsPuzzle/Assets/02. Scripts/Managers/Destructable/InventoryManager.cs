@@ -134,8 +134,6 @@ namespace _02._Scripts.Managers.Destructable
 
         public void ResetAllSlots()
         {
-            Debug.Log("Reset All Slots");
-            
             foreach(var slot in itemSlots) slot.Clear();
             itemSlots.Clear();
             foreach (var go in itemSlotPrefabs)Destroy(go);
