@@ -120,7 +120,11 @@ namespace _02._Scripts.Character.Player
                 
                 _isJumpPressed = false;
             } 
-            if (CheckWallCollision()) rigidBody.AddForce(-move.normalized * 2f, ForceMode.Impulse);
+            if (CheckWallCollision()) 
+            { 
+                rigidBody.AddForce(-move.normalized * 2f, ForceMode.Impulse);
+                move /= currentSpeed;
+            }
             rigidBody.MovePosition(transform.position + move);
         }
         
