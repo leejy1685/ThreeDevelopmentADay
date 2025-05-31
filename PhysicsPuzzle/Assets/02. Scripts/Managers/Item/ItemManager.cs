@@ -16,6 +16,7 @@ namespace _02._Scripts.Managers.Item
             
         // Properties
         public ItemTable ItemTable => itemTable;
+        public bool IsItemTableLoaded => itemTable;
             
         private void Awake()
         {
@@ -36,7 +37,6 @@ namespace _02._Scripts.Managers.Item
             {
                 itemTable = handle.Result;
                 Debug.Log("ItemTable Load Completed!");
-                ItemSpawnManager.Instance.SpawnItemBoxes();
             }
             else
             {

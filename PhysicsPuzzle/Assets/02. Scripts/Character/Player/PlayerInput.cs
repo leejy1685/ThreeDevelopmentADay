@@ -55,6 +55,7 @@ namespace _02._Scripts.Character.Player
 
         public void OnChangeGravity(InputAction.CallbackContext context)
         {
+            if (!playerCondition.IsGravityAllowed) return;
             if(context.started) playerController.OnChangeGravity();
         }
 

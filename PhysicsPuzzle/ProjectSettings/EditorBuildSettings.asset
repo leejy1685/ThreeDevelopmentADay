@@ -23,4 +23,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01. Scenes/DayAndNightGravity.unity
     guid: 1713ded6f21975d418786f6b48c10e85
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 18814312cc8ee1749b9e57db5a2fc0ca, type: 2}

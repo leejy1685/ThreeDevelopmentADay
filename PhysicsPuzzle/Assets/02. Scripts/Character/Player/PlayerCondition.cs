@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using _02._Scripts.Managers;
 using _02._Scripts.UI;
 using Cinemachine;
@@ -12,6 +13,7 @@ namespace _02._Scripts.Character.Player
         [SerializeField] private bool isPlayerCharacterHasControl = true;
         [SerializeField] private float timeChangeCooldown = 3f;
         [SerializeField] private float gravityChangeCooldown = 3f;
+        [SerializeField] private bool isGravityAllowed;
         
         [Header("Virtual Cameras")]
         [SerializeField] private CinemachineVirtualCamera firstPersonCamera;
@@ -31,12 +33,18 @@ namespace _02._Scripts.Character.Player
         public bool IsPlayerUpsideDown { get; private set; }
         public bool IsGodMode { get; private set; }
         public bool IsMoonTime { get; private set; }
+        public bool IsGravityAllowed => isGravityAllowed;
 
         private void Start()
         {
             _gameUI = UIManager.Instance.GameUI;
             _player = CharacterManager.Instance.Player;
             _playerController = _player.PlayerController;
+        }
+
+        public void SetGravityAllow(bool isAllowed)
+        {
+            isGravityAllowed = isAllowed;
         }
 
         public void ToggleGodMode()
