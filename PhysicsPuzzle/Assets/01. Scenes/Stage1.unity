@@ -185,6 +185,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7571869139598616909, guid: 8d85e6370c513b447a5a73a3a144bfd1, type: 3}
   m_PrefabInstance: {fileID: 64652591}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &152848364 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6850557317937054288, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+  m_PrefabInstance: {fileID: 1598859988}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55a1816fbe94ad1b4d7d9d9c3847730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &410601925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -940,6 +951,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionId
+      value: 8b645df8-074b-4ee7-b07a-81cbf4695fd8
+      objectReference: {fileID: 0}
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionName
+      value: Player/GodMode[/Keyboard/t]
+      objectReference: {fileID: 0}
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 152848364}
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnGodMode
+      objectReference: {fileID: 0}
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: _02._Scripts.Character.Player.PlayerInput, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 1141663084719360671, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
       propertyPath: m_Name
       value: Player
