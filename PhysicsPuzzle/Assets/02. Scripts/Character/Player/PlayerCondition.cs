@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using _02._Scripts.Managers;
 using _02._Scripts.UI;
 using Cinemachine;
 using UnityEngine;
@@ -20,17 +21,28 @@ namespace _02._Scripts.Character.Player
         private float _timeSinceLastTimeSkill;
         private float _timeSinceLastGravitySkill;
         private GameUI _gameUI;
+        private Player _player;
+        private PlayerController _playerController;
         
         // Properties
         public bool IsGravitySkillAvailable { get; private set; } = true;
         public bool IsTimeSkillAvailable { get; private set; } = true;
         public bool IsPlayerCharacterHasControl => isPlayerCharacterHasControl;
         public bool IsPlayerUpsideDown { get; private set; }
+        public bool IsGodMode { get; private set; }
         public bool IsMoonTime { get; private set; }
 
         private void Start()
         {
             _gameUI = UIManager.Instance.GameUI;
+            _player = CharacterManager.Instance.Player;
+            _playerController = _player.PlayerController;
+        }
+
+        public void ToggleGodMode()
+        {
+            IsGodMode = !IsGodMode;
+            _playerController.ToggleGodModePhysics();
         }
 
         public void RunGravitySkillCoolTime()

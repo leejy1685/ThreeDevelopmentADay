@@ -41,6 +41,12 @@ namespace _02._Scripts.Character.Player
         private CharacterManager _characterManager;
         private EnvironmentManager _environmentManager;
         
+        // Player Setting Fields
+        private float _maxSpeed;
+        private float _crouchSpeed;
+        private float _gravityValue;
+        private float _jumpForce;
+        
         // Player State Fields
         private bool _isGrounded = true;
         private bool _isCrouch;
@@ -61,6 +67,11 @@ namespace _02._Scripts.Character.Player
             _cameraPivot = cameraController.CameraPivot;
             _characterManager = CharacterManager.Instance;
             _environmentManager = EnvironmentManager.Instance;
+            
+            _maxSpeed = maxSpeed;
+            _crouchSpeed = crouchSpeed;
+            _gravityValue = gravityValue;
+            _jumpForce = jumpForce;
             
             originalCameraPositionY = _cameraPivot.localPosition.y;
             playerAnimator = _characterManager.Player.PlayerAnimation;
@@ -120,7 +131,11 @@ namespace _02._Scripts.Character.Player
                 
                 _isJumpPressed = false;
             } 
-            if (CheckWallCollision()) rigidBody.AddForce(-move.normalized * 2f, ForceMode.Impulse);
+            if (CheckWallCollision()) 
+            { 
+                // rigidBody.AddForce(-move.normalized * 2f, ForceMode.Impulse);
+                if(currentSpeed >= 0.1f) move /= currentSpeed;
+            }
             rigidBody.MovePosition(transform.position + move);
         }
         
@@ -195,6 +210,24 @@ namespace _02._Scripts.Character.Player
         private bool IsPlayerGrounded()
         {
             return Physics.CheckSphere(transform.position + (transform.up * 0.25f), 0.35f, groundLayer);
+        }
+
+        public void ToggleGodModePhysics()
+        {
+            if (playerCondition.IsGodMode)
+            {
+                maxSpeed = 20f;
+                crouchSpeed = 10f;
+                gravityValue = 3f;
+                jumpForce = 25f;
+            } 
+            else
+            {
+                maxSpeed = _maxSpeed;
+                crouchSpeed = _crouchSpeed;
+                gravityValue = _gravityValue;
+                jumpForce = _jumpForce;
+            }
         }
         
         #region Player Input Methods

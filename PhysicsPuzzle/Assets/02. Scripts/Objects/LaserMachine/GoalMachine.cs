@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor.XR;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -19,6 +20,8 @@ namespace _02._Scripts.Objects.LaserMachine
 
         private float _lastHitTime;
         private float _emissionDuration = 0.05f;
+
+        public bool IsActivate {  get { return isActivate; } }
 
         private void Awake()
         {
