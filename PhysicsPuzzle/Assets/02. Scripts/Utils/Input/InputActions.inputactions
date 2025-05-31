@@ -83,7 +83,7 @@
                     "id": "97f92654-86d4-423d-a86d-56cec3aa86e8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=1.5)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -274,7 +274,7 @@
                 {
                     "name": "",
                     "id": "43e91b7e-f946-4c82-b8ba-fd3a23ec01d4",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
