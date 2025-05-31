@@ -4,35 +4,38 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum SCENE_TYPE
+namespace _02._Scripts.Managers.Indestructable
 {
-    // 여기에 하드코딩 방지용 SceneName
-    LoadingScene,
-    Lobby,
-    ObjectAndPipe,
-    DayAndNightGravity,
-    Count,
-}
-public class SceneHandleManager : Singleton<SceneHandleManager>
-{
-    
-    public SCENE_TYPE currentScene;
-    private string nextSceneName;
-    public string NextSceneName { get => nextSceneName; }
-
-    protected override void Awake()
+    public enum SCENE_TYPE
     {
-        base.Awake();
-        
-        currentScene = SCENE_TYPE.Lobby;
+        // 여기에 하드코딩 방지용 SceneName
+        LoadingScene,
+        Lobby,
+        ObjectAndPipe,
+        DayAndNightGravity,
+        Count,
     }
-
-
-    // 로딩 씬전환 시 호출
-    public void LoadScene(SCENE_TYPE sceneName)
+    public class SceneHandleManager : Singleton<SceneHandleManager>
     {
-        currentScene = sceneName;
-        nextSceneName = sceneName.ToString();
-        SceneManager.LoadScene(SCENE_TYPE.LoadingScene.ToString());
+        
+        public SCENE_TYPE currentScene;
+        private string nextSceneName;
+        public string NextSceneName { get => nextSceneName; }
+    
+        protected override void Awake()
+        {
+            base.Awake();
+            
+            currentScene = SCENE_TYPE.Lobby;
+        }
+    
+    
+        // 로딩 씬전환 시 호출
+        public void LoadScene(SCENE_TYPE sceneName)
+        {
+            currentScene = sceneName;
+            nextSceneName = sceneName.ToString();
+            SceneManager.LoadScene(SCENE_TYPE.LoadingScene.ToString());
+        }
     }
 }

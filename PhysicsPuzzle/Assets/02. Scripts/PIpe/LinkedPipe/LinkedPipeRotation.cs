@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using _02._Scripts.Utils.Interface;
+using _02._Scripts.Character.Player.Interface;
 using UnityEngine;
 
 namespace _02._Scripts.PIpe.ConnectionPipe

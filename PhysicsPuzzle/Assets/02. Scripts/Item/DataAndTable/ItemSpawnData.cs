@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using _02._Scripts.Objects.LaserMachine;
-using AYellowpaper.SerializedCollections;
-using UnityEngine;
 
-namespace _02._Scripts.Item
+namespace _02._Scripts.Item.DataAndTable
 {
     [Serializable] public class ItemSpawnData
     {

@@ -1,4 +1,4 @@
-﻿namespace _02._Scripts.Utils.Interface
+﻿namespace _02._Scripts.Character.Player.Interface
 {
     public interface IInteractable
     {

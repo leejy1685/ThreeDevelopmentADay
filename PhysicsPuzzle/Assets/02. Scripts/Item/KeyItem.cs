@@ -1,7 +1,7 @@
-﻿using _02._Scripts.Item.DataAndTable;
+﻿using _02._Scripts.Character.Player.Interface;
+using _02._Scripts.Item.DataAndTable;
 using _02._Scripts.Managers;
 using _02._Scripts.Managers.Destructable;
-using _02._Scripts.Utils.Interface;
 using UnityEngine;
 
 namespace _02._Scripts.Item

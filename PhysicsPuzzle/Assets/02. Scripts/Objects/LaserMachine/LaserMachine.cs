@@ -1,7 +1,7 @@
 using _02._Scripts.Character.Player;
 using _02._Scripts.Managers;
-using _02._Scripts.Utils.Interface;
 using System.Collections.Generic;
+using _02._Scripts.Character.Player.Interface;
 using _02._Scripts.Managers.Destructable;
 using UnityEngine;
 using UnityEngine.Rendering;
