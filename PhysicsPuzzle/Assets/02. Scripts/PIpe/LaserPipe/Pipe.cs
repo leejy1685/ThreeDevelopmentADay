@@ -1,8 +1,8 @@
 ﻿using _02._Scripts.Objects.LaserMachine;
-using _02._Scripts.Utils.Interface;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _02._Scripts.Character.Player.Interface;
 using Unity.VisualScripting;
 using UnityEngine;
 

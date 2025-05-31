@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.Objects.LaserMachine;
 using UnityEngine;
 

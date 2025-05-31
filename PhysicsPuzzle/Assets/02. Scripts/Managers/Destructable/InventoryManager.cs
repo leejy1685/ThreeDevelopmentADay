@@ -4,6 +4,7 @@ using _02._Scripts.Character.Player;
 using _02._Scripts.Item;
 using _02._Scripts.Item.DataAndTable;
 using _02._Scripts.Managers.Destructable.Item;
+using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.Objects.LaserMachine;
 using _02._Scripts.Utils;
 using JetBrains.Annotations;
@@ -121,6 +122,12 @@ namespace _02._Scripts.Managers.Destructable
                 if (slot.ItemData) slot.Set();
                 else slot.Clear();
             }
+        }
+
+        public void ResetAllSlots()
+        {
+            foreach(var slot in itemSlots) slot.Clear();
+            itemSlots.Clear();
         }
         
         private ItemSlot GetItemInStack(ItemData data)
