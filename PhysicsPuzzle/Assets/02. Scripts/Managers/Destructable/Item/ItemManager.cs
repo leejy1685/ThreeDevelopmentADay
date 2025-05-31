@@ -4,21 +4,18 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace _02._Scripts.Managers.Item
+namespace _02._Scripts.Managers.Destructable.Item
 {
-    public class ItemManager : MonoBehaviour
+    public class ItemManager : Singleton<ItemManager>
     {
         [SerializeField] private ItemTable itemTable;
         [SerializeField] private AssetLabelReference itemTableLabel;
-            
-        // Singleton
-        public static ItemManager Instance { get; private set; }
             
         // Properties
         public ItemTable ItemTable => itemTable;
         public bool IsItemTableLoaded => itemTable;
             
-        private void Awake()
+        protected override void Awake()
         {
             if (!Instance)
             {

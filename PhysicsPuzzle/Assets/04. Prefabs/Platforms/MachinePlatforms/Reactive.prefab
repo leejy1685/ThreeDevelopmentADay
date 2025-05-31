@@ -148,14 +148,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 6046776299160044895}
     m_Modifications:
     - target: {fileID: 3929060055168957645, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3929060055168957645, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3929060055168957645, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
       objectReference: {fileID: 0}
@@ -198,22 +190,6 @@ PrefabInstance:
     - target: {fileID: 4228276543891934819, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
       propertyPath: m_Name
       value: ReactiveMachine
-      objectReference: {fileID: 0}
-    - target: {fileID: 5223892718615033384, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_Parameters.widthMultiplier
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 8873057653244312214, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8873057653244312214, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8873057653244312214, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

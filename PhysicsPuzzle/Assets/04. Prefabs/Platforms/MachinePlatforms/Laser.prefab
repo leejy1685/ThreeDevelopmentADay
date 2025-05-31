@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: laserColor
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8965806539318086713, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
+      propertyPath: pitchSpeed
+      value: 45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

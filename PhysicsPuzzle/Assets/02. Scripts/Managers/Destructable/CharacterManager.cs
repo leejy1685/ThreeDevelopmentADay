@@ -2,20 +2,17 @@
 using _02._Scripts.Utils;
 using UnityEngine;
 
-namespace _02._Scripts.Managers
+namespace _02._Scripts.Managers.Destructable
 {
-    public class CharacterManager : MonoBehaviour
+    public class CharacterManager : Singleton<CharacterManager>
     {
         // Fields
         [SerializeField] private Player player;
         
         // Properties
         public Player Player => player;
-        
-        // Singleton
-        public static CharacterManager Instance { get; private set; }
 
-        private void Awake()
+        protected override void Awake()
         {
             if (!Instance)
             {

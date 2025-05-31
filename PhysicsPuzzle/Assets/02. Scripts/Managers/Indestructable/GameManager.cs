@@ -1,10 +1,5 @@
 using System;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using _02._Scripts.Character.Player;
-using _02._Scripts.Objects.LaserMachine;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -32,8 +27,11 @@ public class GameManager : Singleton<GameManager>
 
     public Door[] doors;    //퍼즐 클리어 시 열리는 문
     private Transform player;   //플레이어 좌표
+    private bool isGameActive = true;
     
-    private void Awake()
+    public bool IsGameActive => isGameActive;
+    
+    protected override void Awake()
     {
         base.Awake();
         
@@ -44,19 +42,14 @@ public class GameManager : Singleton<GameManager>
         PlayerPrefs.SetInt(LASTCLEARPUZZLE,3);
     }
 
-    //씬이 넘어갈 때 사용
-    void OnEnable()
-    {
-        _uiManager = UIManager.Instance;
-        _sceneHandle = SceneHandleManager.Instance;
-        // 씬 매니저의 sceneLoaded에 체인을 건다.
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
     private void Start()
     {
         //시작 카메라 연출
-        _lobbyCamera.gameObject.SetActive(true);
+        // _lobbyCamera.gameObject.SetActive(true);
+        _uiManager = UIManager.Instance;
+        _sceneHandle = SceneHandleManager.Instance;
+        // 씬 매니저의 sceneLoaded에 체인을 건다
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     private void Update()
@@ -94,6 +87,9 @@ public class GameManager : Singleton<GameManager>
     
     public void GameStart()
     {
+        // 게임 시작
+        isGameActive = true;
+        
         //마우스 커서 고정
         Cursor.lockState = CursorLockMode.Locked;
         

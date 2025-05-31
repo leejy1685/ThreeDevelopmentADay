@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.Item;
 using _02._Scripts.Item.DataAndTable;
@@ -8,9 +7,9 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace _02._Scripts.Managers.Item
+namespace _02._Scripts.Managers.Destructable.Item
 {
-    public class ItemSpawnManager : MonoBehaviour
+    public class ItemSpawnManager : Singleton<ItemSpawnManager>
     {
         [Header("ItemBox Spawn Settings")]
         [SerializeField] private List<Transform> itemBoxSpawnPoints;
@@ -21,11 +20,8 @@ namespace _02._Scripts.Managers.Item
         [SerializeField] private ItemSpawnTable itemSpawnTable;
         
         public bool IsItemSpawnTableLoaded => itemSpawnTable;
-        
-        // Singleton
-        public static ItemSpawnManager Instance { get; private set; }
 
-        private void Awake()
+        protected override void Awake()
         {
             if (!Instance)
             {
@@ -42,11 +38,11 @@ namespace _02._Scripts.Managers.Item
             if (handle.Status == AsyncOperationStatus.Succeeded)
             {
                 itemSpawnTable = handle.Result;
-                Debug.Log("ItemTable Load Completed!");
+                Debug.Log("ItemSpawnTable Load Completed!");
             }
             else
             {
-                Debug.LogError("ItemTable Load Failed!");
+                Debug.LogError("ItemSpawnTable Load Failed!");
             }
         }
         

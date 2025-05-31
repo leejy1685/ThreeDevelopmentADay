@@ -3,14 +3,15 @@ using System.Linq;
 using _02._Scripts.Character.Player;
 using _02._Scripts.Item;
 using _02._Scripts.Item.DataAndTable;
+using _02._Scripts.Managers.Destructable.Item;
 using _02._Scripts.Objects.LaserMachine;
 using _02._Scripts.Utils;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace _02._Scripts.Managers
+namespace _02._Scripts.Managers.Destructable
 {
-    public class InventoryManager : MonoBehaviour
+    public class InventoryManager : Singleton<InventoryManager>
     {
         [Header("Inventory Slots")] 
         [SerializeField] private List<ItemSlot> itemSlots;
@@ -31,18 +32,10 @@ namespace _02._Scripts.Managers
         private PlayerInteraction _playerInteraction;
         private PlayerCondition _playerCondition;
         private Player _player;
+        private ItemManager _itemManager;
         
         // Properties
         public ItemData SelectedItem => selectedItem;
-        
-        // Singleton
-        public static InventoryManager Instance { get; private set; }
-
-        private void Awake()
-        {
-            if (!Instance) { Instance = this; }
-            else { if(Instance != this) Destroy(gameObject); }
-        }
 
         private void Start()
         {
@@ -52,8 +45,9 @@ namespace _02._Scripts.Managers
             _playerCondition = _characterManager.Player.PlayerCondition;
             _player = _characterManager.Player;
             _uiManager = UIManager.Instance;
-            itemThrowPivot = _player.ItemThrowPivot;
+            _itemManager = ItemManager.Instance;
             
+            itemThrowPivot = _player.ItemThrowPivot;
             itemSlots = new List<ItemSlot> { Capacity = maxDataCount };
 
             for (var i = 0; i < maxDataCount; i++)
@@ -105,6 +99,10 @@ namespace _02._Scripts.Managers
         {
             if (!selectedItem || !_playerCondition.IsPlayerCharacterHasControl) return;
             if (_playerInteraction.Interactable is not LaserMachine laserMachine) return;
+            if (laserMachine.laserColor != LASER_COLOR.White)
+            {
+                Instantiate(_itemManager.ItemTable.GetItemByIndex((int)laserMachine.laserColor).itemPrefab, laserMachine.Barrel.ItemSpawnPoint.position, Quaternion.identity); 
+            }
             laserMachine.SetColorOfMachine(selectedItem.color);
             RemoveSelectedItem();
         }

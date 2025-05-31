@@ -49,4 +49,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   itemBoxPrefab: {fileID: 6216242660270982858, guid: 4046fadf822f4774489801d92e6a1d9e, type: 3}
+  itemSpawnTableLabel:
+    m_LabelString: ItemSpawnTable
   itemSpawnTable: {fileID: 11400000, guid: c29f7de34376f8b44a091d3bac313e00, type: 2}

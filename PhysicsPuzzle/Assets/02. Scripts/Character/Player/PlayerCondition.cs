@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.Managers;
+using _02._Scripts.Managers.Destructable;
 using _02._Scripts.UI;
 using Cinemachine;
 using UnityEngine;

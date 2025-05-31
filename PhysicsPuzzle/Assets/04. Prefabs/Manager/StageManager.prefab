@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 651f1d635e31460bb96a9129d6bcde7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStageCleared: 0
+  currentRoomCount: 3
+  isRoomCleared: 

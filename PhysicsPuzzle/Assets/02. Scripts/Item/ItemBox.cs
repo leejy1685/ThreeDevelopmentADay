@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using _02._Scripts.Managers;
-using _02._Scripts.Managers.Item;
+using _02._Scripts.Managers.Destructable.Item;
 using _02._Scripts.Objects.LaserMachine;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;

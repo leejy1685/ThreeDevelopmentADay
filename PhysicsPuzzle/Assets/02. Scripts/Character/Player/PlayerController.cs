@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using _02._Scripts.Character.Player.Camera;
 using _02._Scripts.Managers;
+using _02._Scripts.Managers.Destructable;
 using _02._Scripts.Objects.LaserMachine;
 using _02._Scripts.PIpe.ConnectionPipe;
 using _02._Scripts.Utils;

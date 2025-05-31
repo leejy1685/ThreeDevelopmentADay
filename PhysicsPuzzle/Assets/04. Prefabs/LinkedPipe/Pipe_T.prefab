@@ -244,8 +244,9 @@ GameObject:
   - component: {fileID: 9039903012192732408}
   - component: {fileID: 4343499203768925868}
   - component: {fileID: 1009281433088473505}
-  - component: {fileID: 3768502691727704768}
   - component: {fileID: 5803541180184630773}
+  - component: {fileID: 3768502691727704768}
+  - component: {fileID: 876354613325399969}
   m_Layer: 7
   m_Name: Pipe_T
   m_TagString: LinkedPipe
@@ -344,33 +345,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -8966584397558611351, guid: a20f45ea4d571994cb4f76ce98535a80, type: 3}
---- !u!114 &3768502691727704768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7768384746833001345}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5b7e203ba9effa4b903cc48b8bf1636, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  materials:
-  - {fileID: 2100000, guid: 5d747dcd45eab2a41a9f7149b0f026b6, type: 2}
-  - {fileID: 2100000, guid: 7e04f706f9e3f7f468772566c9b75da8, type: 2}
-  - {fileID: 2100000, guid: 1a63d72c6152ef54493960acf859fc4a, type: 2}
-  - {fileID: 2100000, guid: 805487a24eecbcf4a923c3ff4746bd22, type: 2}
-  - {fileID: 2100000, guid: 52e4708390753da4d9c262a4a102d958, type: 2}
-  - {fileID: 2100000, guid: eb42043ce030bd64abb0a0f6dfc0e4fd, type: 2}
-  materialDictionary:
-    _serializedList: []
-  ports:
-  - {fileID: 5328654494969135011}
-  - {fileID: 6559566721759545390}
-  - {fileID: 2018741191067238489}
-  render: {fileID: 0}
-  receivedColor: 0
 --- !u!54 &5803541180184630773
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -398,3 +372,45 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3768502691727704768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7768384746833001345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5b7e203ba9effa4b903cc48b8bf1636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materials:
+  - {fileID: 2100000, guid: 5d747dcd45eab2a41a9f7149b0f026b6, type: 2}
+  - {fileID: 2100000, guid: 7e04f706f9e3f7f468772566c9b75da8, type: 2}
+  - {fileID: 2100000, guid: 1a63d72c6152ef54493960acf859fc4a, type: 2}
+  - {fileID: 2100000, guid: 805487a24eecbcf4a923c3ff4746bd22, type: 2}
+  - {fileID: 2100000, guid: 52e4708390753da4d9c262a4a102d958, type: 2}
+  - {fileID: 2100000, guid: eb42043ce030bd64abb0a0f6dfc0e4fd, type: 2}
+  materialDictionary:
+    _serializedList: []
+  ports:
+  - {fileID: 5328654494969135011}
+  - {fileID: 6559566721759545390}
+  - {fileID: 2018741191067238489}
+  render: {fileID: 0}
+  receivedColor: 0
+--- !u!114 &876354613325399969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7768384746833001345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5086961bba634c60a9d6d3e85bf75e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationAngle: 90
+  rotationDuration: 0.5
+  rotationPivot: {fileID: 3169766343994006524}

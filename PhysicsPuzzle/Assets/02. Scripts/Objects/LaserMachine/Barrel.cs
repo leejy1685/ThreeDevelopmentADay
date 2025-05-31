@@ -1,7 +1,7 @@
 ﻿using System;
 using _02._Scripts.Item.DataAndTable;
 using _02._Scripts.Managers;
-using _02._Scripts.Managers.Item;
+using _02._Scripts.Managers.Destructable.Item;
 using _02._Scripts.Utils.Interface;
 using UnityEngine;
 
@@ -15,6 +15,8 @@ namespace _02._Scripts.Objects.LaserMachine
         private LaserMachine _laserMachine;
         private ItemManager _itemManager;
         private ItemTable _itemTable;
+        
+        public Transform ItemSpawnPoint => itemSpawnPoint;
 
         public void Init(LaserMachine laserMachine)
         {

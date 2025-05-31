@@ -22,7 +22,7 @@ public class UIManager : Singleton<UIManager>
     
     public GameUI GameUI => gameUI;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
 

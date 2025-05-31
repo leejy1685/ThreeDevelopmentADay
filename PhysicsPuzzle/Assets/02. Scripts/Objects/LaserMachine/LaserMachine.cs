@@ -2,6 +2,7 @@ using _02._Scripts.Character.Player;
 using _02._Scripts.Managers;
 using _02._Scripts.Utils.Interface;
 using System.Collections.Generic;
+using _02._Scripts.Managers.Destructable;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -44,6 +45,8 @@ namespace _02._Scripts.Objects.LaserMachine
         private bool _isFiring = false; // 발사 체크 
         private float _currPitch; // 현재 Z축 회전값
 
+        public Barrel Barrel => barrel;
+        
         private void Awake()
         {
             var i = 0;

@@ -30,7 +30,6 @@ public class SoundManager : Singleton<SoundManager>
         set { SFXVolume = Mathf.Clamp(value, 0f, 1f); }
     }
 
-
     protected override void Awake()
     {
         base.Awake();
@@ -55,8 +54,4 @@ public class SoundManager : Singleton<SoundManager>
         SoundSource soundSource = obj.GetComponent<SoundSource>();
         soundSource.Play(clip, Instance.SFXVolume, Instance.pitchValue);
     }
-    
-    
-    
-    
 }
