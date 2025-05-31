@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -8,8 +6,6 @@ using UnityEngine.UI;
 public class LoadingManager : Singleton<LoadingManager>
 {
     [SerializeField] public Slider progressBar;
-    [SerializeField] public Image fadeImage;
-    [SerializeField] public TextMeshProUGUI text;
 
     private void Start()
     {
@@ -42,41 +38,7 @@ public class LoadingManager : Singleton<LoadingManager>
         //1초 기다렸다 화면 전환, 클릭으로 화면 전환 받을 거면 이곳에서 구현
         yield return new WaitForSeconds(1f);
 
-        text.text = "Press any key";
-
-        yield return StartCoroutine(WaitUserInput_Coroutine());
-
-        yield return StartCoroutine(FadeOut_Coroutine());
-
         // 화면 전환
         operation.allowSceneActivation = true;
     }
-    IEnumerator WaitUserInput_Coroutine()
-    {
-        float elapsedTime = 0f;
-
-        while (!Input.anyKeyDown && !Input.GetMouseButtonDown(0))
-        {
-            elapsedTime += Time.deltaTime;
-
-            float alphaValue = Mathf.PingPong(elapsedTime * 1.5f, 1f);
-            text.color = new Color(text.color.r, text.color.g, text.color.b, Mathf.Lerp(0.2f, 1f, alphaValue));
-            yield return null;
-        }
-    }
-    IEnumerator FadeOut_Coroutine()
-    {
-        float elapsedTime = 0f; ;
-        float fadeDuration = 1f;
-        Color color = fadeImage.color;
-        while(elapsedTime < fadeDuration)
-        {
-            elapsedTime += Time.deltaTime;
-            float alphaValue = Mathf.Lerp(0f, 1f, elapsedTime / fadeDuration);
-            fadeImage.color = new Color(color.r, color.g, color.b, alphaValue);
-            yield return null;
-        }
-        fadeImage.color = new Color(color.r, color.g, color.b, 1f);
-    }
-
 }

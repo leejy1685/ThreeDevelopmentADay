@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using _02._Scripts.Character.Player;
-using _02._Scripts.Managers;
 using _02._Scripts.Managers.Destructable;
 using _02._Scripts.Objects.LaserMachine;
 using _02._Scripts.Utils.Interface;

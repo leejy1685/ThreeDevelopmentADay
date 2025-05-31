@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using _02._Scripts.Utils;
-using _02._Scripts.Utils.Interface;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 

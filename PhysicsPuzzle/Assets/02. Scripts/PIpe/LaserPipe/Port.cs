@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using _02._Scripts.Objects.LaserMachine;
 
 [RequireComponent(typeof(Collider))]
 /// <summary>

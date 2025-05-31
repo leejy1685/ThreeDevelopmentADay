@@ -6,7 +6,6 @@ public enum UIState
     Game,
     Clear,
     Obtion,
-    ObjectAndPipe,
     LoadingScene
 }
 
