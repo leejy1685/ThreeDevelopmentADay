@@ -1,6 +1,7 @@
 using System;
 using _02._Scripts.Camera;
 using _02._Scripts.Character.Player;
+using _02._Scripts.Managers.Destructable;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -83,8 +84,17 @@ namespace _02._Scripts.Managers.Indestructable
             if (player != null)
             {
                 //플레이어 배치
-                player.position = new Vector3(20, 0, 0); //일단은 하드코딩
+                //player.position = new Vector3(20, 0, 0); //일단은 하드코딩
                 LoadPlayerPosition();
+            }
+
+            if (scene.name == SCENE_TYPE.LoadingScene.ToString())
+            {
+                _uiManager.ChangeState(UIState.LoadingScene);
+            }
+            else
+            {
+                _uiManager.ChangeState(UIState.Game);
             }
         }
     
