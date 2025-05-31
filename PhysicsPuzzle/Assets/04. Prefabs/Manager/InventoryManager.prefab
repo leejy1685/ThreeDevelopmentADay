@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSlots: []
   maxDataCount: 5
-  itemSlotPrefab: {fileID: 8316218638631259926, guid: 3fdfdf4fb1745fd49b3f03d82a4ef25e, type: 3}
+  itemSlotPrefab: {fileID: 8827487839027712962, guid: d0d7e5b882cb9ae4baa0841c029945a4, type: 3}
   selectedItem: {fileID: 0}
   selectedItemIndex: 0
   itemThrowPivot: {fileID: 0}

@@ -10796,6 +10796,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff6daae0aa3dbbd4f81bd695a5556e61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pitchValue: 0.5
+  BGM: {fileID: 0}
+  BGMVolume: 0
+  soundPrefab: {fileID: 1386551371442508357, guid: 516b65ddfb8b0df4d89ff167ef75cd2e, type: 3}
+  SFXVolume: 0.5
 --- !u!4 &845446490
 Transform:
   m_ObjectHideFlags: 0
@@ -14645,18 +14650,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 253720887}
     m_Modifications:
-    - target: {fileID: 1466311019402294628, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3602097030777999689, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4105514845315249046, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 4209045108637913066, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 32
@@ -14697,25 +14690,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6749543430067527238, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 7588369809687288475, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
       propertyPath: m_Name
       value: LaserMachine
       objectReference: {fileID: 0}
-    - target: {fileID: 7588369809687288475, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8040798536340954770, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 8965806539318086713, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
       propertyPath: laserColor
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15321,18 +15302,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1861975406}
     m_Modifications:
-    - target: {fileID: 1466311019402294628, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3602097030777999689, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 4105514845315249046, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 4209045108637913066, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
@@ -15373,21 +15342,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6749543430067527238, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 7588369809687288475, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
       propertyPath: m_Name
       value: LaserMachine
-      objectReference: {fileID: 0}
-    - target: {fileID: 7588369809687288475, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8040798536340954770, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8965806539318086713, guid: f011f6c7d091cf5488104bc434355be9, type: 3}
       propertyPath: laserColor
@@ -19664,14 +19621,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 253720887}
     m_Modifications:
-    - target: {fileID: 546326790765540117, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1407906010387183921, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 3929060055168957645, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 30
@@ -19715,46 +19664,6 @@ PrefabInstance:
     - target: {fileID: 4228276543891934819, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
       propertyPath: m_Name
       value: ReactiveMachine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4228276543891934819, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5349062696896271712, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5479347894953984279, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5799606081852796417, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6025362224179699310, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8230759041539368934, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8873057653244312214, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8873057653244312214, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 8873057653244312214, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 9057816315205779520, guid: 0516ac350de4e9c4ca9b2d8f2ec71fb5, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -83,6 +83,17 @@ public class GameManager : Singleton<GameManager>
             player.position = new Vector3(20, 0, 0); //일단은 하드코딩
             LoadPlayerPosition();
         }
+
+        //로딩 씬에서 UI 안보이게
+        if (scene.name == SCENE_TYPE.LoadingScene.ToString())
+        {
+            _uiManager.ChangeState(UIState.LoadingScene);
+        }
+        else
+        {
+            //_uiManager.GameUI.
+            _uiManager.ChangeState(UIState.Game);
+        }
     }
     
     public void GameStart()
