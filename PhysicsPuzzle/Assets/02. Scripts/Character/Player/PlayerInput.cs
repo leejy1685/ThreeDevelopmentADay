@@ -103,6 +103,11 @@ namespace _02._Scripts.Character.Player
             if(val > 0) _inventoryManager.SelectPrevItem();
             else _inventoryManager.SelectNextItem();
         }
+
+        public void OnGodMode(InputAction.CallbackContext context)
+        {
+            if(context.started) playerCondition.ToggleGodMode();
+        }
         
         #endregion
     }
