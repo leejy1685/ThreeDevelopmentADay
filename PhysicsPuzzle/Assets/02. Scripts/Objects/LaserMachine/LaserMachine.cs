@@ -3,6 +3,7 @@ using _02._Scripts.Managers;
 using System.Collections.Generic;
 using _02._Scripts.Character.Player.Interface;
 using _02._Scripts.Managers.Destructable;
+using _02._Scripts.Managers.Indestructable;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -46,6 +47,8 @@ namespace _02._Scripts.Objects.LaserMachine
         private float _currPitch; // 현재 Z축 회전값
 
         public Barrel Barrel => barrel;
+        
+        [SerializeField] private AudioClip interactionSound;
         
         private void Awake()
         {
@@ -158,6 +161,7 @@ namespace _02._Scripts.Objects.LaserMachine
         /// </summary>
         public void OnInteract()
         {
+            SoundManager.PlaySFX(interactionSound); 
             _playerCondition.MigrateCameraFocusToOtherObject(body);
         }
     }

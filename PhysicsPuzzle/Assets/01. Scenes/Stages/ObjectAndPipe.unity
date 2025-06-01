@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2781106243148141820, guid: 8d85e6370c513b447a5a73a3a144bfd1, type: 3}
+      propertyPath: _doorOpenClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
     - target: {fileID: 7571869139598616909, guid: 8d85e6370c513b447a5a73a3a144bfd1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -40
@@ -175,6 +179,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7700585971121033631, guid: 8d85e6370c513b447a5a73a3a144bfd1, type: 3}
+      propertyPath: _doorOpenClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -716,6 +724,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7353561314021564521, guid: 3f8727300f715c64f99991635381bef0, type: 3}
+      propertyPath: _doorOpenClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1097,6 +1109,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7640258127031251280, guid: bbbd03cf61970b34cae5509ea4461808, type: 3}
+      propertyPath: _doorOpenClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
     - target: {fileID: 7836734723375345638, guid: bbbd03cf61970b34cae5509ea4461808, type: 3}
       propertyPath: m_Name
       value: Room 3

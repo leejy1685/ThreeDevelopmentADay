@@ -8,7 +8,7 @@ public class StraightPipe : Pipe
 
     public override void OnInteract()
     {
-
+        base.OnInteract();
         if (!isRotating)
             StartCoroutine(RotateSmoothStraight());
     }

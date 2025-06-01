@@ -29,6 +29,8 @@ namespace _02._Scripts.Managers.Destructable.Room
         
         public RoomData RoomData => roomData;
         
+        [SerializeField] private AudioClip _doorOpenClip;
+        
         private void Start()
         {
             _stageManager = StageManager.Instance;
@@ -51,6 +53,7 @@ namespace _02._Scripts.Managers.Destructable.Room
         public void OpenDoor()
         {
             StartCoroutine(OpenDoor_coroutine());
+            SoundManager.PlaySFX(_doorOpenClip);
         }
 
         private IEnumerator OpenDoor_coroutine()

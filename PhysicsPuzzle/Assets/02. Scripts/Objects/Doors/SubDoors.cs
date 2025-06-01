@@ -1,6 +1,7 @@
 ﻿using _02._Scripts.Objects.LaserMachine;
 using System.Collections;
 using System.Collections.Generic;
+using _02._Scripts.Managers.Indestructable;
 using UnityEngine;
 
 public class SubDoors : MonoBehaviour
@@ -18,6 +19,8 @@ public class SubDoors : MonoBehaviour
     private bool _isOpen;
 
     private Coroutine _waitToOpen_Coroutine;
+    
+    [SerializeField] private AudioClip _doorOpenClip;
 
     private void Awake()
     {
@@ -78,6 +81,7 @@ public class SubDoors : MonoBehaviour
 
         _isOpen = true;
         StartCoroutine(OpenDoor_Coroutine());
+        SoundManager.PlaySFX(_doorOpenClip);
     }
 
     private IEnumerator OpenDoor_Coroutine()

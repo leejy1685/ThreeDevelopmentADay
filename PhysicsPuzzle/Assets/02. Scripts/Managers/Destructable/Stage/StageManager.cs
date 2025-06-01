@@ -18,6 +18,8 @@ namespace _02._Scripts.Managers.Destructable.Stage
         protected GameManager _gameManager;
         protected CharacterManager _characterManager;
         protected PlayerCondition _playerCondition;
+
+        [SerializeField] private AudioClip StageBGM;
         
         protected virtual void Start()
         {
@@ -29,6 +31,7 @@ namespace _02._Scripts.Managers.Destructable.Stage
             
             //스테이지 시작
             GameManager.Instance.StageStart();
+            SoundManager.Instance.ChangeBGM(StageBGM);
         }
 
         public void RoomCleared(int roomId)

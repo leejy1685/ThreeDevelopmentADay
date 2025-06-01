@@ -3,6 +3,7 @@ using _02._Scripts.Character.Player;
 using _02._Scripts.Character.Player.Interface;
 using _02._Scripts.Managers;
 using _02._Scripts.Managers.Destructable;
+using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.Objects.LaserMachine;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
@@ -35,6 +36,8 @@ namespace _02._Scripts.PIpe.ConnectionPipe
         private bool _isFiring;  // 발사 체크 
         private float _currPitch;        // 현재 Z축 회전값
         private PlayerCondition _playerCondition;
+        
+        [SerializeField] private AudioClip _interactionSound;
 
         private void Awake()
         {
@@ -124,6 +127,7 @@ namespace _02._Scripts.PIpe.ConnectionPipe
 
         public void OnInteract()
         {
+            SoundManager.PlaySFX(_interactionSound);
             _playerCondition.MigrateCameraFocusToOtherObject(_body);
         }
     }

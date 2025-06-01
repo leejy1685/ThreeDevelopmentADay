@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.Character.Player.Interface;
+using _02._Scripts.Managers.Indestructable;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -35,6 +36,8 @@ public class Pipe : MonoBehaviour, IInteractable
     private Dictionary<Port, LineRenderer> portLineMap;
     // 포트별로 마지막으로 레이저를 발사한 프레임 기록
     private Dictionary<Port, int> lastShotFrameByPort;
+    
+    [SerializeField] private AudioClip interactSound;
 
     void Awake()
     {
@@ -86,7 +89,11 @@ public class Pipe : MonoBehaviour, IInteractable
 
         }
     }
-    public virtual void OnInteract(){}
+
+    public virtual void OnInteract()
+    {
+        SoundManager.PlaySFX(interactSound);
+    }
  
     /// <summary>
     /// 특정 Port로 레이저가 들어왔을 때 호출됩니다. 해당 포트를 제외한 나머지 포트들로 레이저를 발사

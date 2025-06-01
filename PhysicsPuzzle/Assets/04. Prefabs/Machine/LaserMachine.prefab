@@ -514,6 +514,7 @@ MonoBehaviour:
   maxRotate: 0
   minRotate: -90
   laserColor: 0
+  interactionSound: {fileID: 8300000, guid: 421a528761b8e10409fe8f3da000b368, type: 3}
 --- !u!1 &8040798536340954770
 GameObject:
   m_ObjectHideFlags: 0
