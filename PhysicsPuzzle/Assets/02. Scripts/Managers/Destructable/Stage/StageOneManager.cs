@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using _02._Scripts.Character.Player;
 using _02._Scripts.Managers.Destructable.Item;
 using _02._Scripts.Managers.Indestructable;
@@ -11,22 +12,15 @@ namespace _02._Scripts.Managers.Destructable.Stage
         private ItemManager _itemManager;
         private ItemSpawnManager _itemSpawnManager;
         private bool _isItemSpawned;
-        
-        protected override void Awake()
-        {
-            base.Awake();
-            _itemManager = ItemManager.Instance;
-            _itemSpawnManager = ItemSpawnManager.Instance;
-        }
 
         protected override void Start()
         {
+            _itemManager = ItemManager.Instance;
+            _itemSpawnManager = ItemSpawnManager.Instance;
+            
             base.Start();
             _playerCondition.SetGravityAllow(false);
-        }
-
-        private void Update()
-        {
+            
             if (!_isItemSpawned)
             {
                 if (_itemManager.IsItemTableLoaded && _itemSpawnManager.IsItemSpawnTableLoaded)
@@ -35,6 +29,8 @@ namespace _02._Scripts.Managers.Destructable.Stage
                     _isItemSpawned = true;
                 }
             }
+            
         }
+        
     }
 }
