@@ -163,7 +163,7 @@ MonoBehaviour:
   ports:
   - {fileID: 605022510817182188}
   - {fileID: 4400907209580128533}
-  render: {fileID: 0}
+  render: {fileID: 569031500856610955}
   receivedColor: 0
 --- !u!114 &1586839933248698602
 MonoBehaviour:

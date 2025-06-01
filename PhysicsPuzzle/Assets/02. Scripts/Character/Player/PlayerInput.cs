@@ -2,7 +2,7 @@
 using _02._Scripts.Managers.Destructable;
 using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.Objects.LaserMachine;
-using _02._Scripts.PIpe.ConnectionPipe;
+using _02._Scripts.Pipe.LinkedPipe;
 using UnityEngine;
 using UnityEngine.InputSystem;
 

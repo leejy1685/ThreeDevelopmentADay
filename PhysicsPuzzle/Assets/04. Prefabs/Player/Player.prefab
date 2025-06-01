@@ -316,8 +316,8 @@ GameObject:
   - component: {fileID: 6850557317937054288}
   - component: {fileID: 3087116806064683726}
   - component: {fileID: 40961569538208126}
-  - component: {fileID: 619859596558535234}
   - component: {fileID: 5987576773532369127}
+  - component: {fileID: 619859596558535234}
   - component: {fileID: 324553522748509991}
   m_Layer: 6
   m_Name: Player
@@ -430,9 +430,12 @@ MonoBehaviour:
   isPlayerCharacterHasControl: 1
   timeChangeCooldown: 3
   gravityChangeCooldown: 3
-  isGravityAllowed: 0
+  isGravityAllowed: 1
   firstPersonCamera: {fileID: 0}
   thirdPersonCamera: {fileID: 0}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &8901723863115515097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,6 +554,26 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   interactableObject: {fileID: 0}
+--- !u!114 &5987576773532369127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141663084719360671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e198d132c26b6074d94ba8d7d5089bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepClips:
+  - {fileID: 8300000, guid: 31c14cdcc74c7cb43853c1c5c7e394f8, type: 3}
+  - {fileID: 8300000, guid: bc0d802c7c31e4544a33c71548c28772, type: 3}
+  - {fileID: 8300000, guid: 85854780fe511a34591c3dec63061fd2, type: 3}
+  - {fileID: 8300000, guid: e48730c7ca1cac545bbbc0365bf34479, type: 3}
+  - {fileID: 8300000, guid: 24e76b8f437e6af458e2b1319e67681e, type: 3}
+  footstepThreshold: 0.3
+  footstepRate: 0.5
 --- !u!114 &619859596558535234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,26 +784,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &5987576773532369127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1141663084719360671}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e198d132c26b6074d94ba8d7d5089bb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  footstepClips:
-  - {fileID: 8300000, guid: 31c14cdcc74c7cb43853c1c5c7e394f8, type: 3}
-  - {fileID: 8300000, guid: bc0d802c7c31e4544a33c71548c28772, type: 3}
-  - {fileID: 8300000, guid: 85854780fe511a34591c3dec63061fd2, type: 3}
-  - {fileID: 8300000, guid: e48730c7ca1cac545bbbc0365bf34479, type: 3}
-  - {fileID: 8300000, guid: 24e76b8f437e6af458e2b1319e67681e, type: 3}
-  footstepThreshold: 0.3
-  footstepRate: 0.5
 --- !u!82 &324553522748509991
 AudioSource:
   m_ObjectHideFlags: 0

@@ -70,7 +70,7 @@ MonoBehaviour:
   parentPipe: {fileID: 0}
   exitLocalDirection: {x: 0, y: 1, z: 0}
   portEffect: {fileID: 5654116923301751072}
-  PipeBodyParticleSystem: {fileID: 1957921947454676774}
+  pipeBodyParticleSystem: {fileID: 1957921947454676774}
 --- !u!1 &5977858281515080319
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ MonoBehaviour:
   parentPipe: {fileID: 0}
   exitLocalDirection: {x: 0, y: 1, z: 0}
   portEffect: {fileID: 8901127013071600186}
-  PipeBodyParticleSystem: {fileID: 1957921947454676774}
+  pipeBodyParticleSystem: {fileID: 1957921947454676774}
 --- !u!1 &7175608291401722510
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2ac09f1aa8809340b6aecdec45c2406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BodyParticle: {fileID: 7652913801141412324}
+  bodyParticle: {fileID: 7652913801141412324}
 --- !u!1 &8943137901459786216
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
   rotationDuration: 0.5
   maxRayDistance: 100
   lineRenderer: {fileID: 520362244276233644, guid: 9cf663f20972077458fa8253eed9eb25, type: 3}
-  Body: {fileID: 1957921947454676774}
+  body: {fileID: 1957921947454676774}
   interactSound: {fileID: 8300000, guid: e1d70f2909a4c3543aaf1fb07e281cf3, type: 3}
   axis: {x: 0, y: 1, z: 0}
 --- !u!1001 &651104744582579398

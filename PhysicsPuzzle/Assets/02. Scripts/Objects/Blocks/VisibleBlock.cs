@@ -8,6 +8,7 @@ namespace _02._Scripts.Objects.Blocks
 {
     public class VisibleBlock : MonoBehaviour
     {
+        [Header("Visible Block Type")]
         [SerializeField] private TIME_TYPE timeBlockType;
         
         private MeshRenderer _meshRenderer;

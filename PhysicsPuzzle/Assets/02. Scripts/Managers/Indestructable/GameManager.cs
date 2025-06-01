@@ -5,6 +5,7 @@ using _02._Scripts.Character.Player;
 using _02._Scripts.Managers.Destructable;
 using _02._Scripts.Managers.Destructable.Room;
 using _02._Scripts.Managers.Destructable.Stage;
+using _02._Scripts.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,33 +13,34 @@ namespace _02._Scripts.Managers.Indestructable
 {
     public class GameManager : Singleton<GameManager>
     {
-
-        [Header("[Managers]")]
+        private const string Laststage = "LastStage"; //마지막 스테이지
+        private const string Lasttime = "LastTime"; //마지막 시간
+        private const string Lastclearroom = "lastClearRoom"; //마지막 퍼즐
+        private const string Lastpositionx = "lastPositionX";
+        private const string Lastpositiony = "lastPositionY";
+        private const string Lastpositionz = "lastPositionZ";
+        
+        [Header("[LoadData]")]
+        [SerializeField] public bool isLoad;         //Load
+        [SerializeField] private RoomManager[] roomManagers;
+        [SerializeField] private Transform player;   //플레이어 좌표
+        
+        [Header("[PlayData]")]
+        [SerializeField] private bool isGameActive;
+        [SerializeField] public float playTime;
+    
+        [Header("Lobby Camera")]
+        [SerializeField] public LobbyCamera lobbyCamera;   //로비 연출용 카메라
+        
+        // Fields
         private UIManager _uiManager;
         private SceneHandleManager _sceneHandle;
-    
-        [Header("[LoadData]")]
-        public bool isLoad;         //Load
-        private RoomManager[] _roomManagers;
-        private Transform player;   //플레이어 좌표
-        private int lastClearRoom;     
-        private const string LASTSTAGE = "LastStage";   //마지막 스테이지
-        private const string LASTTIME = "LastTime";     //마지막 시간
-        private const string LASTCLEARROOM = "lastClearRoom";//마지막 퍼즐
-        private const string LASTPOSITIONX = "lastPositionX";
-        private const string LASTPOSITIONY = "lastPositionY";
-        private const string LASTPOSITIONZ = "lastPositionZ";
-
-        [Header("[PlayData]")]
-        private bool isGameActive;
+        private int _lastClearRoom;
+        private bool _activeTimer;
+        
+        // Properties
         public bool IsGameActive => isGameActive;
-        private bool activeTimer;
-        public float playTime;
-    
         
-        [SerializeField] public LobbyCamera _lobbyCamera;   //로비 연출용 카메라
-        
-
         //testCode
         private int RoomId;
     
@@ -50,13 +52,13 @@ namespace _02._Scripts.Managers.Indestructable
             isGameActive = false;
             playTime = 0;
             isLoad = false;
-            activeTimer = false;
+            _activeTimer = false;
         }
 
         private void Start()
         {
             //시작 카메라 연출
-            _lobbyCamera.gameObject.SetActive(true);
+            lobbyCamera.gameObject.SetActive(true);
             _uiManager = UIManager.Instance;
             _sceneHandle = SceneHandleManager.Instance;
             // 씬 매니저의 sceneLoaded에 체인을 건다
@@ -77,7 +79,7 @@ namespace _02._Scripts.Managers.Indestructable
                 _uiManager.SetOptionUI();
             }
 
-            if (activeTimer)
+            if (_activeTimer)
             {
                 playTime += Time.deltaTime;
                 _uiManager.GameUI.UpdatePlayTime(playTime);
@@ -85,13 +87,13 @@ namespace _02._Scripts.Managers.Indestructable
         }
     
         // 체인을 걸어서 이 함수는 매 씬마다 호출된다.
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             //저장 기능을 위해 플레이어 위치 탐색
             player = FindAnyObjectByType<Player>()?.transform;
             
             //로비로 복귀 시 UI 셋팅
-            if (scene.name == SCENE_TYPE.Lobby.ToString())
+            if (scene.name == nameof(SCENE_TYPE.Lobby))
             {
                 _uiManager.SetGameUI(false);
             }
@@ -99,9 +101,21 @@ namespace _02._Scripts.Managers.Indestructable
             //게임 로드
             GameLoad_Scene(scene);
         }
-
+        
+        public void LoadLobbyScene()
+        {
+            //데이터 초기화
+            playTime = 0;
+            RoomId = 0;
+            
+            //마우스 커서 고정
+            Cursor.lockState = CursorLockMode.Locked;
+        
+            _sceneHandle.LoadScene(SCENE_TYPE.Lobby);
+        }
 
         #region GameStart&Load
+        
         public void GameStart()
         {
             // 게임 시작
@@ -111,8 +125,8 @@ namespace _02._Scripts.Managers.Indestructable
             Cursor.lockState = CursorLockMode.Locked;
         
             //카메라 이벤트 종료
-            _lobbyCamera = FindAnyObjectByType<LobbyCamera>();
-            _lobbyCamera?.DisableCamera();
+            lobbyCamera = FindAnyObjectByType<LobbyCamera>();
+            lobbyCamera?.DisableCamera();
             
             _uiManager.SetGameUI(false);
         }
@@ -130,18 +144,16 @@ namespace _02._Scripts.Managers.Indestructable
             isLoad = true;
 
             //마지막 정보 불러오기
-            playTime = PlayerPrefs.GetFloat(LASTTIME);
-            lastClearRoom = PlayerPrefs.GetInt(LASTCLEARROOM);
+            playTime = PlayerPrefs.GetFloat(Lasttime);
+            _lastClearRoom = PlayerPrefs.GetInt(Lastclearroom);
 
             //마지막 씬 불러오기
-            string sceneName = PlayerPrefs.GetString(LASTSTAGE);
-            SCENE_TYPE loadScene = SCENE_TYPE.Lobby;
-            for (int i = 0; i < (int)SCENE_TYPE.Count;i++)
+            var sceneName = PlayerPrefs.GetString(Laststage);
+            var loadScene = SCENE_TYPE.Lobby;
+            
+            foreach (var scene in (SCENE_TYPE[])Enum.GetValues(typeof(SCENE_TYPE)))
             {
-                if (sceneName == ((SCENE_TYPE)i).ToString())
-                {
-                    loadScene = (SCENE_TYPE)i;
-                }
+                 if(sceneName.Equals(scene.ToString())) loadScene = scene;
             }
 
             _sceneHandle.LoadScene(loadScene);
@@ -152,50 +164,48 @@ namespace _02._Scripts.Managers.Indestructable
             if (scene.name != SCENE_TYPE.LoadingScene.ToString() && isLoad)
             {
                 //방의 정보 가져오기 및 정렬
-                _roomManagers = FindObjectsOfType<RoomManager>();
-                Array.Sort(_roomManagers, (x, y) => x.RoomData.roomId.CompareTo(y.RoomData.roomId));
+                roomManagers = FindObjectsOfType<RoomManager>();
+                Array.Sort(roomManagers, (x, y) => x.RoomData.roomId.CompareTo(y.RoomData.roomId));
                 
-                if (player != null)
+                if (player)
                 {
-                    float x = PlayerPrefs.GetFloat(LASTPOSITIONX);
-                    float y = PlayerPrefs.GetFloat(LASTPOSITIONY);
-                    float z = PlayerPrefs.GetFloat(LASTPOSITIONZ);
+                    float x = PlayerPrefs.GetFloat(Lastpositionx);
+                    float y = PlayerPrefs.GetFloat(Lastpositiony);
+                    float z = PlayerPrefs.GetFloat(Lastpositionz);
                     //플레이어 배치
                     player.position = new Vector3(x,y,z);
                 }
                 
                 //해결 했던 퍼즐의 문 열림
-                for (int i = 0; i <= lastClearRoom; i++)
+                for (int i = 0; i <= _lastClearRoom; i++)
                 {
-                    _roomManagers[i].OpenDoor();
+                    roomManagers[i].OpenDoor();
                 }
                 
                 //로드 종료
                 isLoad = false;
             }
         }
-
         
-
         #endregion
 
         #region Stage
 
         public void StageStart()
         {
-            activeTimer = true;
+            _activeTimer = true;
             _uiManager.SetGameUI(true);
         }
         
         public void SaveData(int roomId)
         {
             //클리어 저장
-            PlayerPrefs.SetString(LASTSTAGE,_sceneHandle.currentScene.ToString());
-            PlayerPrefs.SetFloat(LASTTIME,playTime);
-            PlayerPrefs.SetInt(LASTCLEARROOM,roomId);
-            PlayerPrefs.SetFloat(LASTPOSITIONX,player.position.x);
-            PlayerPrefs.SetFloat(LASTPOSITIONY,player.position.y);
-            PlayerPrefs.SetFloat(LASTPOSITIONZ,player.position.z);
+            PlayerPrefs.SetString(Laststage,_sceneHandle.currentScene.ToString());
+            PlayerPrefs.SetFloat(Lasttime,playTime);
+            PlayerPrefs.SetInt(Lastclearroom,roomId);
+            PlayerPrefs.SetFloat(Lastpositionx,player.position.x);
+            PlayerPrefs.SetFloat(Lastpositiony,player.position.y);
+            PlayerPrefs.SetFloat(Lastpositionz,player.position.z);
         }
         public void StageClear()
         {
@@ -203,10 +213,10 @@ namespace _02._Scripts.Managers.Indestructable
             Cursor.lockState = CursorLockMode.None;
         
             //타이머 멈추기
-            activeTimer = false;
+            _activeTimer = false;
 
             //최고 시간초 UI에 설정
-            float bestTime = PlayerPrefs.GetInt(_sceneHandle.currentScene.ToString(),0);
+            var bestTime = PlayerPrefs.GetFloat(_sceneHandle.currentScene.ToString(), float.MaxValue);
             if (bestTime > playTime)
             {
                 bestTime = playTime;
@@ -216,22 +226,9 @@ namespace _02._Scripts.Managers.Indestructable
             _uiManager.SetClearUI(playTime,bestTime);
             
             //모든 룸 클리어 시 로드 저장 위치는 Lobby
-            PlayerPrefs.SetString(LASTSTAGE,SCENE_TYPE.Lobby.ToString());;
+            PlayerPrefs.SetString(Laststage,SCENE_TYPE.Lobby.ToString());;
         }
 
         #endregion
-
-        public void LoadLobbyScene()
-        {
-            //데이터 초기화
-            playTime = 0;
-            RoomId = 0;
-            
-            //마우스 커서 고정
-            Cursor.lockState = CursorLockMode.Locked;
-        
-            _sceneHandle.LoadScene(SCENE_TYPE.Lobby);
-        }
-        
     }
 }

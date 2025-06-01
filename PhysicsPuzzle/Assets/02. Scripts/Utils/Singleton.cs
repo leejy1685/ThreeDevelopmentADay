@@ -1,19 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+namespace _02._Scripts.Utils
 {
-    public static T Instance { get; protected set; }
-
-    protected virtual void Awake()
+    public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        if (!Instance)
+        public static T Instance { get; protected set; }
+
+        protected virtual void Awake()
         {
-            Instance = this as T;
+            if (!Instance)
+            {
+                Instance = this as T;
+            }
+            else { if (Instance != this) Destroy(gameObject); }
         }
-        else { if (Instance != this) Destroy(gameObject); }
     }
 }

@@ -1,27 +1,35 @@
+using _02._Scripts.Utils;
+using _02._Scripts.Utils.SoundLibrary;
 using UnityEngine;
 
 namespace _02._Scripts.Managers.Indestructable
 {
     public class SoundManager : Singleton<SoundManager>
     {
-        [Range(0f,1f)][SerializeField]private float pitchValue = 0.5f;
-    
+        [Header("Components")]
+        [SerializeField] private AudioSource audioSource;
+        
+        [Header("Sound Settings")]
+        [Range(0f, 1f)] [SerializeField] private float pitchValue = 0.5f;
+        [Range(0f, 1f)] [SerializeField] public float bgmVolume;
+        [Range(0f, 1f)] [SerializeField] public float SFXVolume = 0.5f;
+        
         [Header( "[BGM]" )]
-        private AudioSource audioSource;
         [SerializeField] private AudioClip BGM;
-        [Range(0f, 1f)] public float BGMVolume;
+        
+        [Header( "[SFX]" )] 
+        [SerializeField] private SoundSource soundPrefab;
+        
+        // Properties
         public float SetBGMVolume
         {
             set
             {
-                BGMVolume = Mathf.Clamp(value, 0f, 1f); 
-                audioSource.volume = BGMVolume;
+                bgmVolume = Mathf.Clamp(value, 0f, 1f); 
+                audioSource.volume = bgmVolume;
             }
         }
-
-        [Header( "[SFX]" )]
-        [SerializeField] private SoundSource soundPrefab;
-        [Range(0f,1f)]public float SFXVolume = 0.5f;
+        
         public float SetSFXVolume
         {
             set { SFXVolume = Mathf.Clamp(value, 0f, 1f); }
@@ -41,11 +49,11 @@ namespace _02._Scripts.Managers.Indestructable
         public void ChangeBGM(AudioClip clip)
         {
             audioSource.clip = clip;
-            audioSource.volume = BGMVolume;
+            audioSource.volume = bgmVolume;
             audioSource.Play();
         }
 
-        public static void PlaySFX(AudioClip clip)
+        public static void PlaySfx(AudioClip clip)
         {
             SoundSource obj = Instantiate(Instance.soundPrefab);
             SoundSource soundSource = obj.GetComponent<SoundSource>();

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using _02._Scripts.Item.DataAndTable;
+using _02._Scripts.Utils;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;

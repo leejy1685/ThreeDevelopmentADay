@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6761276174729716301}
   - component: {fileID: 6179818600406463213}
   - component: {fileID: 2250907818453310684}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GoalMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 6675782208660777528}
   - component: {fileID: 9128207795639558820}
   - component: {fileID: 178148980342938384}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube_Regular_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}

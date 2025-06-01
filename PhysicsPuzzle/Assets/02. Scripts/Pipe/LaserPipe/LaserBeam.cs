@@ -1,38 +1,41 @@
 ﻿using _02._Scripts.Objects.LaserMachine;
 using UnityEngine;
 
-/// <summary>
-/// 레이저 광선의 방향과 색상 정보를 담는 구조체
-/// </summary>
-public struct LaserBeam
+namespace _02._Scripts.Pipe.LaserPipe
 {
-    /// <summary>레이저의 방향 (정규화 벡터)</summary>
-    public Vector3 direction;
-    /// <summary>레이저의 색상 정보 (열거형)</summary>
-    public LASER_COLOR colorType;
-
-    public LaserBeam(Vector3 dir, LASER_COLOR color)
-    {
-        direction = dir.normalized;
-        colorType = color;
-    }
-
     /// <summary>
-    /// LaserBeam의 colorType을 Unity Engine의 Color로 변환합니다.
+    /// 레이저 광선의 방향과 색상 정보를 담는 구조체
     /// </summary>
-    public Color ColorValue
+    public struct LaserBeam
     {
-        get
+        /// <summary>레이저의 방향 (정규화 벡터)</summary>
+        public Vector3 direction;
+        /// <summary>레이저의 색상 정보 (열거형)</summary>
+        public LASER_COLOR colorType;
+
+        public LaserBeam(Vector3 dir, LASER_COLOR color)
         {
-            switch (colorType)
+            direction = dir.normalized;
+            colorType = color;
+        }
+
+        /// <summary>
+        /// LaserBeam의 colorType을 Unity Engine의 Color로 변환합니다.
+        /// </summary>
+        public Color ColorValue
+        {
+            get
             {
-                case LASER_COLOR.Red: return Color.red;
-                case LASER_COLOR.Blue: return Color.blue;
-                case LASER_COLOR.Green: return Color.green;
-                case LASER_COLOR.Purple: return Color.magenta;  // 보라색 -> Magenta 사용
-                case LASER_COLOR.Yellow: return Color.yellow;
-                case LASER_COLOR.White:
-                default: return Color.white;
+                switch (colorType)
+                {
+                    case LASER_COLOR.Red: return Color.red;
+                    case LASER_COLOR.Blue: return Color.blue;
+                    case LASER_COLOR.Green: return Color.green;
+                    case LASER_COLOR.Purple: return Color.magenta;  // 보라색 -> Magenta 사용
+                    case LASER_COLOR.Yellow: return Color.yellow;
+                    case LASER_COLOR.White:
+                    default: return Color.white;
+                }
             }
         }
     }

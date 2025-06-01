@@ -1,9 +1,8 @@
 using _02._Scripts.Character.Player;
 using _02._Scripts.Managers.Indestructable;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace _02._Scripts.Utils
+namespace _02._Scripts.Utils.SoundLibrary
 {
     public class FootSteps : MonoBehaviour
     {

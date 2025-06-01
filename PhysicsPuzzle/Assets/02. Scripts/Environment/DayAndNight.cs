@@ -1,8 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using _02._Scripts.Managers.Indestructable;
-using _02._Scripts.Objects.Blocks;
 using UnityEngine;
 using CollisionBlock = _02._Scripts.DayAndNight.CollisionBlock;
 using VisibleBlock = _02._Scripts.DayAndNight.VisibleBlock;

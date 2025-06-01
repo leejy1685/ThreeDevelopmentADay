@@ -397,7 +397,7 @@ MonoBehaviour:
   - {fileID: 5328654494969135011}
   - {fileID: 6559566721759545390}
   - {fileID: 2018741191067238489}
-  render: {fileID: 0}
+  render: {fileID: 4343499203768925868}
   receivedColor: 0
 --- !u!114 &876354613325399969
 MonoBehaviour:

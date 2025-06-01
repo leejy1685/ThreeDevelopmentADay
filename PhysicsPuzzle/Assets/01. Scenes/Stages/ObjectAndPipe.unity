@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1274613650}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645252, a: 1}
+  m_IndirectSpecularColor: {r: 0.43667555, g: 0.48427176, b: 0.5645241, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,10 +135,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room 2
       objectReference: {fileID: 0}
-    - target: {fileID: 2781106243148141820, guid: 8d85e6370c513b447a5a73a3a144bfd1, type: 3}
-      propertyPath: _doorOpenClip
-      value: 
-      objectReference: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
     - target: {fileID: 7571869139598616909, guid: 8d85e6370c513b447a5a73a3a144bfd1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -40
@@ -179,10 +175,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7700585971121033631, guid: 8d85e6370c513b447a5a73a3a144bfd1, type: 3}
-      propertyPath: _doorOpenClip
-      value: 
-      objectReference: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -724,10 +716,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7353561314021564521, guid: 3f8727300f715c64f99991635381bef0, type: 3}
-      propertyPath: _doorOpenClip
-      value: 
-      objectReference: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1049,6 +1037,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9204080799817005099, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: isGravityAllowed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9204080799817005099, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
       propertyPath: firstPersonCamera
       value: 
       objectReference: {fileID: 598828339}
@@ -1109,10 +1101,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7640258127031251280, guid: bbbd03cf61970b34cae5509ea4461808, type: 3}
-      propertyPath: _doorOpenClip
-      value: 
-      objectReference: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
     - target: {fileID: 7836734723375345638, guid: bbbd03cf61970b34cae5509ea4461808, type: 3}
       propertyPath: m_Name
       value: Room 3

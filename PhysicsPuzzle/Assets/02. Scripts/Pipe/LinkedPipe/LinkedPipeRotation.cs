@@ -2,7 +2,7 @@
 using _02._Scripts.Character.Player.Interface;
 using UnityEngine;
 
-namespace _02._Scripts.PIpe.ConnectionPipe
+namespace _02._Scripts.Pipe.LinkedPipe
 {
     public class LinkedPipeRotation : MonoBehaviour, IInteractable
     {

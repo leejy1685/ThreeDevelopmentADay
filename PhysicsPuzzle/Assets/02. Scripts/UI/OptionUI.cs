@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace _02._Scripts.UI
 {
-    public class ObtionUI : BaseUI
+    public class OptionUI : BaseUI
     {
         [Header("[Option UI]")] [SerializeField]
         private Slider bgmSlider;

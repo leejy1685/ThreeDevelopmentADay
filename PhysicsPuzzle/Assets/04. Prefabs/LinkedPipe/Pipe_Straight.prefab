@@ -295,7 +295,7 @@ MonoBehaviour:
   ports:
   - {fileID: 5117326028141665405}
   - {fileID: 531910704159451453}
-  render: {fileID: 0}
+  render: {fileID: 7549513053443566567}
   receivedColor: 0
 --- !u!1 &8646965156329172495
 GameObject:

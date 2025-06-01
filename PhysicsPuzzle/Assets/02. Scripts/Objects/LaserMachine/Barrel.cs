@@ -1,7 +1,5 @@
-﻿using System;
-using _02._Scripts.Character.Player.Interface;
+﻿using _02._Scripts.Character.Player.Interface;
 using _02._Scripts.Item.DataAndTable;
-using _02._Scripts.Managers;
 using _02._Scripts.Managers.Destructable.Item;
 using UnityEngine;
 

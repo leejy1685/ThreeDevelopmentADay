@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor.XR;
+using _02._Scripts.Pipe.Common.Interface;
+using _02._Scripts.Pipe.LaserPipe;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 namespace _02._Scripts.Objects.LaserMachine
 {
-    [Serializable] 
-    public class GoalMachine : MonoBehaviour, ILaserReceiver
+    [Serializable] public class GoalMachine : MonoBehaviour, ILaserReceiver
     {
-        [Header("Components ")]
+        [Header("Goal Machine States")]
         [SerializeField] private bool isActivate;
         [SerializeField] private LASER_COLOR mainColor;
 

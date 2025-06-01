@@ -2252,6 +2252,7 @@ MonoBehaviour:
     leftDoor: {fileID: 8013292660132537208}
     rightDoor: {fileID: 8013292660132537214}
   openDuration: 2
+  _doorOpenClip: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
 --- !u!1 &4148477118055502285
 GameObject:
   m_ObjectHideFlags: 0

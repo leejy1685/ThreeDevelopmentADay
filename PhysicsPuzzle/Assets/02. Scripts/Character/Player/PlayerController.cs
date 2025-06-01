@@ -2,10 +2,9 @@
 using _02._Scripts.Managers.Destructable;
 using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.Objects.LaserMachine;
-using _02._Scripts.PIpe.ConnectionPipe;
+using _02._Scripts.Pipe.LinkedPipe;
 using _02._Scripts.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace _02._Scripts.Character.Player
 {
@@ -87,7 +86,6 @@ namespace _02._Scripts.Character.Player
 
         private void FixedUpdate()
         {
-            if (!playerCondition.IsPlayerCharacterHasControl) return;
             CalculateMovement();
         }
 
@@ -144,14 +142,18 @@ namespace _02._Scripts.Character.Player
             rigidBody.MovePosition(transform.position + move);
         }
         
-        
-
         /// <summary>
         /// Calculate Player Movement in flat surface.
         /// </summary>
         /// <returns></returns>
         private Vector3 CalculateMovement_FlatSurface()
         {
+            if (!playerCondition.IsPlayerCharacterHasControl)
+            {
+                playerAnimator.SetPlayerSpeed(0);
+                return Vector3.zero;
+            }
+            
             var targetSpeed = 0f;
             if (movementDirection != Vector2.zero) { targetSpeed = _isCrouchPressed ? crouchSpeed : maxSpeed; }
             if (currentSpeed <= 0.1f) currentSpeed = !Mathf.Approximately(currentSpeed, targetSpeed) ? Mathf.Lerp(currentSpeed, targetSpeed, Time.fixedDeltaTime * speedDeltaMultiplier) : targetSpeed;
@@ -162,6 +164,10 @@ namespace _02._Scripts.Character.Player
             return velocityXZ * Time.fixedDeltaTime;
         }
 
+        /// <summary>
+        /// Check if the player is close to the Wall. (To prevent player from penetrating the wall)
+        /// </summary>
+        /// <returns>Returns true, when the player close enough to the wall</returns>
         private bool CheckWallCollision()
         {
             return Physics.CheckCapsule(transform.position + transform.up * (capsuleCollider.height / 2f), transform.position + transform.up * (capsuleCollider.height / 2f),capsuleCollider.radius + 0.1f, wallLayer);
@@ -290,7 +296,7 @@ namespace _02._Scripts.Character.Player
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
             
-            SoundManager.PlaySFX(gravityChangeSound);
+            SoundManager.PlaySfx(gravityChangeSound);
         }
 
         /// <summary>
@@ -304,9 +310,8 @@ namespace _02._Scripts.Character.Player
             playerCondition.RunTimeSkillCoolTime();
             _environmentManager.DayAndNight.ChangeDayAndNight();
             
-            SoundManager.PlaySFX(timeChangeSound);
+            SoundManager.PlaySfx(timeChangeSound);
         }
-        
         
         #endregion
     }

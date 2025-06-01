@@ -510,7 +510,7 @@ MonoBehaviour:
     m_Keys: 
     m_Values: []
   maxDistance: 100
-  pitchSpeed: 60
+  pitchSpeed: 40
   maxRotate: 0
   minRotate: -90
   laserColor: 0

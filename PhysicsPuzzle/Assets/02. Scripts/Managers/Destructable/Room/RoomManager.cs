@@ -53,13 +53,13 @@ namespace _02._Scripts.Managers.Destructable.Room
         public void OpenDoor()
         {
             StartCoroutine(OpenDoor_coroutine());
-            SoundManager.PlaySFX(_doorOpenClip);
         }
 
         private IEnumerator OpenDoor_coroutine()
         {
             if(!roomData.leftDoor || !roomData.rightDoor) yield break;
             
+            SoundManager.PlaySfx(_doorOpenClip);
             var leftStart = roomData.leftDoor.localPosition;
             var leftTarget = new Vector3(leftStart.x, leftStart.y, 2f);
 

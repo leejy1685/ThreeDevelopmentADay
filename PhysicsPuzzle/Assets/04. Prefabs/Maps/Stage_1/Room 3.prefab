@@ -18853,6 +18853,7 @@ MonoBehaviour:
     leftDoor: {fileID: 0}
     rightDoor: {fileID: 0}
   openDuration: 2
+  _doorOpenClip: {fileID: 0}
 --- !u!1 &7840550795887488934
 GameObject:
   m_ObjectHideFlags: 0
@@ -22760,6 +22761,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Laser (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4493291793274154376, guid: 5170ec4e94fd6294d97da3be1383c691, type: 3}
+      propertyPath: pitchSpeed
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 8807097947152294730, guid: 5170ec4e94fd6294d97da3be1383c691, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25
@@ -23405,6 +23410,10 @@ PrefabInstance:
     - target: {fileID: 3213880706522554718, guid: 5170ec4e94fd6294d97da3be1383c691, type: 3}
       propertyPath: m_Name
       value: Laser
+      objectReference: {fileID: 0}
+    - target: {fileID: 4493291793274154376, guid: 5170ec4e94fd6294d97da3be1383c691, type: 3}
+      propertyPath: pitchSpeed
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8807097947152294730, guid: 5170ec4e94fd6294d97da3be1383c691, type: 3}
       propertyPath: m_LocalPosition.x

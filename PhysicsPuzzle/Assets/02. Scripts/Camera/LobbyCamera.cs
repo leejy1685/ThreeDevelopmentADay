@@ -6,26 +6,26 @@ namespace _02._Scripts.Camera
 {
     public class LobbyCamera : MonoBehaviour
     {
-        [SerializeField] private LayerMask _playerLayer;
-        private CinemachineSmoothPath path;
+        [SerializeField] private LayerMask playerLayer;
+        private CinemachineSmoothPath _path;
         private Rigidbody _rigidbody;
     
 
         private void Awake()
         {
-            path = FindAnyObjectByType<CinemachineSmoothPath>();
+            _path = FindAnyObjectByType<CinemachineSmoothPath>();
             _rigidbody = GetComponent<Rigidbody>();
         }
 
         private void OnEnable()
         {
-            UnityEngine.Camera.main.cullingMask += _playerLayer;
+            UnityEngine.Camera.main.cullingMask += playerLayer;
             StartCoroutine(CameraMove_Coroutine());
         }
 
         public void DisableCamera()
         {
-            UnityEngine.Camera.main.cullingMask -= _playerLayer;
+            UnityEngine.Camera.main.cullingMask -= playerLayer;
             gameObject.SetActive(false);
         }
 
@@ -33,15 +33,15 @@ namespace _02._Scripts.Camera
     
         private IEnumerator CameraMove_Coroutine()
         {
-            int waypointCount = path.m_Waypoints.Length;
+            int waypointCount = _path.m_Waypoints.Length;
 
             int i = 0;
         
             //루프 형태 일 때
-            while(path.Looped)
+            while(_path.Looped)
             {
-                Vector3 startPos = path.transform.TransformPoint(path.m_Waypoints[i % waypointCount].position);
-                Vector3 endPos = path.transform.TransformPoint(path.m_Waypoints[(i + 1) % waypointCount].position);
+                Vector3 startPos = _path.transform.TransformPoint(_path.m_Waypoints[i % waypointCount].position);
+                Vector3 endPos = _path.transform.TransformPoint(_path.m_Waypoints[(i + 1) % waypointCount].position);
 
                 int totalFrames = 60;
 
@@ -60,13 +60,13 @@ namespace _02._Scripts.Camera
             }
 
             //루피 형태가 아닐 때
-            while (!path.Looped)
+            while (!_path.Looped)
             {
                 int currentIndex = (int)Mathf.PingPong(i, waypointCount - 1);;
                 int nextIndex = (int)Mathf.PingPong(i+1, waypointCount - 1);
             
-                Vector3 startPos = path.transform.TransformPoint(path.m_Waypoints[currentIndex].position);
-                Vector3 endPos = path.transform.TransformPoint(path.m_Waypoints[nextIndex].position);
+                Vector3 startPos = _path.transform.TransformPoint(_path.m_Waypoints[currentIndex].position);
+                Vector3 endPos = _path.transform.TransformPoint(_path.m_Waypoints[nextIndex].position);
 
                 int totalFrames = 60;
 

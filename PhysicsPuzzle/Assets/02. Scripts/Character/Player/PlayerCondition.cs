@@ -19,12 +19,16 @@ namespace _02._Scripts.Character.Player
         [SerializeField] private CinemachineVirtualCamera firstPersonCamera;
         [SerializeField] private CinemachineVirtualCamera thirdPersonCamera;
 
+        [Header("LayerMask of Player")]
+        [SerializeField] private LayerMask playerLayerMask;
+        
         // Fields
         private float _timeSinceLastTimeSkill;
         private float _timeSinceLastGravitySkill;
         private GameUI _gameUI;
         private Player _player;
         private PlayerController _playerController;
+        private UnityEngine.Camera _camera; 
         
         // Properties
         public bool IsGravitySkillAvailable { get; private set; } = true;
@@ -40,6 +44,7 @@ namespace _02._Scripts.Character.Player
             _gameUI = UIManager.Instance.GameUI;
             _player = CharacterManager.Instance.Player;
             _playerController = _player.PlayerController;
+            _camera = UnityEngine.Camera.main;
         }
 
         public void SetGravityAllow(bool isAllowed)
@@ -107,11 +112,13 @@ namespace _02._Scripts.Character.Player
                 thirdPersonCamera.LookAt = other;
                 firstPersonCamera.Priority = 0;
                 thirdPersonCamera.Priority = 10;
+                _camera.cullingMask += playerLayerMask;
             }
             else
             {
                 firstPersonCamera.Priority = 10;
                 thirdPersonCamera.Priority = 0;
+                _camera.cullingMask -= playerLayerMask;
             }
                 
             isPlayerCharacterHasControl = !isPlayerCharacterHasControl;

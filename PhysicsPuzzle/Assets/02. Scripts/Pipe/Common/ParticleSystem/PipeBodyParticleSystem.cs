@@ -1,22 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PipeBodyParticleSystem : MonoBehaviour
+namespace _02._Scripts.Pipe.Common.ParticleSystem
 {
-    [SerializeField] private ParticleSystem BodyParticle;
-
-    public void BodyEffect(Color laserColor)
+    public class PipeBodyParticleSystem : MonoBehaviour
     {
-        var main = BodyParticle.main;
-        main.startColor = laserColor;
+        [SerializeField] private UnityEngine.ParticleSystem bodyParticle;
 
-        BodyParticle.Stop();
-        BodyParticle.Play();
-    }
+        public void BodyEffect(Color laserColor)
+        {
+            var main = bodyParticle.main;
+            main.startColor = laserColor;
 
-    public void StopBodyEffect()
-    {
-        BodyParticle.Stop();
+            bodyParticle.Stop();
+            bodyParticle.Play();
+        }
+
+        public void StopBodyEffect()
+        {
+            bodyParticle.Stop();
+        }
     }
 }

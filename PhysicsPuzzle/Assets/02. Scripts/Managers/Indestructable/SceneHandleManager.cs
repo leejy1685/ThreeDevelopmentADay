@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using _02._Scripts.Utils;
 using UnityEngine.SceneManagement;
 
 namespace _02._Scripts.Managers.Indestructable
@@ -13,7 +10,6 @@ namespace _02._Scripts.Managers.Indestructable
         Lobby,
         ObjectAndPipe,
         DayAndNightGravity,
-        Count,
     }
     public class SceneHandleManager : Singleton<SceneHandleManager>
     {
@@ -28,7 +24,6 @@ namespace _02._Scripts.Managers.Indestructable
             
             currentScene = SCENE_TYPE.Lobby;
         }
-    
     
         // 로딩 씬전환 시 호출
         public void LoadScene(SCENE_TYPE sceneName)

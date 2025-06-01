@@ -15,8 +15,8 @@ namespace _02._Scripts.Item
         public void Init(ItemData data){ itemData = data; }
         public void OnInteract()
         {
-            SoundManager.PlaySFX(pickupSound);
             InventoryManager.Instance.AddItem(itemData);
+            SoundManager.PlaySfx(pickupSound);
             Destroy(gameObject);
         }
     }

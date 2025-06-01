@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.UI;
+using _02._Scripts.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,46 +18,49 @@ namespace _02._Scripts.Managers.Indestructable
     
     public class UIManager : Singleton<UIManager>
     {
-
         [Header("[UI State]")]
-        private UIState prevState;
-        public UIState currentState = UIState.Lobby;
-        LobbyUI lobbyUI = null;
-        ObtionUI obtionUI = null;
-        GameUI gameUI = null;
-        ClearUI clearUI = null;
+        [SerializeField] private UIState prevState;
+        [SerializeField] public UIState currentState = UIState.Lobby;
         
-        public GameUI GameUI => gameUI;
-        public UIState PrevState { get => prevState; }
+        [Header("Fade Image")]
         [SerializeField] private Image fadeImage;
-    
+        
+        // Fields
+        private LobbyUI _lobbyUI;
+        private OptionUI _optionUI;
+        private GameUI _gameUI;
+        private ClearUI _clearUI;
+        
+        // Properties
+        public GameUI GameUI => _gameUI;
+        public UIState PrevState { get => prevState; }
+        
         protected override void Awake()
         {
             base.Awake();
     
             // 자식 오브젝트에서 각각의 UI를 찾아 초기화
-            lobbyUI = GetComponentInChildren<LobbyUI>(true);
-            lobbyUI?.Init(this);
-            obtionUI = GetComponentInChildren<ObtionUI>(true);
-            obtionUI?.Init(this);
-            gameUI = GetComponentInChildren<GameUI>(true);
-            gameUI?.Init(this);
-            clearUI = GetComponentInChildren<ClearUI>(true);
-            clearUI?.Init(this);
+            _lobbyUI = GetComponentInChildren<LobbyUI>(true);
+            _lobbyUI?.Init(this);
+            _optionUI = GetComponentInChildren<OptionUI>(true);
+            _optionUI?.Init(this);
+            _gameUI = GetComponentInChildren<GameUI>(true);
+            _gameUI?.Init(this);
+            _clearUI = GetComponentInChildren<ClearUI>(true);
+            _clearUI?.Init(this);
     
             // 초기 상태를 로비 화면으로 설정
             ChangeState(UIState.Lobby);
         }
     
-    
         public void ChangeState(UIState state)
         {
             currentState = state;
             
-            lobbyUI?.SetActive(currentState);
-            obtionUI?.SetActive(currentState);
-            gameUI?.SetActive(currentState);
-            clearUI?.SetActive(currentState);
+            _lobbyUI?.SetActive(currentState);
+            _optionUI?.SetActive(currentState);
+            _gameUI?.SetActive(currentState);
+            _clearUI?.SetActive(currentState);
         }
         
         public void OnClickExit()
@@ -71,7 +74,7 @@ namespace _02._Scripts.Managers.Indestructable
     
         public void SetClearUI(float time,float bestTime)
         {
-            clearUI.SetClearTime(time,bestTime);
+            _clearUI.SetClearTime(time,bestTime);
             ChangeState(UIState.Clear);
         }
 
@@ -85,11 +88,11 @@ namespace _02._Scripts.Managers.Indestructable
         {
             StartCoroutine(FadeIn_Coroutine());
             GameUI.ChangeSceneName();
-            gameUI.SetTimer(timer);
+            _gameUI.SetTimer(timer);
             ChangeState(UIState.Game);
         }
         
-        IEnumerator FadeIn_Coroutine()
+        private IEnumerator FadeIn_Coroutine()
         {
             float elapsedTime = 0f;
             ;

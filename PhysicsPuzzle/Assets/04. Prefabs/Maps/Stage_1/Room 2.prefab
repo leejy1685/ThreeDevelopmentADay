@@ -1922,6 +1922,7 @@ MonoBehaviour:
     leftDoor: {fileID: 6260176838551884572}
     rightDoor: {fileID: 6260176838551884570}
   openDuration: 2
+  _doorOpenClip: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
 --- !u!1 &2484829298070228727
 GameObject:
   m_ObjectHideFlags: 0
@@ -6436,14 +6437,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972e04b3f5c14c94f84c5cbef576fd11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _linkedGoals:
+  linkedGoals:
   - {fileID: 2137288384819059594}
   - {fileID: 5548011181016044717}
   - {fileID: 7935278511890361125}
-  _leftDoor: {fileID: 2862103350088522602}
-  _rightDoor: {fileID: 7257278385009110416}
-  _openDuration: 1.5
-  _openDelay: 2
+  leftDoor: {fileID: 2862103350088522602}
+  rightDoor: {fileID: 7257278385009110416}
+  openDuration: 1.5
+  openDelay: 2
+  doorOpenClip: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
 --- !u!1 &7796949186925233673
 GameObject:
   m_ObjectHideFlags: 0

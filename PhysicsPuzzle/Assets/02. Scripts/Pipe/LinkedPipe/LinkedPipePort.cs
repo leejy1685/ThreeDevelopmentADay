@@ -1,34 +1,36 @@
 ﻿using _02._Scripts.Objects.LaserMachine;
-using System.Collections;
 using _02._Scripts.Utils;
 using UnityEngine;
 
-public class LinkedPipePort : MonoBehaviour
+namespace _02._Scripts.Pipe.LinkedPipe
 {
-    public LinkedPipe parentPipe;
-
-    private void Awake()
+    public class LinkedPipePort : MonoBehaviour
     {
-        parentPipe = GetComponentInParent<LinkedPipe>();
-        if (!parentPipe) Debug.LogError($"{name} → parentPipe is NULL!");
-    }
+        public LinkedPipe parentPipe;
 
-    public bool IsConnectedToLaser(out LASER_COLOR color)
-    {
-        Collider[] hits = Physics.OverlapSphere(transform.position, 0.2f);
-        foreach (var hit in hits)
+        private void Awake()
         {
-            if (hit.CompareTag("LaserBody"))
+            parentPipe = GetComponentInParent<LinkedPipe>();
+            if (!parentPipe) Debug.LogError($"{name} → parentPipe is NULL!");
+        }
+
+        public bool IsConnectedToLaser(out LASER_COLOR color)
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position, 0.2f);
+            foreach (var hit in hits)
             {
-                var laser = Helper.GetComponent_Helper<LaserMachine>(hit.gameObject);
-                if (laser)
+                if (hit.CompareTag("LaserBody"))
                 {
-                    color = laser.laserColor;
-                    return true;
+                    var laser = Helper.GetComponent_Helper<LaserMachine>(hit.gameObject);
+                    if (laser)
+                    {
+                        color = laser.laserColor;
+                        return true;
+                    }
                 }
             }
+            color = LASER_COLOR.White;
+            return false;
         }
-        color = LASER_COLOR.White;
-        return false;
     }
 }

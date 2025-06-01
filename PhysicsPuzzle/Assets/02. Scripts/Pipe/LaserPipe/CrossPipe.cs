@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 
-public class CrossPipe : Pipe
+namespace _02._Scripts.Pipe.LaserPipe
 {
-    
-    public override void OnInteract()
+    public class CrossPipe : global::_02._Scripts.Pipe.LaserPipe.Pipe
     {
-        base.OnInteract();
-        if (!isRotating)
-            StartCoroutine(RotateAroundPivot(Vector3.up));
+    
+        public override void OnInteract()
+        {
+            base.OnInteract();
+            if (!isRotating)
+                StartCoroutine(RotateAroundPivot(Vector3.up));
+        }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using _02._Scripts.Character.Player;
 using _02._Scripts.Character.Player.Interface;
-using _02._Scripts.Managers;
 using _02._Scripts.Managers.Destructable;
 using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.Objects.LaserMachine;
+using _02._Scripts.Pipe.Common.Interface;
+using _02._Scripts.Pipe.LaserPipe;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
-namespace _02._Scripts.PIpe.ConnectionPipe
+namespace _02._Scripts.Pipe.LinkedPipe
 {
     public class ReactiveMachine : MonoBehaviour, IInteractable
     {
@@ -32,13 +33,15 @@ namespace _02._Scripts.PIpe.ConnectionPipe
         [Header("Laser State")]
         [SerializeField] public LASER_COLOR laserColor = LASER_COLOR.Blue; // 현재 레이저 색상
 
+        [Header("Sound Source")]
+        [SerializeField] private AudioClip _interactionSound;
+        
+        // Fields
         private GoalMachine _currentTarget = null;
         private bool _isFiring;  // 발사 체크 
         private float _currPitch;        // 현재 Z축 회전값
         private PlayerCondition _playerCondition;
         
-        [SerializeField] private AudioClip _interactionSound;
-
         private void Awake()
         {
             var i = 0;
@@ -51,7 +54,7 @@ namespace _02._Scripts.PIpe.ConnectionPipe
             _playerCondition = CharacterManager.Instance.Player.PlayerCondition;
         }
 
-        void LateUpdate()
+        private void LateUpdate()
         {
             // 회전 제한(현재는 수직 ~ 수평)
             _currPitch = Mathf.Clamp(_currPitch, _minRotate, _maxRotate);
@@ -62,11 +65,11 @@ namespace _02._Scripts.PIpe.ConnectionPipe
             UpdateLaser();
         }
 
-        void UpdateLaser()
+        private void UpdateLaser()
         {
-            Vector3 direction = _pitchPivot.up;
-            Vector3 startPosition = _pitchPivot.position + direction;
-            Vector3 endPosition = startPosition + direction * _maxDistance;
+            var direction = _pitchPivot.up;
+            var startPosition = _pitchPivot.position + direction;
+            var endPosition = startPosition + direction * _maxDistance;
 
             if (_isFiring)
             {
@@ -127,7 +130,7 @@ namespace _02._Scripts.PIpe.ConnectionPipe
 
         public void OnInteract()
         {
-            SoundManager.PlaySFX(_interactionSound);
+            SoundManager.PlaySfx(_interactionSound);
             _playerCondition.MigrateCameraFocusToOtherObject(_body);
         }
     }

@@ -1,9 +1,10 @@
 using _02._Scripts.Character.Player;
-using _02._Scripts.Managers;
 using System.Collections.Generic;
 using _02._Scripts.Character.Player.Interface;
 using _02._Scripts.Managers.Destructable;
 using _02._Scripts.Managers.Indestructable;
+using _02._Scripts.Pipe.Common.Interface;
+using _02._Scripts.Pipe.LaserPipe;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -161,7 +162,7 @@ namespace _02._Scripts.Objects.LaserMachine
         /// </summary>
         public void OnInteract()
         {
-            SoundManager.PlaySFX(interactionSound); 
+            SoundManager.PlaySfx(interactionSound); 
             _playerCondition.MigrateCameraFocusToOtherObject(body);
         }
     }
