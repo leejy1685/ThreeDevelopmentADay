@@ -11,7 +11,8 @@ Material:
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: f33991274cb50c047b101035d76c934e, type: 2}
   m_ModifiedSerializedProperties: 8
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _SPECULAR_SETUP
   m_InvalidKeywords:
   - _SUNDISK_SIMPLE
   m_LightmapFlags: 4

@@ -1,6 +1,5 @@
-﻿using System;
-using _02._Scripts.Character.Player.Camera;
-using _02._Scripts.Managers;
+﻿using _02._Scripts.Character.Player.Camera;
+using _02._Scripts.Managers.Destructable;
 using _02._Scripts.Objects.LaserMachine;
 using _02._Scripts.PIpe.ConnectionPipe;
 using _02._Scripts.Utils;
@@ -28,6 +27,7 @@ namespace _02._Scripts.Character.Player
         [SerializeField] private float gravityValue = 9.81f;
         [SerializeField] private Vector3 gravityDirection = Vector3.down;
         [SerializeField] private LayerMask groundLayer;
+        [SerializeField] private LayerMask wallLayer;
 
         [Header("CameraPivot Settings")] 
         [SerializeField] private Transform cameraPivot;
@@ -38,6 +38,12 @@ namespace _02._Scripts.Character.Player
         private Transform _cameraPivot;
         private CharacterManager _characterManager;
         private EnvironmentManager _environmentManager;
+        
+        // Player Setting Fields
+        private float _maxSpeed;
+        private float _crouchSpeed;
+        private float _gravityValue;
+        private float _jumpForce;
         
         // Player State Fields
         private bool _isGrounded = true;
@@ -59,6 +65,11 @@ namespace _02._Scripts.Character.Player
             _cameraPivot = cameraController.CameraPivot;
             _characterManager = CharacterManager.Instance;
             _environmentManager = EnvironmentManager.Instance;
+            
+            _maxSpeed = maxSpeed;
+            _crouchSpeed = crouchSpeed;
+            _gravityValue = gravityValue;
+            _jumpForce = jumpForce;
             
             originalCameraPositionY = _cameraPivot.localPosition.y;
             playerAnimator = _characterManager.Player.PlayerAnimation;
@@ -98,7 +109,7 @@ namespace _02._Scripts.Character.Player
         /// </summary>
         private void CalculateMovement()
         {
-            _isGrounded = IsPlayerGrounded(); 
+            _isGrounded = IsPlayerGrounded();
             playerAnimator.SetPlayerIsGrounded(_isGrounded);
             
             var move = CalculateMovement_FlatSurface();
@@ -118,9 +129,15 @@ namespace _02._Scripts.Character.Player
                 
                 _isJumpPressed = false;
             } 
-            
+            if (CheckWallCollision()) 
+            { 
+                // rigidBody.AddForce(-move.normalized * 2f, ForceMode.Impulse);
+                if(currentSpeed >= 0.1f) move /= currentSpeed;
+            }
             rigidBody.MovePosition(transform.position + move);
         }
+        
+        
 
         /// <summary>
         /// Calculate Player Movement in flat surface.
@@ -136,6 +153,11 @@ namespace _02._Scripts.Character.Player
             var velocityXZ = (transform.forward * movementDirection.y + transform.right * movementDirection.x).normalized * currentSpeed;
             playerAnimator.SetPlayerSpeed(velocityXZ.magnitude / maxSpeed);
             return velocityXZ * Time.fixedDeltaTime;
+        }
+
+        private bool CheckWallCollision()
+        {
+            return Physics.CheckCapsule(transform.position + transform.up * (capsuleCollider.height / 2f), transform.position + transform.up * (capsuleCollider.height / 2f),capsuleCollider.radius + 0.1f, wallLayer);
         }
 
         /// <summary>
@@ -186,6 +208,24 @@ namespace _02._Scripts.Character.Player
         private bool IsPlayerGrounded()
         {
             return Physics.CheckSphere(transform.position + (transform.up * 0.25f), 0.35f, groundLayer);
+        }
+
+        public void ToggleGodModePhysics()
+        {
+            if (playerCondition.IsGodMode)
+            {
+                maxSpeed = 20f;
+                crouchSpeed = 10f;
+                gravityValue = 3f;
+                jumpForce = 25f;
+            } 
+            else
+            {
+                maxSpeed = _maxSpeed;
+                crouchSpeed = _crouchSpeed;
+                gravityValue = _gravityValue;
+                jumpForce = _jumpForce;
+            }
         }
         
         #region Player Input Methods

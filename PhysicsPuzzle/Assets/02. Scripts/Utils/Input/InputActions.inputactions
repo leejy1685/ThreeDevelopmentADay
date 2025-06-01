@@ -83,7 +83,7 @@
                     "id": "97f92654-86d4-423d-a86d-56cec3aa86e8",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=3)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -99,6 +99,15 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "3aa71559-e187-43e5-ade6-deb563db0bdb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GodMode",
+                    "type": "Button",
+                    "id": "8b645df8-074b-4ee7-b07a-81cbf4695fd8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -274,7 +283,7 @@
                 {
                     "name": "",
                     "id": "43e91b7e-f946-4c82-b8ba-fd3a23ec01d4",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -323,6 +332,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SelectItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c7190db-cf12-4e06-946d-04d3d868feff",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GodMode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
