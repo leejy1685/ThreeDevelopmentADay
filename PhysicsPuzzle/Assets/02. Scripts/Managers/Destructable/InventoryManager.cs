@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.Character.Player;
 using _02._Scripts.Item;
@@ -16,6 +17,7 @@ namespace _02._Scripts.Managers.Destructable
     {
         [Header("Inventory Slots")] 
         [SerializeField] private List<ItemSlot> itemSlots;
+        [SerializeField] private List<GameObject> itemSlotPrefabs;
         [SerializeField] private int maxDataCount = 5;
         [SerializeField] private GameObject itemSlotPrefab;
         
@@ -54,6 +56,7 @@ namespace _02._Scripts.Managers.Destructable
             for (var i = 0; i < maxDataCount; i++)
             {
                 var go = Instantiate(itemSlotPrefab, _uiManager.GameUI.InventoryUITransform);
+                itemSlotPrefabs.Add(go);
                 itemSlots.Add(Helper.GetComponent_Helper<ItemSlot>(go));
                 itemSlots[i].Index = i;
                 if(i > 0) itemSlots[i].SetOutline(false);
@@ -61,7 +64,12 @@ namespace _02._Scripts.Managers.Destructable
             UpdateSlots();
             SelectItem(0);
         }
-        
+
+        private void OnDestroy()
+        {
+            ResetAllSlots();
+        }
+
         public void AddItem(ItemData data)
         {
             if (!data) return;
@@ -124,10 +132,12 @@ namespace _02._Scripts.Managers.Destructable
             }
         }
 
-        public void ResetAllSlots()
+        private void ResetAllSlots()
         {
             foreach(var slot in itemSlots) slot.Clear();
             itemSlots.Clear();
+            foreach(var go in itemSlotPrefabs) Destroy(go);
+            itemSlotPrefabs.Clear();
         }
         
         private ItemSlot GetItemInStack(ItemData data)
