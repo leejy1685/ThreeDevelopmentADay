@@ -74,7 +74,16 @@
 - Windows 10 & 11
   
  ### 리소스
-- 에셋 링크
+
+ 사운드 (License agreement : Standard Unity Asset Store EULA / 라이선스 : 시트)
+- Deep In Space : https://assetstore.unity.com/packages/audio/music/electronic/deep-in-space-88071
+- Puzzled Mind (Free Music) : https://assetstore.unity.com/packages/audio/music/electronic/puzzled-mind-free-music-222465
+- Tabletop Jazz Cafe (Free Music) : https://assetstore.unity.com/packages/audio/music/tabletop-jazz-cafe-free-music-224462
+- 개인 소장 효과음 : https://drive.google.com/file/d/1bEQpWfJX_BUFo4WUBMIeAmTJ5h_TDV6e/view?usp=sharing
+
+  그래픽 (License agreement : Standard Unity Asset Store EULA / 라이선스 : 시트)
+- Grid Master : https://assetstore.unity.com/packages/vfx/shaders/grid-master-286714
+- 
 
 ## 👥팀원 소개
 <a href="https://github.com/leejy1685" target="_blank">
