@@ -82,8 +82,6 @@ public class Pipe : MonoBehaviour, IInteractable
                 lr.enabled = false;
                 port.StopEffect(); //파티클 정지
                 Body.StopBodyEffect();
-
-
             }
 
         }

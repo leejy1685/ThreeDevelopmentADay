@@ -136,7 +136,7 @@ namespace _02._Scripts.Managers.Destructable
         {
             foreach(var slot in itemSlots) slot.Clear();
             itemSlots.Clear();
-            foreach(var go in itemSlotPrefabs) Destroy(go);
+            foreach (var go in itemSlotPrefabs)Destroy(go);
             itemSlotPrefabs.Clear();
         }
         

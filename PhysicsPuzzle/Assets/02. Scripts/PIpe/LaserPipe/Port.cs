@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using _02._Scripts.Objects.LaserMachine;
 
 [RequireComponent(typeof(Collider))]
 /// <summary>
@@ -39,7 +40,7 @@ public class Port : MonoBehaviour, ILaserReceiver
     /// <param name="beam">수신한 LaserBeam (방향, 색상)</param>
     public void OnLaserHit(LaserBeam beam)
     {
-        Debug.Log($"[Port] {name} 수신: 방향={beam.direction}, 색상={beam.colorType}");
+        //Debug.Log($"[Port] {name} 수신: 방향={beam.direction}, 색상={beam.colorType}");
         EmitEffect(beam.ColorValue);
         PipeBodyParticleSystem.BodyEffect(beam.ColorValue);
         // 자신이 속한 파이프에 이 포트로 레이저가 들어왔음을 알림

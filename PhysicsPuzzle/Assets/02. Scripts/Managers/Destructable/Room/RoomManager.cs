@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _02._Scripts.Managers.Destructable.Stage;
+using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.Objects.LaserMachine;
 using UnityEngine;
 
@@ -24,13 +25,13 @@ namespace _02._Scripts.Managers.Destructable.Room
         [SerializeField] private float openDuration = 2f; // 애니메이션 시간
         
         private bool _isRoomCleared;
-        private StageOneManager _stageOneManager;
+        private StageManager _stageManager;
         
         public RoomData RoomData => roomData;
         
         private void Start()
         {
-            _stageOneManager = StageOneManager.Instance;
+            _stageManager = StageManager.Instance;
         }
 
         private void Update()
@@ -43,11 +44,16 @@ namespace _02._Scripts.Managers.Destructable.Room
             if (_isRoomCleared) return;
             if (roomData.goals.Any(goal => !goal.IsActivate)) { return; }
             _isRoomCleared = true;
-            _stageOneManager.RoomCleared(roomData.roomId);
-            StartCoroutine(OpenDoor());
+            _stageManager.RoomCleared(roomData.roomId);
+            OpenDoor();
         }
 
-        private IEnumerator OpenDoor()
+        public void OpenDoor()
+        {
+            StartCoroutine(OpenDoor_coroutine());
+        }
+
+        private IEnumerator OpenDoor_coroutine()
         {
             if(!roomData.leftDoor || !roomData.rightDoor) yield break;
             

@@ -1,22 +1,26 @@
-﻿using _02._Scripts.Managers.Indestructable;
+﻿using System.Collections;
+using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.UI;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace _02._Scripts.Managers.Indestructable
-{
+{ 
     public enum UIState
+
     {
         Lobby,
         Game,
         Clear,
         Obtion,
-        ObjectAndPipe,
         LoadingScene
     }
     
     public class UIManager : Singleton<UIManager>
     {
-    
-        
+
+        [Header("[UI State]")]
+        private UIState prevState;
         public UIState currentState = UIState.Lobby;
         LobbyUI lobbyUI = null;
         ObtionUI obtionUI = null;
@@ -24,6 +28,8 @@ namespace _02._Scripts.Managers.Indestructable
         ClearUI clearUI = null;
         
         public GameUI GameUI => gameUI;
+        public UIState PrevState { get => prevState; }
+        [SerializeField] private Image fadeImage;
     
         protected override void Awake()
         {
@@ -53,13 +59,6 @@ namespace _02._Scripts.Managers.Indestructable
             gameUI?.SetActive(currentState);
             clearUI?.SetActive(currentState);
         }
-    
-        
-        public void OnClickStart()
-        {
-            ChangeState(UIState.Game);
-            SceneHandleManager.Instance.LoadScene(SCENE_TYPE.Lobby); // 게임매니저에서 씬 전환을 통합할지 확인
-        }
         
         public void OnClickExit()
         {
@@ -74,6 +73,37 @@ namespace _02._Scripts.Managers.Indestructable
         {
             clearUI.SetClearTime(time,bestTime);
             ChangeState(UIState.Clear);
+        }
+
+        public void SetOptionUI()
+        {
+            prevState = currentState;
+            ChangeState(UIState.Obtion);
+        }
+
+        public void SetGameUI(bool timer)
+        {
+            StartCoroutine(FadeIn_Coroutine());
+            GameUI.ChangeSceneName();
+            gameUI.SetTimer(timer);
+            ChangeState(UIState.Game);
+        }
+        
+        IEnumerator FadeIn_Coroutine()
+        {
+            float elapsedTime = 0f;
+            ;
+            float fadeDuration = 1f;
+            Color color = fadeImage.color;
+            while (elapsedTime < fadeDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float alphaValue = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+                fadeImage.color = new Color(color.r, color.g, color.b, alphaValue);
+                yield return null;
+            }
+
+            fadeImage.color = new Color(color.r, color.g, color.b, 0f);
         }
     }
 }
