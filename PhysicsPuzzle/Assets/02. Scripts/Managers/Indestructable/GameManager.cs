@@ -65,8 +65,10 @@ namespace _02._Scripts.Managers.Indestructable
 
         private void Update()
         {
+            //test
             if (Input.GetKeyDown(KeyCode.T))
             {
+                _roomManagers[RoomId].OpenDoor();
                 StageManager.Instance.RoomCleared(RoomId);
                 RoomId++;
             }
