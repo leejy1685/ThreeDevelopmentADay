@@ -39469,6 +39469,7 @@ MonoBehaviour:
   isStageCleared: 0
   currentRoomCount: 4
   isRoomCleared: 
+  StageBGM: {fileID: 8300000, guid: 2e3364b32164f7840a18eb97ede44595, type: 3}
 --- !u!1001 &1175355899
 PrefabInstance:
   m_ObjectHideFlags: 0

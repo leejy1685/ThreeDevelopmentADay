@@ -91,7 +91,7 @@ namespace _02._Scripts.Managers.Indestructable
             player = FindAnyObjectByType<Player>()?.transform;
             
             //로비로 복귀 시 UI 셋팅
-            if (_sceneHandle.currentScene == SCENE_TYPE.Lobby)
+            if (scene.name == SCENE_TYPE.Lobby.ToString())
             {
                 _uiManager.SetGameUI(false);
             }

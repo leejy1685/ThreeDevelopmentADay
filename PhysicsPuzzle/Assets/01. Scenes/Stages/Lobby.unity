@@ -10804,8 +10804,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pitchValue: 0.5
-  BGM: {fileID: 0}
-  BGMVolume: 0
+  BGM: {fileID: 8300000, guid: ad403fe5cb1141c4db962f01954ad170, type: 3}
+  BGMVolume: 0.5
   soundPrefab: {fileID: 1386551371442508357, guid: 516b65ddfb8b0df4d89ff167ef75cd2e, type: 3}
   SFXVolume: 0.5
 --- !u!4 &845446490

@@ -47,3 +47,4 @@ MonoBehaviour:
   isStageCleared: 0
   currentRoomCount: 3
   isRoomCleared: 
+  StageBGM: {fileID: 8300000, guid: be7de8c15cc1cee5685b2736ba2f1c3f, type: 3}
