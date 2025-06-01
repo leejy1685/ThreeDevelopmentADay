@@ -93,6 +93,7 @@ namespace _02._Scripts.Managers.Indestructable
             //로비로 복귀 시 UI 셋팅
             if (scene.name == SCENE_TYPE.Lobby.ToString())
             {
+                SoundManager.Instance.ChangeBGM();
                 _uiManager.SetGameUI(false);
             }
             
