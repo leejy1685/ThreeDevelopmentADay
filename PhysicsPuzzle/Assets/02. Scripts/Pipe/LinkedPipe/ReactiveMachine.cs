@@ -50,12 +50,6 @@ namespace _02._Scripts.PIpe.ConnectionPipe
 
         void LateUpdate()
         {
-            // 발사 토글(일단은 좌 컨트롤) => LazerToggle 호출시에 지워도 됨
-            if (Input.GetKeyDown(KeyCode.LeftControl))
-                _isFiring = !_isFiring;
-            TestControl();
-
-
             // 회전 제한(현재는 수직 ~ 수평)
             _currPitch = Mathf.Clamp(_currPitch, _minRotate, _maxRotate);
 
@@ -131,14 +125,6 @@ namespace _02._Scripts.PIpe.ConnectionPipe
         public void OnInteract()
         {
             _playerCondition.MigrateCameraFocusToOtherObject(_body);
-        }
-
-        public void TestControl() // (테스트용)
-        {
-            if (Input.GetKey(KeyCode.UpArrow))
-                _currPitch += _pitchSpeed * Time.deltaTime;
-            if (Input.GetKey(KeyCode.DownArrow))
-                _currPitch -= _pitchSpeed * Time.deltaTime;
         }
     }
 }
