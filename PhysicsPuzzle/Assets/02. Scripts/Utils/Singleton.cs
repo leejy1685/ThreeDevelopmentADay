@@ -1,39 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+namespace _02._Scripts.Utils
 {
-    private static T _instance;
-    public static T Instance
+    public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        get
+        public static T Instance { get; protected set; }
+
+        protected virtual void Awake()
         {
-            if (_instance == null)
+            if (!Instance)
             {
-                _instance = FindAnyObjectByType<T>();
-
-                if (_instance == null)
-                {
-                    GameObject temp = new GameObject(typeof(T).Name);
-                    _instance = temp.AddComponent<T>();
-                }
+                Instance = this as T;
             }
-            return _instance;
-        }
-    }
-
-    protected virtual void Awake()
-    {
-        if (_instance == null)
-        {
-            _instance = this as T;
-        }
-        else if (_instance != this)
-        {
-            Destroy(gameObject);
+            else { if (Instance != this) Destroy(gameObject); }
         }
     }
 }

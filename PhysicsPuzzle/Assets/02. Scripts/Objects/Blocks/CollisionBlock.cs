@@ -8,9 +8,9 @@ namespace _02._Scripts.Objects.Blocks
 {
     public class CollisionBlock : MonoBehaviour
     {
+        [Header("Collision Block Type")]
         [SerializeField] private TIME_TYPE timeBlockType;
         
-    
         public void ChangeSetActive(TIME_TYPE isDay)
         {
             if (isDay == timeBlockType) gameObject.SetActive(true);

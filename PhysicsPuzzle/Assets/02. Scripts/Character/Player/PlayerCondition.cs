@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using _02._Scripts.Managers.Destructable;
+using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.UI;
 using Cinemachine;
 using UnityEngine;
@@ -11,26 +13,49 @@ namespace _02._Scripts.Character.Player
         [SerializeField] private bool isPlayerCharacterHasControl = true;
         [SerializeField] private float timeChangeCooldown = 3f;
         [SerializeField] private float gravityChangeCooldown = 3f;
+        [SerializeField] private bool isGravityAllowed;
         
         [Header("Virtual Cameras")]
         [SerializeField] private CinemachineVirtualCamera firstPersonCamera;
         [SerializeField] private CinemachineVirtualCamera thirdPersonCamera;
 
+        [Header("LayerMask of Player")]
+        [SerializeField] private LayerMask playerLayerMask;
+        
         // Fields
         private float _timeSinceLastTimeSkill;
         private float _timeSinceLastGravitySkill;
         private GameUI _gameUI;
+        private Player _player;
+        private PlayerController _playerController;
+        private UnityEngine.Camera _camera; 
         
         // Properties
         public bool IsGravitySkillAvailable { get; private set; } = true;
         public bool IsTimeSkillAvailable { get; private set; } = true;
         public bool IsPlayerCharacterHasControl => isPlayerCharacterHasControl;
         public bool IsPlayerUpsideDown { get; private set; }
+        public bool IsGodMode { get; private set; }
         public bool IsMoonTime { get; private set; }
+        public bool IsGravityAllowed => isGravityAllowed;
 
         private void Start()
         {
             _gameUI = UIManager.Instance.GameUI;
+            _player = CharacterManager.Instance.Player;
+            _playerController = _player.PlayerController;
+            _camera = UnityEngine.Camera.main;
+        }
+
+        public void SetGravityAllow(bool isAllowed)
+        {
+            isGravityAllowed = isAllowed;
+        }
+
+        public void ToggleGodMode()
+        {
+            IsGodMode = !IsGodMode;
+            _playerController.ToggleGodModePhysics();
         }
 
         public void RunGravitySkillCoolTime()
@@ -87,11 +112,13 @@ namespace _02._Scripts.Character.Player
                 thirdPersonCamera.LookAt = other;
                 firstPersonCamera.Priority = 0;
                 thirdPersonCamera.Priority = 10;
+                _camera.cullingMask += playerLayerMask;
             }
             else
             {
                 firstPersonCamera.Priority = 10;
                 thirdPersonCamera.Priority = 0;
+                _camera.cullingMask -= playerLayerMask;
             }
                 
             isPlayerCharacterHasControl = !isPlayerCharacterHasControl;

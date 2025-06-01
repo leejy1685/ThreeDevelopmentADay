@@ -1,8 +1,9 @@
-﻿using System;
-using _02._Scripts.Managers;
+﻿using _02._Scripts.Character.Player.Interface;
+using _02._Scripts.Item;
+using _02._Scripts.Managers.Destructable;
+using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.Objects.LaserMachine;
-using _02._Scripts.Utils.Interface;
-using JetBrains.Annotations;
+using _02._Scripts.Pipe.LinkedPipe;
 using UnityEngine;
 
 namespace _02._Scripts.Character.Player
@@ -44,11 +45,14 @@ namespace _02._Scripts.Character.Player
                 interactableObject = hit.collider.gameObject;
                 if (!interactableObject.TryGetComponent<IInteractable>(out var interactable)) return;
                 Interactable = interactable;
+                if (interactable is KeyItem keyItem) { UIManager.Instance.GameUI.SetPromptText(keyItem.name); }
+
             }
             else
             {
                 interactableObject = null;
                 Interactable = null;
+                UIManager.Instance.GameUI.ClearPromptText();
             }
         }
 
@@ -58,7 +62,7 @@ namespace _02._Scripts.Character.Player
             
             Interactable?.OnInteract();
             
-            if (Interactable is LaserMachine) return;
+            if (Interactable is LaserMachine or ReactiveMachine) return;
             interactableObject = null;
             Interactable = null;
         }

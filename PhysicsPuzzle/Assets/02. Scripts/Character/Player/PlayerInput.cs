@@ -1,6 +1,8 @@
 ﻿using _02._Scripts.Character.Player.Camera;
-using _02._Scripts.Managers;
+using _02._Scripts.Managers.Destructable;
+using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.Objects.LaserMachine;
+using _02._Scripts.Pipe.LinkedPipe;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,11 +18,13 @@ namespace _02._Scripts.Character.Player
 
         private CharacterManager _characterManager;
         private InventoryManager _inventoryManager;
+        private GameManager _gameManager;
 
         private void Start()
         {
             _characterManager = CharacterManager.Instance;
             _inventoryManager = InventoryManager.Instance;
+            _gameManager = GameManager.Instance;
             
             playerController = _characterManager.Player.PlayerController;
             cameraController = _characterManager.Player.CameraController;
@@ -32,68 +36,93 @@ namespace _02._Scripts.Character.Player
 
         public void OnMove(InputAction.CallbackContext context)
         {
+            if (!_gameManager.IsGameActive) return;
             if (!context.performed) { playerController.OnMove(Vector2.zero); return; }
             playerController.OnMove(context.ReadValue<Vector2>().normalized);
         }
 
         public void OnJump(InputAction.CallbackContext context)
         {
+            if (!_gameManager.IsGameActive) return;
             if(context.started) playerController.OnJump(true);
             else if(context.canceled) playerController.OnJump(false);
         }
 
         public void OnLook(InputAction.CallbackContext context)
         {
+            if (!_gameManager.IsGameActive) return;
             cameraController.OnLook(context.ReadValue<Vector2>());
         }
 
         public void OnCrouch(InputAction.CallbackContext context)
         {
-            if(context.started) playerController.OnCrouch();
+            if (!_gameManager.IsGameActive) return;
+            if (context.started) playerController.OnCrouch();
         }
 
         public void OnChangeGravity(InputAction.CallbackContext context)
         {
-            if(context.started) playerController.OnChangeGravity();
+            if (!_gameManager.IsGameActive) return;
+            if (!playerCondition.IsGravityAllowed) return;
+            if (context.started) playerController.OnChangeGravity();
         }
 
         public void OnChangeTime(InputAction.CallbackContext context)
         {
-            if(context.started) playerController.OnChangeTime();
+            if (!_gameManager.IsGameActive) return;
+            if (context.started) playerController.OnChangeTime();
         }
 
         public void OnInteract(InputAction.CallbackContext context)
         {
-            if(context.started) playerInteraction.OnInteract();
+            if (!_gameManager.IsGameActive) return;
+            if (context.started) playerInteraction.OnInteract();
         }
 
         public void OnUse(InputAction.CallbackContext context)
         {
-            if(context.started) InventoryManager.Instance.UseItem();
+            if (!_gameManager.IsGameActive) return;
+            if (context.started) InventoryManager.Instance.UseItem();
         }
         
         public void OnDrop(InputAction.CallbackContext context)
         {
+            if (!_gameManager.IsGameActive) return;
             if(context.performed) InventoryManager.Instance.DropItem();
         }
         
         public void OnFire(InputAction.CallbackContext context)
         {
+            if (!_gameManager.IsGameActive) return;
             if (context.started)
             {
                 if (playerCondition.IsPlayerCharacterHasControl) return;
-                if (playerInteraction.Interactable is LaserMachine laserMachine)
-                    laserMachine.ToggleLaser();
+                switch (playerInteraction.Interactable)
+                {
+                    case LaserMachine laserMachine:
+                        laserMachine.ToggleLaser();
+                        break;
+                    case ReactiveMachine reactiveMachine:
+                        reactiveMachine.ToggleLaser();
+                        break;
+                }
             }
         }
 
         public void OnSelectItem(InputAction.CallbackContext context)
         {
+            if (!_gameManager.IsGameActive) return;
             if (!context.performed || !playerCondition.IsPlayerCharacterHasControl) return;
             var val = context.ReadValue<float>();
             Debug.Log(val);
-            if(val > 0) _inventoryManager.SelectPrevItem();
+            if (val > 0) _inventoryManager.SelectPrevItem();
             else _inventoryManager.SelectNextItem();
+        }
+
+        public void OnGodMode(InputAction.CallbackContext context)
+        {
+            if (!_gameManager.IsGameActive) return;
+            if (context.started) playerCondition.ToggleGodMode();
         }
         
         #endregion

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: InkTable
   m_EditorClassIdentifier: 
   data:
+  - {fileID: 11400000, guid: d70e522f7ddceab48b3f3bac44268f34, type: 2}
   - {fileID: 11400000, guid: 70388d39d7620224bb27797d97d3543b, type: 2}
   - {fileID: 11400000, guid: 84f158caefe9227499b94b5b11b9ec98, type: 2}
   - {fileID: 11400000, guid: 5039402beaf65514cbed791aa3790ebd, type: 2}

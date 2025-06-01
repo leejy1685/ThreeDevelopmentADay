@@ -1,7 +1,8 @@
-﻿using System;
-using _02._Scripts.Character.Player.Camera;
-using _02._Scripts.Managers;
+﻿using _02._Scripts.Character.Player.Camera;
+using _02._Scripts.Managers.Destructable;
+using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.Objects.LaserMachine;
+using _02._Scripts.Pipe.LinkedPipe;
 using _02._Scripts.Utils;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ namespace _02._Scripts.Character.Player
         [SerializeField] private float gravityValue = 9.81f;
         [SerializeField] private Vector3 gravityDirection = Vector3.down;
         [SerializeField] private LayerMask groundLayer;
+        [SerializeField] private LayerMask wallLayer;
 
         [Header("CameraPivot Settings")] 
         [SerializeField] private Transform cameraPivot;
@@ -38,6 +40,12 @@ namespace _02._Scripts.Character.Player
         private CharacterManager _characterManager;
         private EnvironmentManager _environmentManager;
         
+        // Player Setting Fields
+        private float _maxSpeed;
+        private float _crouchSpeed;
+        private float _gravityValue;
+        private float _jumpForce;
+        
         // Player State Fields
         private bool _isGrounded = true;
         private bool _isCrouch;
@@ -45,6 +53,11 @@ namespace _02._Scripts.Character.Player
         // Player Input Checking Fields
         private bool _isJumpPressed;
         private bool _isCrouchPressed;
+        
+        //사운드에서 사용
+        public float CurrentSpeed => currentSpeed;
+        [SerializeField] private AudioClip gravityChangeSound;
+        [SerializeField] private AudioClip timeChangeSound;
 
         private void Awake()
         {
@@ -59,6 +72,11 @@ namespace _02._Scripts.Character.Player
             _characterManager = CharacterManager.Instance;
             _environmentManager = EnvironmentManager.Instance;
             
+            _maxSpeed = maxSpeed;
+            _crouchSpeed = crouchSpeed;
+            _gravityValue = gravityValue;
+            _jumpForce = jumpForce;
+            
             originalCameraPositionY = _cameraPivot.localPosition.y;
             playerAnimator = _characterManager.Player.PlayerAnimation;
             cameraController = _characterManager.Player.CameraController;
@@ -68,16 +86,20 @@ namespace _02._Scripts.Character.Player
 
         private void FixedUpdate()
         {
-            if (!playerCondition.IsPlayerCharacterHasControl) return;
             CalculateMovement();
         }
 
         private void Update()
         {
-            if (!playerCondition.IsPlayerCharacterHasControl)
+            if (playerCondition.IsPlayerCharacterHasControl) return;
+            switch (playerInteraction.Interactable)
             {
-                if(playerInteraction.Interactable is LaserMachine laserMachine)
+                case LaserMachine laserMachine:
                     laserMachine.ControlLaserPitch(movementDirection);
+                    break;
+                case ReactiveMachine reactiveMachine:
+                    reactiveMachine.ControlLaserPitch(movementDirection);
+                    break;
             }
         }
 
@@ -92,7 +114,7 @@ namespace _02._Scripts.Character.Player
         /// </summary>
         private void CalculateMovement()
         {
-            _isGrounded = IsPlayerGrounded(); 
+            _isGrounded = IsPlayerGrounded();
             playerAnimator.SetPlayerIsGrounded(_isGrounded);
             
             var move = CalculateMovement_FlatSurface();
@@ -112,16 +134,26 @@ namespace _02._Scripts.Character.Player
                 
                 _isJumpPressed = false;
             } 
-            
+            if (CheckWallCollision()) 
+            { 
+                // rigidBody.AddForce(-move.normalized * 2f, ForceMode.Impulse);
+                if(currentSpeed >= 0.1f) move /= currentSpeed;
+            }
             rigidBody.MovePosition(transform.position + move);
         }
-
+        
         /// <summary>
         /// Calculate Player Movement in flat surface.
         /// </summary>
         /// <returns></returns>
         private Vector3 CalculateMovement_FlatSurface()
         {
+            if (!playerCondition.IsPlayerCharacterHasControl)
+            {
+                playerAnimator.SetPlayerSpeed(0);
+                return Vector3.zero;
+            }
+            
             var targetSpeed = 0f;
             if (movementDirection != Vector2.zero) { targetSpeed = _isCrouchPressed ? crouchSpeed : maxSpeed; }
             if (currentSpeed <= 0.1f) currentSpeed = !Mathf.Approximately(currentSpeed, targetSpeed) ? Mathf.Lerp(currentSpeed, targetSpeed, Time.fixedDeltaTime * speedDeltaMultiplier) : targetSpeed;
@@ -130,6 +162,15 @@ namespace _02._Scripts.Character.Player
             var velocityXZ = (transform.forward * movementDirection.y + transform.right * movementDirection.x).normalized * currentSpeed;
             playerAnimator.SetPlayerSpeed(velocityXZ.magnitude / maxSpeed);
             return velocityXZ * Time.fixedDeltaTime;
+        }
+
+        /// <summary>
+        /// Check if the player is close to the Wall. (To prevent player from penetrating the wall)
+        /// </summary>
+        /// <returns>Returns true, when the player close enough to the wall</returns>
+        private bool CheckWallCollision()
+        {
+            return Physics.CheckCapsule(transform.position + transform.up * (capsuleCollider.height / 2f), transform.position + transform.up * (capsuleCollider.height / 2f),capsuleCollider.radius + 0.1f, wallLayer);
         }
 
         /// <summary>
@@ -180,6 +221,24 @@ namespace _02._Scripts.Character.Player
         private bool IsPlayerGrounded()
         {
             return Physics.CheckSphere(transform.position + (transform.up * 0.25f), 0.35f, groundLayer);
+        }
+
+        public void ToggleGodModePhysics()
+        {
+            if (playerCondition.IsGodMode)
+            {
+                maxSpeed = 20f;
+                crouchSpeed = 10f;
+                gravityValue = 3f;
+                jumpForce = 25f;
+            } 
+            else
+            {
+                maxSpeed = _maxSpeed;
+                crouchSpeed = _crouchSpeed;
+                gravityValue = _gravityValue;
+                jumpForce = _jumpForce;
+            }
         }
         
         #region Player Input Methods
@@ -236,6 +295,8 @@ namespace _02._Scripts.Character.Player
                 transform.position += transform.up * capsuleCollider.height; 
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
+            
+            SoundManager.PlaySfx(gravityChangeSound);
         }
 
         /// <summary>
@@ -248,6 +309,8 @@ namespace _02._Scripts.Character.Player
             
             playerCondition.RunTimeSkillCoolTime();
             _environmentManager.DayAndNight.ChangeDayAndNight();
+            
+            SoundManager.PlaySfx(timeChangeSound);
         }
         
         #endregion
