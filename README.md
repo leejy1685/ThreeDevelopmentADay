@@ -83,8 +83,16 @@
 
   그래픽 (License agreement : Standard Unity Asset Store EULA / 라이선스 : 시트)
 - Grid Master : https://assetstore.unity.com/packages/vfx/shaders/grid-master-286714
-- 
-
+- Space Game Icon Set : https://assetstore.unity.com/packages/2d/gui/icons/space-game-icon-set-290437
+- Sci-fi GUI skin : https://assetstore.unity.com/packages/2d/gui/sci-fi-gui-skin-15606
+- *FREE* Skyboxes - Sci-Fi & Fantasy : https://assetstore.unity.com/packages/2d/textures-materials/sky/free-skyboxes-sci-fi-fantasy-184932
+- 공상 과학 로딩 화면 VFX 무료 : https://assetstore.unity.com/packages/vfx/particles/sci-fi-loading-screen-vfx-free-274790
+- Magic Effects FREE : https://assetstore.unity.com/packages/vfx/particles/spells/magic-effects-free-247933
+- Sci Fi Doors : https://assetstore.unity.com/packages/3d/environments/sci-fi/sci-fi-doors-162876
+- 3D Sprite Sci-Fi props : https://assetstore.unity.com/packages/3d/props/3d-sprite-sci-fi-props-246349
+- Volumetric Lines : https://assetstore.unity.com/packages/tools/particles-effects/volumetric-lines-29160
+- Dark Theme UI : https://assetstore.unity.com/packages/2d/gui/dark-theme-ui-199010
+- Prototype Map : https://assetstore.unity.com/packages/3d/environments/prototype-map-315588
 ## 👥팀원 소개
 <a href="https://github.com/leejy1685" target="_blank">
   <img src="https://github.com/leejy1685.png" width="80" style="border-radius: 50%;" />
