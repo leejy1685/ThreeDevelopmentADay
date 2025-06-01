@@ -1,5 +1,8 @@
-﻿using _02._Scripts.Managers.Indestructable;
+﻿using System.Collections;
+using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.UI;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace _02._Scripts.Managers.Indestructable
 { 
@@ -16,8 +19,8 @@ namespace _02._Scripts.Managers.Indestructable
     public class UIManager : Singleton<UIManager>
     {
 
+        [Header("[UI State]")]
         private UIState prevState;
-        public UIState PrevState { get => prevState; }
         public UIState currentState = UIState.Lobby;
         LobbyUI lobbyUI = null;
         ObtionUI obtionUI = null;
@@ -25,6 +28,8 @@ namespace _02._Scripts.Managers.Indestructable
         ClearUI clearUI = null;
         
         public GameUI GameUI => gameUI;
+        public UIState PrevState { get => prevState; }
+        [SerializeField] private Image fadeImage;
     
         protected override void Awake()
         {
@@ -78,9 +83,27 @@ namespace _02._Scripts.Managers.Indestructable
 
         public void SetGameUI(bool timer)
         {
+            StartCoroutine(FadeIn_Coroutine());
             GameUI.ChangeSceneName();
             gameUI.SetTimer(timer);
             ChangeState(UIState.Game);
+        }
+        
+        IEnumerator FadeIn_Coroutine()
+        {
+            float elapsedTime = 0f;
+            ;
+            float fadeDuration = 1f;
+            Color color = fadeImage.color;
+            while (elapsedTime < fadeDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float alphaValue = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+                fadeImage.color = new Color(color.r, color.g, color.b, alphaValue);
+                yield return null;
+            }
+
+            fadeImage.color = new Color(color.r, color.g, color.b, 0f);
         }
     }
 }
