@@ -317,6 +317,8 @@ GameObject:
   - component: {fileID: 3087116806064683726}
   - component: {fileID: 40961569538208126}
   - component: {fileID: 619859596558535234}
+  - component: {fileID: 5987576773532369127}
+  - component: {fileID: 324553522748509991}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -428,6 +430,7 @@ MonoBehaviour:
   isPlayerCharacterHasControl: 1
   timeChangeCooldown: 3
   gravityChangeCooldown: 3
+  isGravityAllowed: 0
   firstPersonCamera: {fileID: 0}
   thirdPersonCamera: {fileID: 0}
 --- !u!114 &8901723863115515097
@@ -498,6 +501,8 @@ MonoBehaviour:
   cameraPivot: {fileID: 7400930726095756771}
   crouchCameraPositionY: 1
   originalCameraPositionY: 0
+  gravityChangeSound: {fileID: 8300000, guid: 5b496ddbe7d7d1046821d6e4b8c557f5, type: 3}
+  timeChangeSound: {fileID: 8300000, guid: 519078c601f01ec4f8bd4e2e017b1496, type: 3}
 --- !u!114 &6850557317937054288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,11 +752,131 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a5e1f2fa-ce06-47bb-a603-d4a0b37facf5
     m_ActionName: Player/SelectItem
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8b645df8-074b-4ee7-b07a-81cbf4695fd8
+    m_ActionName: Player/GodMode[/Keyboard/t]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &5987576773532369127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141663084719360671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e198d132c26b6074d94ba8d7d5089bb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepClips:
+  - {fileID: 8300000, guid: 31c14cdcc74c7cb43853c1c5c7e394f8, type: 3}
+  - {fileID: 8300000, guid: bc0d802c7c31e4544a33c71548c28772, type: 3}
+  - {fileID: 8300000, guid: 85854780fe511a34591c3dec63061fd2, type: 3}
+  - {fileID: 8300000, guid: e48730c7ca1cac545bbbc0365bf34479, type: 3}
+  - {fileID: 8300000, guid: 24e76b8f437e6af458e2b1319e67681e, type: 3}
+  footstepThreshold: 0.3
+  footstepRate: 0.5
+--- !u!82 &324553522748509991
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1141663084719360671}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1374185629718615837
 GameObject:
   m_ObjectHideFlags: 0

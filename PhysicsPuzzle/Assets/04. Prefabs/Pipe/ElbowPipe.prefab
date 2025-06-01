@@ -103,6 +103,7 @@ MonoBehaviour:
   maxRayDistance: 100
   lineRenderer: {fileID: 520362244276233644, guid: 9cf663f20972077458fa8253eed9eb25, type: 3}
   Body: {fileID: 7616557067569789314}
+  interactSound: {fileID: 8300000, guid: e1d70f2909a4c3543aaf1fb07e281cf3, type: 3}
 --- !u!1 &5061187774019698103
 GameObject:
   m_ObjectHideFlags: 0

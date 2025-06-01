@@ -276,6 +276,7 @@ MonoBehaviour:
   currentTime: 0
   visibleBlocks: []
   collisionBlocks: []
+  SFXClip: {fileID: 8300000, guid: 519078c601f01ec4f8bd4e2e017b1496, type: 3}
 --- !u!1 &5113034221556593252
 GameObject:
   m_ObjectHideFlags: 0

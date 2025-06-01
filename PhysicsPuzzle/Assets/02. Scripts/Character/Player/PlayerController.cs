@@ -1,9 +1,11 @@
 ﻿using _02._Scripts.Character.Player.Camera;
 using _02._Scripts.Managers.Destructable;
+using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.Objects.LaserMachine;
 using _02._Scripts.PIpe.ConnectionPipe;
 using _02._Scripts.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _02._Scripts.Character.Player
 {
@@ -52,6 +54,11 @@ namespace _02._Scripts.Character.Player
         // Player Input Checking Fields
         private bool _isJumpPressed;
         private bool _isCrouchPressed;
+        
+        //사운드에서 사용
+        public float CurrentSpeed => currentSpeed;
+        [SerializeField] private AudioClip gravityChangeSound;
+        [SerializeField] private AudioClip timeChangeSound;
 
         private void Awake()
         {
@@ -282,6 +289,8 @@ namespace _02._Scripts.Character.Player
                 transform.position += transform.up * capsuleCollider.height; 
                 transform.rotation = Quaternion.Euler(0, 0, 0);
             }
+            
+            SoundManager.PlaySFX(gravityChangeSound);
         }
 
         /// <summary>
@@ -294,7 +303,10 @@ namespace _02._Scripts.Character.Player
             
             playerCondition.RunTimeSkillCoolTime();
             _environmentManager.DayAndNight.ChangeDayAndNight();
+            
+            SoundManager.PlaySFX(timeChangeSound);
         }
+        
         
         #endregion
     }

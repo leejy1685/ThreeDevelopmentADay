@@ -4502,6 +4502,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionId
+      value: 8b645df8-074b-4ee7-b07a-81cbf4695fd8
+      objectReference: {fileID: 0}
+    - target: {fileID: 619859596558535234, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionName
+      value: Player/GodMode[/Keyboard/t]
+      objectReference: {fileID: 0}
     - target: {fileID: 1141663084719360671, guid: fd6062279d7510d4fa0a0b11ff246f2b, type: 3}
       propertyPath: m_Name
       value: Player

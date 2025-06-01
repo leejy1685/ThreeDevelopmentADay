@@ -15221,6 +15221,7 @@ MonoBehaviour:
     leftDoor: {fileID: 1454305612}
     rightDoor: {fileID: 1454305611}
   openDuration: 2
+  _doorOpenClip: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
 --- !u!1001 &446777974
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24753,6 +24754,7 @@ MonoBehaviour:
     leftDoor: {fileID: 0}
     rightDoor: {fileID: 0}
   openDuration: 2
+  _doorOpenClip: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
 --- !u!1001 &755608040
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58905,6 +58907,7 @@ MonoBehaviour:
     leftDoor: {fileID: 1955777421}
     rightDoor: {fileID: 1955777420}
   openDuration: 2
+  _doorOpenClip: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
 --- !u!1001 &1760989576
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61653,6 +61656,7 @@ MonoBehaviour:
     leftDoor: {fileID: 1422599232}
     rightDoor: {fileID: 1422599231}
   openDuration: 2
+  _doorOpenClip: {fileID: 8300000, guid: f1bec3883476c054b90a05ac7a23ccf2, type: 3}
 --- !u!1001 &1845704138
 PrefabInstance:
   m_ObjectHideFlags: 0
