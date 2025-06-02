@@ -37,6 +37,7 @@ namespace _02._Scripts.Managers.Indestructable
         private SceneHandleManager _sceneHandle;
         private int _lastClearRoom;
         private bool _activeTimer;
+        private Transform _savePoint;
         
         // Properties
         public bool IsGameActive => isGameActive;
@@ -95,6 +96,7 @@ namespace _02._Scripts.Managers.Indestructable
             //로비로 복귀 시 UI 셋팅
             if (scene.name == nameof(SCENE_TYPE.Lobby))
             {
+                _savePoint = GameObject.FindWithTag("Respawn").transform;
                 SoundManager.Instance.ChangeBGM();
                 _uiManager.SetGameUI(false);
             }
@@ -162,30 +164,43 @@ namespace _02._Scripts.Managers.Indestructable
 
         private void GameLoad_Scene(Scene scene)
         {
+            Debug.Log("asdasd");
+            
             if (scene.name != SCENE_TYPE.LoadingScene.ToString() && isLoad)
             {
-                //방의 정보 가져오기 및 정렬
-                roomManagers = FindObjectsOfType<RoomManager>();
-                Array.Sort(roomManagers, (x, y) => x.RoomData.roomId.CompareTo(y.RoomData.roomId));
+
+                if (!player)
+                    return;
                 
-                if (player)
+                //세이브 포인트가 로비 일 때
+                if (scene.name.Equals(SCENE_TYPE.Lobby.ToString()))
                 {
+                    player.position = _savePoint.position;
+                }
+                else
+                {   //세이브 포인트가 스테이지 일 때
+                    //방의 정보 가져오기 및 정렬
+                    roomManagers = FindObjectsOfType<RoomManager>();
+                    Array.Sort(roomManagers, (x, y) => x.RoomData.roomId.CompareTo(y.RoomData.roomId));
+
+                    //해결 했던 퍼즐의 문 열림
+                    for (int i = 0; i <= _lastClearRoom; i++)
+                    {
+                        roomManagers[i].OpenDoor();
+                    }
+
                     float x = PlayerPrefs.GetFloat(Lastpositionx);
                     float y = PlayerPrefs.GetFloat(Lastpositiony);
                     float z = PlayerPrefs.GetFloat(Lastpositionz);
+                    
                     //플레이어 배치
-                    player.position = new Vector3(x,y,z);
+                    player.position = new Vector3(x, y, z);
                 }
                 
-                //해결 했던 퍼즐의 문 열림
-                for (int i = 0; i <= _lastClearRoom; i++)
-                {
-                    roomManagers[i].OpenDoor();
-                }
-                
-                //로드 종료
-                isLoad = false;
             }
+
+            //로드 종료
+            isLoad = false;
         }
         
         #endregion
