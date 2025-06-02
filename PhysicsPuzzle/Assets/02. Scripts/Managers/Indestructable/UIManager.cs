@@ -80,6 +80,7 @@ namespace _02._Scripts.Managers.Indestructable
 
         public void SetOptionUI()
         {
+            if (currentState == UIState.Obtion) { ChangeState(prevState); return; }
             prevState = currentState;
             ChangeState(UIState.Obtion);
         }

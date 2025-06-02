@@ -46,8 +46,9 @@ namespace _02._Scripts.Managers.Indestructable
 
         }
 
-        public void ChangeBGM(AudioClip clip)
+        public void ChangeBGM(AudioClip clip = null)
         {
+            if (!clip) clip = BGM;
             audioSource.clip = clip;
             audioSource.volume = bgmVolume;
             audioSource.Play();
