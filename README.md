@@ -115,4 +115,4 @@
 
 ### 플레이 링크
 
-- https://play.unity.com/en/games/2b65ec52-b0c2-4993-9662-55360d1727cf/webglbuild
+- https://play.unity.com/en/games/2b65ec52-b0c2-4993-9662-55360d1727cf/axis
