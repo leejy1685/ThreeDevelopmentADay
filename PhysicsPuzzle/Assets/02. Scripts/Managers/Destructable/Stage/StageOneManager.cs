@@ -20,13 +20,11 @@ namespace _02._Scripts.Managers.Destructable.Stage
 
         private void Update()
         {
-            if (!_isItemSpawned)
+            if (_isItemSpawned) return;
+            if (_itemManager.IsItemTableLoaded && _itemSpawnManager.IsItemSpawnTableLoaded)
             {
-                if (_itemManager.IsItemTableLoaded && _itemSpawnManager.IsItemSpawnTableLoaded)
-                {
-                    _itemSpawnManager.SpawnItemBoxes();
-                    _isItemSpawned = true;
-                }
+                _itemSpawnManager.SpawnItemBoxes();
+                _isItemSpawned = true;
             }
         }
     }
