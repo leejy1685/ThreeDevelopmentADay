@@ -6,16 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/01. Scenes/Stages/LoadingScene.unity
-    guid: af478e8b64cfcb049911fdf5b88bbfc4
-  - enabled: 1
     path: Assets/01. Scenes/Stages/Lobby.unity
     guid: aa7da234a023cba438a60061195fbf00
   - enabled: 1
-    path: Assets/01. Scenes/Stages/DayAndNightGravity.unity
-    guid: 1713ded6f21975d418786f6b48c10e85
+    path: Assets/01. Scenes/Stages/LoadingScene.unity
+    guid: af478e8b64cfcb049911fdf5b88bbfc4
   - enabled: 1
     path: Assets/01. Scenes/Stages/ObjectAndPipe.unity
     guid: d698f0f2b5c1c7e49b3f80c70c4d7291
+  - enabled: 1
+    path: Assets/01. Scenes/Stages/DayAndNightGravity.unity
+    guid: 1713ded6f21975d418786f6b48c10e85
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 18814312cc8ee1749b9e57db5a2fc0ca, type: 2}

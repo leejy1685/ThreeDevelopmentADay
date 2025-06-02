@@ -35,6 +35,10 @@ namespace _02._Scripts.UI
 
         public void OnClickBackButton()
         {
+            if (uiManager.PrevState == UIState.Game)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
             uiManager.ChangeState(uiManager.PrevState);
         }
     }

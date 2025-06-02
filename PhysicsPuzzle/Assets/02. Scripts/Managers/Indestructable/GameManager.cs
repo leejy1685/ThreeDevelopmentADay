@@ -68,12 +68,6 @@ namespace _02._Scripts.Managers.Indestructable
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                StageManager.Instance.RoomCleared(RoomId);
-                RoomId++;
-            }
-
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Cursor.lockState = CursorLockMode.None;

@@ -20,12 +20,14 @@ namespace _02._Scripts.Managers.Destructable.Room
     {
         [Header("Room Settings")]
         [SerializeField] private RoomData roomData;
-        
-        [Header("Door Settings")]
+
+        [Header("Door Settings")] 
+        [SerializeField] private float openDelay = 2f;
         [SerializeField] private float openDuration = 2f; // 애니메이션 시간
         
         private bool _isRoomCleared;
         private StageManager _stageManager;
+        private Coroutine _waitToOpenCoroutine;
         
         public RoomData RoomData => roomData;
         
@@ -44,7 +46,14 @@ namespace _02._Scripts.Managers.Destructable.Room
         private void CheckGoalsInRoom()
         {
             if (_isRoomCleared) return;
-            if (roomData.goals.Any(goal => !goal.IsActivate)) { return; }
+            if (roomData.goals.Any(goal => !goal.IsActivate)) { if(_waitToOpenCoroutine != null) StopCoroutine(_waitToOpenCoroutine); return; }
+            _waitToOpenCoroutine ??= StartCoroutine(WaitAndOpen_Coroutine());
+        }
+
+        private IEnumerator WaitAndOpen_Coroutine()
+        {
+            var timer = 0f;
+            while(timer < openDelay){ timer += Time.deltaTime; yield return null; }
             _isRoomCleared = true;
             _stageManager.RoomCleared(roomData.roomId);
             OpenDoor();
@@ -81,6 +90,7 @@ namespace _02._Scripts.Managers.Destructable.Room
 
             roomData.leftDoor.localPosition = leftTarget;
             roomData.rightDoor.localPosition = rightTarget;
+            _waitToOpenCoroutine = null;
         }
     }
 }
