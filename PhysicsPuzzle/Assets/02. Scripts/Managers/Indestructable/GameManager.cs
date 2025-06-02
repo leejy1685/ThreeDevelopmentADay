@@ -158,8 +158,6 @@ namespace _02._Scripts.Managers.Indestructable
 
         private void GameLoad_Scene(Scene scene)
         {
-            Debug.Log("asdasd");
-            
             if (scene.name != SCENE_TYPE.LoadingScene.ToString() && isLoad)
             {
 
