@@ -115,4 +115,4 @@
 
 ### 플레이 링크
 
-- 플레이 링크 여기에
+- https://play.unity.com/en/games/2b65ec52-b0c2-4993-9662-55360d1727cf/webglbuild
