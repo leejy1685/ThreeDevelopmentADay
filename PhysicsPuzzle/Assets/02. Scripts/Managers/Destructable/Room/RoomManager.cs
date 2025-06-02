@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using _02._Scripts.Managers.Destructable.Stage;
 using _02._Scripts.Managers.Indestructable;
 using _02._Scripts.Objects.LaserMachine;
@@ -28,6 +29,7 @@ namespace _02._Scripts.Managers.Destructable.Room
         private bool _isRoomCleared;
         private StageManager _stageManager;
         private Coroutine _waitToOpenCoroutine;
+        private float timer = 0f;
         
         public RoomData RoomData => roomData;
         
@@ -46,21 +48,20 @@ namespace _02._Scripts.Managers.Destructable.Room
         private void CheckGoalsInRoom()
         {
             if (_isRoomCleared) return;
-            if (roomData.goals.Any(goal => !goal.IsActivate)) { if(_waitToOpenCoroutine != null) StopCoroutine(_waitToOpenCoroutine); return; }
-            _waitToOpenCoroutine ??= StartCoroutine(WaitAndOpen_Coroutine());
+            if (roomData.goals.Any(goal => !goal.IsActivate))
+            {
+                timer = 0f;
+                return;
+            }
+            timer += Time.deltaTime;
+            if (timer > openDelay)
+                OpenDoor();
         }
-
-        private IEnumerator WaitAndOpen_Coroutine()
-        {
-            var timer = 0f;
-            while(timer < openDelay){ timer += Time.deltaTime; yield return null; }
-            _isRoomCleared = true;
-            _stageManager.RoomCleared(roomData.roomId);
-            OpenDoor();
-        }
-
+        
         public void OpenDoor()
         {
+            _isRoomCleared = true;
+            _stageManager.RoomCleared(roomData.roomId);
             StartCoroutine(OpenDoor_coroutine());
         }
 
